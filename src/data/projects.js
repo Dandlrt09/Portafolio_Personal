@@ -2,6 +2,7 @@ import olistImg from '../assets/projects/olist.png';
 import gamesImg from '../assets/projects/games.png';
 import diamondsImg from '../assets/projects/diamonds.png';
 import titanicImg from '../assets/projects/titanic.png';
+import churnImg from '../assets/projects/churn.png';
 
 export const projects = [
     {
@@ -14,7 +15,7 @@ export const projects = [
         tech: ["Python", "Pandas", "Matplotlib", "NumPy"],
         image: olistImg,
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%201/Main.ipynb",
-        stars: 3, // Placeholder
+        stars: 3,
         topics: ["Data Analysis", "E-commerce"]
     },
     {
@@ -55,5 +56,18 @@ export const projects = [
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%204/Main.ipynb",
         stars: 5,
         topics: ["PyCaret", "Classification"]
+    },
+    {
+        id: 5,
+        title: "Predicción de Fuga de Clientes (Churn Rate)",
+        description: {
+            es: "Análisis y predicción de fuga de clientes en telecomunicaciones usando PyCaret y AdaBoost Classifier. Modelo optimizado para Recall que identifica clientes con alta probabilidad de cancelar servicios.",
+            en: "Customer churn analysis and prediction in telecommunications using PyCaret and AdaBoost Classifier. Recall-optimized model that identifies customers with high probability of canceling services."
+        },
+        tech: ["PyCaret", "Python", "Pandas", "AdaBoost"],
+        image: churnImg,
+        link: "https://github.com/Dandlrt09/Proyecto_Analisis-y-Prediccion-de-Fuga-de-Clientes",
+        stars: 4,
+        topics: ["Machine Learning", "Classification", "Churn"]
     }
 ];
