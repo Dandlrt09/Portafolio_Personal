@@ -17,8 +17,14 @@ const translations = {
         },
         projects: {
             title: "Mis Proyectos",
+            dsTitle: "Ciencia de Datos",
+            biTitle: "Análisis de Datos",
             viewCode: "Ver Código",
-            stars: "Estrellas"
+            viewReport: "Ver Reporte",
+            viewHere: "Ver aquí",
+            stars: "Estrellas",
+            comingSoon: "Próximamente…",
+            comingSoonDesc: "Aquí publicaré dashboards e informes interactivos desarrollados con Power BI y otras herramientas de visualización de datos."
         },
         about: {
             title: "Sobre Mí",
@@ -48,8 +54,14 @@ const translations = {
         },
         projects: {
             title: "My Projects",
+            dsTitle: "Data Science",
+            biTitle: "Data Analysis",
             viewCode: "View Code",
-            stars: "Stars"
+            viewReport: "View Report",
+            viewHere: "View here",
+            stars: "Stars",
+            comingSoon: "Coming soon…",
+            comingSoonDesc: "Here I will publish interactive dashboards and reports built with Power BI and other data visualization tools."
         },
         about: {
             title: "About Me",

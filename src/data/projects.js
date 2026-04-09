@@ -3,10 +3,12 @@ import gamesImg from '../assets/projects/games.png';
 import diamondsImg from '../assets/projects/diamonds.png';
 import titanicImg from '../assets/projects/titanic.png';
 import churnImg from '../assets/projects/churn.png';
+import globalSuperstoreImg from '../assets/projects/global_superstore.png';
 
 export const projects = [
     {
         id: 1,
+        category: "data-science",
         title: "Análisis de Ventas - E-commerce Olist",
         description: {
             es: "Análisis del conjunto de datos de Olist para explorar y visualizar patrones de ventas, identificando categorías rentables y comportamiento de precios.",
@@ -20,6 +22,7 @@ export const projects = [
     },
     {
         id: 2,
+        category: "data-science",
         title: "Análisis de Ventas de Videojuegos (2000-2016)",
         description: {
             es: "Análisis global de ventas de videojuegos utilizando técnicas de ML. Dataset de +16,000 juegos, explorando variables como plataforma, género y ventas regionales.",
@@ -33,6 +36,7 @@ export const projects = [
     },
     {
         id: 3,
+        category: "data-science",
         title: "Predicción de Precios de Diamantes",
         description: {
             es: "Pipeline de Machine Learning con PyCaret para predecir precios de diamantes basado en características físicas. Demostración de herramientas low-code.",
@@ -46,6 +50,7 @@ export const projects = [
     },
     {
         id: 4,
+        category: "data-science",
         title: "Predicción de Supervivencia Titanic",
         description: {
             es: "Estudio del clásico dataset del Titanic utilizando PyCaret para explorar capacidades de machine learning de bajo código.",
@@ -59,6 +64,7 @@ export const projects = [
     },
     {
         id: 5,
+        category: "data-science",
         title: "Predicción de Fuga de Clientes (Churn Rate)",
         description: {
             es: "Análisis y predicción de fuga de clientes en telecomunicaciones usando PyCaret y AdaBoost Classifier. Modelo optimizado para Recall que identifica clientes con alta probabilidad de cancelar servicios.",
@@ -69,5 +75,34 @@ export const projects = [
         link: "https://github.com/Dandlrt09/Proyecto_Analisis-y-Prediccion-de-Fuga-de-Clientes",
         stars: 4,
         topics: ["Machine Learning", "Classification", "Churn"]
+    }
+];
+
+// Proyectos de Análisis de Datos (Power BI, Tableau, Looker, etc.)
+// Agrega aquí tus proyectos de BI cuando estén listos.
+// Ejemplo de estructura:
+// {
+//     id: 1,
+//     category: "data-analysis",
+//     title: "Dashboard de Ventas - Power BI",
+//     description: { es: "...", en: "..." },
+//     tool: "Power BI",
+//     image: someImg,
+//     link: "https://...",
+//     topics: ["Sales", "Dashboard"]
+// }
+export const biProjects = [
+    {
+        id: 1,
+        category: "data-analysis",
+        title: "Global Superstore Project",
+        description: {
+            es: "Dashboard interactivo de Power BI que analiza las ventas globales del dataset Global Superstore. Explora métricas clave como ingresos, márgenes de ganancia y tendencias de ventas por región, categoría de producto y segmento de cliente.",
+            en: "Interactive Power BI dashboard analyzing global sales from the Global Superstore dataset. Explores key metrics including revenue, profit margins, and sales trends by region, product category, and customer segment."
+        },
+        tool: "Power BI",
+        image: globalSuperstoreImg,
+        link: "https://app.powerbi.com/view?r=eyJrIjoiNTJmNWM1OGYtZTRjNC00NmVjLTk3OGItMDI2NzgwNmYzMTdlIiwidCI6IjM0MzAzNTQxLTc0ZWMtNGQ0YS04YzVhLTgwNDlkMmZkNmNlNiIsImMiOjR9",
+        topics: ["Sales Analytics", "Power BI", "Global"]
     }
 ];
