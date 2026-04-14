@@ -6,6 +6,11 @@ import { useLanguage } from '../context/LanguageContext';
 const ReportModal = ({ project, onClose }) => {
     const { t } = useLanguage();
 
+    // Para archivos HTML locales construimos la URL absoluta; para reportes externos usamos el link tal cual
+    const externalHref = project.localFile
+        ? `${window.location.origin}${project.link}`
+        : project.link;
+
     // Cerrar con Escape
     useEffect(() => {
         const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -47,7 +52,7 @@ const ReportModal = ({ project, onClose }) => {
                         </div>
                         <div className="flex items-center gap-3">
                             <a
-                                href={project.link}
+                                href={externalHref}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"

@@ -4,6 +4,7 @@ import diamondsImg from '../assets/projects/diamonds.png';
 import titanicImg from '../assets/projects/titanic.png';
 import churnImg from '../assets/projects/churn.png';
 import globalSuperstoreImg from '../assets/projects/global_superstore.png';
+import hospitalDashboardImg from '../assets/projects/hospital_dashboard.png';
 
 export const projects = [
     {
@@ -104,5 +105,19 @@ export const biProjects = [
         image: globalSuperstoreImg,
         link: "https://app.powerbi.com/view?r=eyJrIjoiNTJmNWM1OGYtZTRjNC00NmVjLTk3OGItMDI2NzgwNmYzMTdlIiwidCI6IjM0MzAzNTQxLTc0ZWMtNGQ0YS04YzVhLTgwNDlkMmZkNmNlNiIsImMiOjR9",
         topics: ["Sales Analytics", "Power BI", "Global"]
+    },
+    {
+        id: 2,
+        category: "data-analysis",
+        title: "Dashboard Hospitalario",
+        description: {
+            es: "Dashboard interactivo de análisis hospitalario con datos de 984 pacientes. Visualiza KPIs clave como costo promedio, tasa de readmisión y satisfacción del paciente. Incluye filtros dinámicos por género, resultado clínico y readmisión, con gráficos de condiciones frecuentes, distribución por edad, procedimientos y más.",
+            en: "Interactive hospital analytics dashboard with data from 984 patients. Visualizes key KPIs such as average cost, readmission rate, and patient satisfaction. Includes dynamic filters by gender, clinical outcome and readmission, with charts for frequent conditions, age distribution, procedures, and more."
+        },
+        tool: "Chart.js",
+        image: hospitalDashboardImg,
+        link: "/hospital_dashboard.html",
+        localFile: true,
+        topics: ["Healthcare", "Dashboard", "Chart.js"]
     }
 ];
