@@ -5,6 +5,7 @@ import titanicImg from '../assets/projects/titanic.png';
 import churnImg from '../assets/projects/churn.png';
 import globalSuperstoreImg from '../assets/projects/global_superstore.png';
 import hospitalDashboardImg from '../assets/projects/hospital_dashboard.png';
+import hrDashboardImg from '../assets/projects/hr_dashboard.png';
 
 export const projects = [
     {
@@ -119,5 +120,18 @@ export const biProjects = [
         link: "/hospital_dashboard.html",
         localFile: true,
         topics: ["Healthcare", "Dashboard", "Chart.js"]
+    },
+    {
+        id: 3,
+        category: "data-analysis",
+        title: "Dashboard de Recursos Humanos",
+        description: {
+            es: "Dashboard de Recursos Humanos desarrollado en Power BI con 3 páginas interactivas: Resumen Ejecutivo, Análisis de Empleados y Rotación. Visualiza KPIs clave como 311 empleados totales, salario promedio de $69K, tasa de rotación del 33% y promedio de ausencias. Incluye gráficos de contrataciones por año, distribución por género, headcount por departamento y filtros interactivos.",
+            en: "Human Resources dashboard built in Power BI with 3 interactive pages: Executive Summary, Employee Analysis, and Turnover. Visualizes key KPIs including 311 total employees, $69K average salary, 33% turnover rate and average absences. Features charts for hires by year, gender distribution, headcount by department, and interactive filters."
+        },
+        tool: "Power BI",
+        image: hrDashboardImg,
+        link: "https://app.powerbi.com/view?r=eyJrIjoiNDkzMzYwZWItZDU0YS00Y2M5LTkxYTEtZjIzNDQ1NmQzYzUwIiwidCI6IjM0MzAzNTQxLTc0ZWMtNGQ0YS04YzVhLTgwNDlkMmZkNmNlNiIsImMiOjR9",
+        topics: ["Human Resources", "Power BI", "HR Analytics"]
     }
 ];
