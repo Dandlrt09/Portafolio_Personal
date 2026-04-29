@@ -1,10 +1,38 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink } from 'lucide-react';
+import { X, ExternalLink, Target, Compass, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
+const ContextSection = ({ context }) => (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-5 py-4 border-b border-white/10">
+        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
+            <div className="flex items-center gap-2 mb-2">
+                <Target size={14} className="text-amber-400" />
+                <span className="text-xs font-semibold text-amber-400 uppercase tracking-wide">Problema</span>
+            </div>
+            <p className="text-sm text-white/70 leading-relaxed">{context.problem}</p>
+        </div>
+        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
+            <div className="flex items-center gap-2 mb-2">
+                <Compass size={14} className="text-blue-400" />
+                <span className="text-xs font-semibold text-blue-400 uppercase tracking-wide">Enfoque</span>
+            </div>
+            <p className="text-sm text-white/70 leading-relaxed">{context.approach}</p>
+        </div>
+        <div className="rounded-lg bg-white/5 border border-white/10 p-4">
+            <div className="flex items-center gap-2 mb-2">
+                <Lightbulb size={14} className="text-emerald-400" />
+                <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wide">Insight</span>
+            </div>
+            <p className="text-sm text-white/70 leading-relaxed">{context.insight}</p>
+        </div>
+    </div>
+);
+
 const ReportModal = ({ project, onClose }) => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+
+    const context = project.context?.[language] || project.context?.['es'];
 
     // Para archivos HTML locales construimos la URL absoluta; para reportes externos usamos el link tal cual
     const externalHref = project.localFile
@@ -70,8 +98,11 @@ const ReportModal = ({ project, onClose }) => {
                         </div>
                     </div>
 
+                    {/* Context cards (only if project has context) */}
+                    {context && <ContextSection context={context} />}
+
                     {/* Iframe */}
-                    <div className="flex-1 relative">
+                    <div className={`relative ${context ? 'flex-1' : 'flex-1'}`}>
                         <iframe
                             title={project.title}
                             src={project.link}

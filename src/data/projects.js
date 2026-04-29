@@ -129,6 +129,18 @@ export const biProjects = [
             es: "Dashboard de Recursos Humanos desarrollado en Power BI con 3 páginas interactivas: Resumen Ejecutivo, Análisis de Empleados y Rotación. Visualiza KPIs clave como 311 empleados totales, salario promedio de $69K, tasa de rotación del 33% y promedio de ausencias. Incluye gráficos de contrataciones por año, distribución por género, headcount por departamento y filtros interactivos.",
             en: "Human Resources dashboard built in Power BI with 3 interactive pages: Executive Summary, Employee Analysis, and Turnover. Visualizes key KPIs including 311 total employees, $69K average salary, 33% turnover rate and average absences. Features charts for hires by year, gender distribution, headcount by department, and interactive filters."
         },
+        context: {
+            es: {
+                problem: "Una organización necesita monitorear la salud de su capital humano: quién se va, por qué, y qué patrones aparecen en el desempeño y la rotación. Sin datos claros, las decisiones de retención son reactivas en lugar de preventivas.",
+                approach: "Tres vistas jerárquicas: un resumen ejecutivo para visión general en 30 segundos, un análisis personal para detalle individual por manager, y una vista de desempeño y rotación para responder a la pregunta crítica: ¿se van los mejores o los peores?",
+                insight: "La rotación del 33% no es un número abstracto — cada salida tiene un perfil. Identificar patrones por departamento, antigüedad y desempeño permite actuar antes de que se vayan los perfiles clave."
+            },
+            en: {
+                problem: "An organization needs to monitor the health of its human capital: who is leaving, why, and what patterns emerge in performance and turnover. Without clear data, retention decisions are reactive rather than preventive.",
+                approach: "Three hierarchical views: an executive summary for a 30-second overview, a personal analysis for individual detail per manager, and a performance & turnover view to answer the critical question: are the best or the worst leaving?",
+                insight: "A 33% turnover rate is not an abstract number — each departure has a profile. Identifying patterns by department, tenure, and performance enables action before key profiles leave."
+            }
+        },
         tool: "Power BI",
         image: hrDashboardImg,
         link: "https://app.powerbi.com/view?r=eyJrIjoiNDkzMzYwZWItZDU0YS00Y2M5LTkxYTEtZjIzNDQ1NmQzYzUwIiwidCI6IjM0MzAzNTQxLTc0ZWMtNGQ0YS04YzVhLTgwNDlkMmZkNmNlNiIsImMiOjR9",
