@@ -102,6 +102,18 @@ export const biProjects = [
             es: "Dashboard interactivo de Power BI que analiza las ventas globales del dataset Global Superstore. Explora métricas clave como ingresos, márgenes de ganancia y tendencias de ventas por región, categoría de producto y segmento de cliente.",
             en: "Interactive Power BI dashboard analyzing global sales from the Global Superstore dataset. Explores key metrics including revenue, profit margins, and sales trends by region, product category, and customer segment."
         },
+        context: {
+            es: {
+                problem: "Una empresa con operaciones globales necesita entender de un vistazo qué regiones, categorías y segmentos generan ganancias reales versus cuáles están drenando recursos.",
+                approach: "Dashboard con filtros por región, categoría y segmento para identificar rápidamente dónde están las oportunidades y los problemas de rentabilidad.",
+                insight: "Las ventas altas no significan ganancias altas. Algunas regiones con mayor facturación tienen márgenes negativos — la decisión correcta es mirar rentabilidad, no solo volumen."
+            },
+            en: {
+                problem: "A company with global operations needs to understand at a glance which regions, categories and segments generate real profit versus which are draining resources.",
+                approach: "Dashboard with filters by region, category and segment to quickly identify where opportunities and profitability issues lie.",
+                insight: "High sales don't mean high profits. Some regions with the highest revenue have negative margins — the right decision is to look at profitability, not just volume."
+            }
+        },
         tool: "Power BI",
         image: globalSuperstoreImg,
         link: "https://app.powerbi.com/view?r=eyJrIjoiNTJmNWM1OGYtZTRjNC00NmVjLTk3OGItMDI2NzgwNmYzMTdlIiwidCI6IjM0MzAzNTQxLTc0ZWMtNGQ0YS04YzVhLTgwNDlkMmZkNmNlNiIsImMiOjR9",
@@ -114,6 +126,18 @@ export const biProjects = [
         description: {
             es: "Dashboard interactivo de análisis hospitalario con datos de 984 pacientes. Visualiza KPIs clave como costo promedio, tasa de readmisión y satisfacción del paciente. Incluye filtros dinámicos por género, resultado clínico y readmisión, con gráficos de condiciones frecuentes, distribución por edad, procedimientos y más.",
             en: "Interactive hospital analytics dashboard with data from 984 patients. Visualizes key KPIs such as average cost, readmission rate, and patient satisfaction. Includes dynamic filters by gender, clinical outcome and readmission, with charts for frequent conditions, age distribution, procedures, and more."
+        },
+        context: {
+            es: {
+                problem: "Un hospital necesita responder 4 preguntas clave: ¿qué enfermedades son más frecuentes?, ¿cuáles generan más costos?, ¿qué pacientes tienen mayor riesgo de urgencias?, y ¿qué procedimientos se usan más?",
+                approach: "Proyecto de exploración: construido con Claude AI usando Chart.js para comparar cómo se siente crear dashboards interactivos fuera de Power BI. El valor está en validar si las respuestas son correctas y entender la experiencia del usuario final.",
+                insight: "Las 4 preguntas se responden con solo 4 gráficos bien elegidos. Esto demuestra que no necesitás 20 visuales para un dashboard útil — necesitás las preguntas correctas primero."
+            },
+            en: {
+                problem: "A hospital needs to answer 4 key questions: what conditions are most frequent?, which generate the highest costs?, which patients have the highest emergency risk?, and which procedures are most used?",
+                approach: "Exploration project: built with Claude AI using Chart.js to compare the experience of creating interactive dashboards outside Power BI. The value is in validating whether the answers are correct and understanding the end-user experience.",
+                insight: "All 4 questions are answered with just 4 well-chosen charts. This proves you don't need 20 visuals for a useful dashboard — you need the right questions first."
+            }
         },
         tool: "Chart.js",
         image: hospitalDashboardImg,
