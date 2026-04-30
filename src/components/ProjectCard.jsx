@@ -42,7 +42,7 @@ const ProjectCard = ({ project, index }) => {
                     {project.description[language] || project.description['es']}
                 </p>
 
-                <div className="flex items-center gap-4 mt-auto">
+                <div className="flex flex-col gap-2 mt-auto">
                     <a
                         href={project.link}
                         target="_blank"
@@ -52,6 +52,17 @@ const ProjectCard = ({ project, index }) => {
                         <Github size={16} />
                         {t.projects.viewCode}
                     </a>
+                    {project.streamlit && (
+                        <a
+                            href={project.streamlit}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-sm font-medium text-text hover:text-primary transition-colors"
+                        >
+                            <ExternalLink size={16} />
+                            {t.projects.viewStreamlit}
+                        </a>
+                    )}
                 </div>
             </div>
         </motion.div>

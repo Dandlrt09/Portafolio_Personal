@@ -75,6 +75,7 @@ export const projects = [
         tech: ["PyCaret", "Python", "Pandas", "AdaBoost"],
         image: churnImg,
         link: "https://github.com/Dandlrt09/Proyecto_Analisis-y-Prediccion-de-Fuga-de-Clientes",
+        streamlit: "https://simulador-churn.streamlit.app",
         stars: 4,
         topics: ["Machine Learning", "Classification", "Churn"]
     }

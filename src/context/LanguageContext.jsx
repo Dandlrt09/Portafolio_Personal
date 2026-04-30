@@ -22,6 +22,7 @@ const translations = {
             viewCode: "Ver Código",
             viewReport: "Ver Reporte",
             viewHere: "Ver aquí",
+            viewStreamlit: "Ver en Streamlit",
             stars: "Estrellas",
             comingSoon: "Próximamente…",
             comingSoonDesc: "Aquí publicaré dashboards e informes interactivos desarrollados con Power BI y otras herramientas de visualización de datos."
@@ -59,6 +60,7 @@ const translations = {
             viewCode: "View Code",
             viewReport: "View Report",
             viewHere: "View here",
+            viewStreamlit: "View in Streamlit",
             stars: "Stars",
             comingSoon: "Coming soon…",
             comingSoonDesc: "Here I will publish interactive dashboards and reports built with Power BI and other data visualization tools."
