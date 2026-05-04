@@ -61,6 +61,7 @@ export const projects = [
         tech: ["PyCaret", "Pandas", "NumPy"],
         image: titanicImg,
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%204/Main.ipynb",
+        streamlit: "https://supervivencia-titanic.streamlit.app",
         stars: 5,
         topics: ["PyCaret", "Classification"]
     },
