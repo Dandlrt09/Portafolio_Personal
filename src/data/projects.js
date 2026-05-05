@@ -19,6 +19,7 @@ export const projects = [
         tech: ["Python", "Pandas", "Matplotlib", "NumPy"],
         image: olistImg,
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%201/Main.ipynb",
+        streamlit: "https://e-commerce-app-project.streamlit.app",
         stars: 3,
         topics: ["Data Analysis", "E-commerce"]
     },
