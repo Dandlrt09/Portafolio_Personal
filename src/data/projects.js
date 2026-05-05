@@ -47,6 +47,7 @@ export const projects = [
         tech: ["PyCaret", "Python", "Pandas", "Jupyter"],
         image: diamondsImg,
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%203/Pycaret%20y%20Entrenamiento.ipynb",
+        streamlit: "https://diamond-price-app.streamlit.app",
         stars: 4,
         topics: ["PyCaret", "Prediction"]
     },
