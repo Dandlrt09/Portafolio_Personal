@@ -33,6 +33,7 @@ export const projects = [
         tech: ["Python", "Pandas", "Seaborn", "Scikit-learn"],
         image: gamesImg,
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%202/Main.ipynb",
+        streamlit: "https://videogames-analysis.streamlit.app",
         stars: 2,
         topics: ["Machine Learning", "Gaming"]
     },
