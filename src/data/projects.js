@@ -6,6 +6,7 @@ import churnImg from '../assets/projects/churn.png';
 import globalSuperstoreImg from '../assets/projects/global_superstore.png';
 import hospitalDashboardImg from '../assets/projects/hospital_dashboard.png';
 import hrDashboardImg from '../assets/projects/hr_dashboard.png';
+import dataraImg from '../assets/projects/datara.png';
 
 export const projects = [
     {
@@ -149,6 +150,31 @@ export const biProjects = [
         link: "/hospital_dashboard.html",
         localFile: true,
         topics: ["Healthcare", "Dashboard", "Chart.js"]
+    },
+    {
+        id: 4,
+        category: "data-analysis",
+        title: "Datara — Analizá datos con lenguaje natural",
+        description: {
+            es: "App web interactiva que permite cargar archivos CSV o Excel y hacerles preguntas en español. La IA (Gemini) genera respuestas con texto, tablas y gráficos Plotly automáticamente. Incluye sandbox seguro para ejecutar código, exportación de resultados, y 145 tests automatizados.",
+            en: "Interactive web app that lets you upload CSV or Excel files and ask questions in Spanish. The AI (Gemini) automatically generates responses with text, tables, and Plotly charts. Includes a secure code sandbox, result export, and 145 automated tests."
+        },
+        context: {
+            es: {
+                problem: "Para analizar datos con IA tenés que saber programar o usar herramientas en inglés. No hay una opción simple donde subas un archivo, preguntes en español y obtengas resultados al instante sin configurar nada.",
+                approach: "App construida con Streamlit + Gemini 2.5 Flash. El usuario sube archivos, escribe preguntas en lenguaje natural, y la IA genera código Python que se ejecuta en un sandbox seguro. El resultado se muestra como texto, tabla o gráfico según lo que tenga sentido para la pregunta.",
+                insight: "El challenge no fue la IA — fue el sandbox. El código generado por la IA puede tener loops infinitos, imports peligrosos o errores de sintaxis. El verdadero trabajo fue construir un entorno de ejecución que fuera seguro pero suficientemente potente para que pandas y plotly funcionen."
+            },
+            en: {
+                problem: "To analyze data with AI you either need to know how to code or use English-only tools. There's no simple option where you upload a file, ask in Spanish, and get instant results without configuration.",
+                approach: "App built with Streamlit + Gemini 2.5 Flash. Users upload files, ask questions in natural language, and the AI generates Python code that executes in a secure sandbox. Results are shown as text, tables, or charts depending on what makes sense for the question.",
+                insight: "The challenge wasn't the AI — it was the sandbox. AI-generated code can have infinite loops, dangerous imports, or syntax errors. The real work was building a secure execution environment that's still powerful enough for pandas and plotly to work."
+            }
+        },
+        tool: "Streamlit + Gemini",
+        image: dataraImg,
+        link: "https://github.com/Dandlrt09/Datara",
+        topics: ["Streamlit", "Gemini AI", "Python", "Natural Language", "Data Analysis"]
     },
     {
         id: 3,
