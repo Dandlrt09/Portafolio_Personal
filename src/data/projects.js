@@ -27,17 +27,17 @@ export const projects = [
     {
         id: 2,
         category: "data-science",
-        title: "Análisis de Ventas de Videojuegos (2000-2016)",
+        title: "Análisis de Ventas Globales — Mercado Interactivo (1985-2016)",
         description: {
-            es: "Análisis global de ventas de videojuegos utilizando técnicas de ML. Dataset de +16,000 juegos, explorando variables como plataforma, género y ventas regionales.",
-            en: "Global video game sales analysis using ML techniques. Dataset of +16,000 games, exploring platform, genre, and regional sales variables."
+            es: "Análisis global de ventas de productos de entretenimiento interactivo utilizando técnicas de ML. Dataset de +16,000 lanzamientos, explorando variables como plataforma, género y ventas regionales.",
+            en: "Global sales analysis of interactive entertainment products using ML techniques. Dataset of +16,000 releases, exploring platform, genre, and regional sales variables."
         },
         tech: ["Python", "Pandas", "Seaborn", "Scikit-learn"],
         image: gamesImg,
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%202/Main.ipynb",
         streamlit: "https://videogames-analysis.streamlit.app",
         stars: 2,
-        topics: ["Machine Learning", "Gaming"]
+        topics: ["Machine Learning", "Data Analysis"]
     },
     {
         id: 3,
