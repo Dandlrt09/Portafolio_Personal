@@ -7,7 +7,7 @@ const translations = {
         hero: {
             badge: "ANALISTA DE DATOS & BI",
             title: "Daniel Josué De los Ríos Trespalacios",
-            subtitle: "De la Ingeniería Multimedia al Mundo de los Datos | Python | Power BI | Machine Learning",
+            subtitle: "Analista de Datos | Python | Power BI | Machine Learning",
             cta: "Ver Proyectos",
             resume: "Ver CV"
         },
@@ -46,7 +46,7 @@ const translations = {
         hero: {
             badge: "DATA ANALYST & BI",
             title: "Daniel Josué De los Ríos Trespalacios",
-            subtitle: "From Multimedia Engineering to Data | Python | Power BI | Machine Learning",
+            subtitle: "Data Analyst | Python | Power BI | Machine Learning",
             cta: "View Projects",
             resume: "View CV"
         },
