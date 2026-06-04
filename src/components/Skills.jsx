@@ -5,9 +5,9 @@ import { Code2, BarChart, Palette, Cpu } from 'lucide-react';
 
 const skills = [
     { key: "python", icon: <Code2 size={24} />, level: 90 },
-    { key: "dataviz", icon: <BarChart size={24} />, level: 85 },
-    { key: "design", icon: <Palette size={24} />, level: 90 },
-    { key: "automation", icon: <Cpu size={24} />, level: 80 },
+    { key: "ml", icon: <Cpu size={24} />, level: 85 },
+    { key: "bi", icon: <BarChart size={24} />, level: 85 },
+    { key: "storytelling", icon: <Palette size={24} />, level: 90 },
 ];
 
 const Skills = () => {

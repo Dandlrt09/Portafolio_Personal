@@ -5,8 +5,9 @@ const LanguageContext = createContext();
 const translations = {
     es: {
         hero: {
+            badge: "ANALISTA DE DATOS & BI",
             title: "Daniel Josué De los Ríos Trespalacios",
-            subtitle: "Ingeniero Multimedia | Python | Ciencia de Datos",
+            subtitle: "De la Ingeniería Multimedia al Mundo de los Datos | Python | Power BI | Machine Learning",
             cta: "Ver Proyectos",
             resume: "Ver CV"
         },
@@ -29,13 +30,13 @@ const translations = {
         },
         about: {
             title: "Sobre Mí",
-            description: "Ingeniero Multimedia con experiencia en diseño gráfico, animación y edición de video, complementada con formación en desarrollo en Python y ciencia de datos. Manejo herramientas creativas como Adobe Creative Suite, Figma, CapCut y Unreal Engine 5, junto con entornos de desarrollo como Visual Studio Code. Capaz de integrar programación, análisis de datos y visualización para crear soluciones interactivas, funcionales y orientadas a una comunicación visual efectiva."
+            description: "Profesional con formación en Ingeniería Multimedia en transición activa hacia Ciencia de Datos y Business Intelligence. Combino habilidades técnicas en Python (Pandas, NumPy, Scikit-learn) y Power BI con una sólida comprensión del diseño de información y la comunicación visual, lo que me permite transformar datos complejos en narrativas claras y accionables para equipos no técnicos. He desarrollado proyectos personales de machine learning — incluyendo predicción de churn y análisis de ventas globales — y tengo proyección hacia arquitecturas de datos en la nube con Databricks y Azure/AWS."
         },
         skills: {
-            python: "Programación en Python",
-            dataviz: "Análisis y visualización de datos",
-            design: "Diseño y comunicación visual",
-            automation: "Automatización de procesos creativos"
+            python: "Python (Pandas, NumPy, Scikit-learn)",
+            ml: "EDA & Machine Learning",
+            bi: "Power BI & Visualización",
+            storytelling: "Data Storytelling & Comunicación Visual"
         },
         footer: {
             rights: "Todos los derechos reservados."
@@ -43,8 +44,9 @@ const translations = {
     },
     en: {
         hero: {
+            badge: "DATA ANALYST & BI",
             title: "Daniel Josué De los Ríos Trespalacios",
-            subtitle: "Multimedia Engineer | Python | Data Science",
+            subtitle: "From Multimedia Engineering to Data | Python | Power BI | Machine Learning",
             cta: "View Projects",
             resume: "View CV"
         },
@@ -67,13 +69,13 @@ const translations = {
         },
         about: {
             title: "About Me",
-            description: "Multimedia Engineer with experience in graphic design, animation, and video editing, complemented by training in Python development and data science. Proficient in creative tools like Adobe Creative Suite, Figma, CapCut, and Unreal Engine 5, along with development environments like Visual Studio Code. Capable of integrating programming, data analysis, and visualization to create interactive, functional solutions oriented towards effective visual communication."
+            description: "Professional with a Multimedia Engineering background in active transition toward Data Science and Business Intelligence. I combine technical skills in Python (Pandas, NumPy, Scikit-learn) and Power BI with a strong understanding of information design and visual communication, enabling me to transform complex data into clear, actionable narratives for non-technical teams. I have developed personal machine learning projects — including churn prediction and global sales analysis — with a forward-looking focus on cloud data architectures using Databricks and Azure/AWS."
         },
         skills: {
-            python: "Python Programming",
-            dataviz: "Data Analysis & Visualization",
-            design: "Visual Design & Communication",
-            automation: "Creative Process Automation"
+            python: "Python (Pandas, NumPy, Scikit-learn)",
+            ml: "EDA & Machine Learning",
+            bi: "Power BI & Visualization",
+            storytelling: "Data Storytelling & Visual Communication"
         },
         footer: {
             rights: "All rights reserved."

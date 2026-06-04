@@ -19,7 +19,7 @@ const Hero = () => {
                     transition={{ duration: 0.8 }}
                 >
                     <span className="inline-block px-3 py-1 mb-4 text-xs font-medium tracking-wider text-secondary border border-secondary/20 rounded-full bg-secondary/5">
-                        INGENIERO MULTIMEDIA
+                        {t.hero.badge}
                     </span>
 
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
