@@ -58,15 +58,15 @@ const BiProjectCard = ({ project, index }) => {
                             {t.projects.viewHere}
                         </button>
 
-                        {/* Ver Reporte — abre en pestaña nueva */}
+                        {/* Ver Reporte / Descargar PDF */}
                         <a
-                            href={project.link}
+                            href={project.pdfPath || project.link}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-sm font-medium text-text-muted hover:text-accent transition-colors"
                         >
                             <ExternalLink size={14} />
-                            {t.projects.viewReport}
+                            {project.pdfPath ? 'Descargar PDF' : t.projects.viewReport}
                         </a>
                     </div>
                 </div>

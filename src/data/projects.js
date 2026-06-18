@@ -4,8 +4,14 @@ import diamondsImg from '../assets/projects/diamonds.png';
 import titanicImg from '../assets/projects/titanic.png';
 import churnImg from '../assets/projects/churn.png';
 import globalSuperstoreImg from '../assets/projects/global_superstore.png';
+import globalResumen from '../assets/projects/global_resumen.png';
+import globalGeografico from '../assets/projects/global_geografico.png';
+import globalProductos from '../assets/projects/global_productos.png';
 import hospitalDashboardImg from '../assets/projects/hospital_dashboard.png';
 import hrDashboardImg from '../assets/projects/hr_dashboard.png';
+import hrResumen from '../assets/projects/hr_resumen.png';
+import hrEmpleados from '../assets/projects/hr_empleados.png';
+import hrRotacion from '../assets/projects/hr_rotacion.png';
 import dataraImg from '../assets/projects/datara.png';
 
 export const projects = [
@@ -122,7 +128,8 @@ export const biProjects = [
         },
         tool: "Power BI",
         image: globalSuperstoreImg,
-        link: "https://app.powerbi.com/view?r=eyJrIjoiNTJmNWM1OGYtZTRjNC00NmVjLTk3OGItMDI2NzgwNmYzMTdlIiwidCI6IjM0MzAzNTQxLTc0ZWMtNGQ0YS04YzVhLTgwNDlkMmZkNmNlNiIsImMiOjR9",
+        pages: [globalResumen, globalGeografico, globalProductos],
+        pdfPath: "/Global Superstore Proyect.pdf",
         topics: ["Sales Analytics", "Power BI", "Global"]
     },
     {
@@ -198,7 +205,8 @@ export const biProjects = [
         },
         tool: "Power BI",
         image: hrDashboardImg,
-        link: "https://app.powerbi.com/view?r=eyJrIjoiNDkzMzYwZWItZDU0YS00Y2M5LTkxYTEtZjIzNDQ1NmQzYzUwIiwidCI6IjM0MzAzNTQxLTc0ZWMtNGQ0YS04YzVhLTgwNDlkMmZkNmNlNiIsImMiOjR9",
+        pages: [hrResumen, hrEmpleados, hrRotacion],
+        pdfPath: "/Recursos Humanos.pdf",
         topics: ["Human Resources", "Power BI", "HR Analytics"]
     }
 ];

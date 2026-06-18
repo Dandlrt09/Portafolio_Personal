@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Target, Compass, Lightbulb } from 'lucide-react';
+import { X, ExternalLink, Target, Compass, Lightbulb, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const ContextSection = ({ context }) => (
@@ -29,15 +29,81 @@ const ContextSection = ({ context }) => (
     </div>
 );
 
+const GalleryView = ({ pages, title }) => {
+    const [current, setCurrent] = useState(0);
+
+    const pageLabels = ['Resumen', 'Análisis Geográfico', 'Análisis de Productos'];
+
+    return (
+        <div className="flex-1 flex flex-col min-h-0">
+            {/* Image counter */}
+            <div className="flex items-center justify-between px-5 py-2 border-b border-white/5">
+                <span className="text-xs text-text-muted">
+                    {pageLabels[current]} — {current + 1} / {pages.length}
+                </span>
+            </div>
+
+            {/* Image container */}
+            <div className="flex-1 relative flex items-center justify-center bg-black/40 p-4">
+                <img
+                    src={pages[current]}
+                    alt={`${title} — ${pageLabels[current]}`}
+                    className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                />
+
+                {/* Nav arrows */}
+                {pages.length > 1 && (
+                    <>
+                        <button
+                            onClick={() => setCurrent(p => Math.max(0, p - 1))}
+                            disabled={current === 0}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white/80 hover:bg-black/70 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        >
+                            <ChevronLeft size={22} />
+                        </button>
+                        <button
+                            onClick={() => setCurrent(p => Math.min(pages.length - 1, p + 1))}
+                            disabled={current === pages.length - 1}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white/80 hover:bg-black/70 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        >
+                            <ChevronRight size={22} />
+                        </button>
+                    </>
+                )}
+            </div>
+
+            {/* Dot indicators */}
+            {pages.length > 1 && (
+                <div className="flex items-center justify-center gap-2 py-3 border-t border-white/5">
+                    {pages.map((_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => setCurrent(i)}
+                            className={`w-2 h-2 rounded-full transition-all ${
+                                i === current ? 'bg-accent w-6' : 'bg-white/20 hover:bg-white/40'
+                            }`}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
 const ReportModal = ({ project, onClose }) => {
     const { t, language } = useLanguage();
+    const isGallery = !!project.pages;
 
     const context = project.context?.[language] || project.context?.['es'];
 
-    // Para archivos HTML locales construimos la URL absoluta; para reportes externos usamos el link tal cual
-    const externalHref = project.localFile
+    // Construir link externo segun el tipo de proyecto
+    const externalHref = project.pdfPath
+        ? project.pdfPath
+        : project.localFile
         ? `${window.location.origin}${project.link}`
         : project.link;
+
+    const externalLabel = project.pdfPath ? 'Descargar PDF' : t.projects.viewReport;
 
     // Cerrar con Escape
     useEffect(() => {
@@ -79,15 +145,17 @@ const ReportModal = ({ project, onClose }) => {
                             </span>
                         </div>
                         <div className="flex items-center gap-3">
-                            <a
-                                href={externalHref}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"
-                            >
-                                <ExternalLink size={13} />
-                                {t.projects.viewReport}
-                            </a>
+                            {externalHref && (
+                                <a
+                                    href={externalHref}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"
+                                >
+                                    {project.pdfPath ? <Download size={13} /> : <ExternalLink size={13} />}
+                                    {externalLabel}
+                                </a>
+                            )}
                             <button
                                 onClick={onClose}
                                 className="flex items-center justify-center w-8 h-8 rounded-lg text-text-muted hover:text-white hover:bg-white/10 transition-colors"
@@ -98,19 +166,23 @@ const ReportModal = ({ project, onClose }) => {
                         </div>
                     </div>
 
-                    {/* Context cards (only if project has context) */}
+                    {/* Context cards */}
                     {context && <ContextSection context={context} />}
 
-                    {/* Iframe */}
-                    <div className={`relative ${context ? 'flex-1' : 'flex-1'}`}>
-                        <iframe
-                            title={project.title}
-                            src={project.link}
-                            frameBorder="0"
-                            allowFullScreen
-                            className="absolute inset-0 w-full h-full"
-                        />
-                    </div>
+                    {/* Content: Gallery o Iframe */}
+                    {isGallery ? (
+                        <GalleryView pages={project.pages} title={project.title} />
+                    ) : (
+                        <div className="relative flex-1">
+                            <iframe
+                                title={project.title}
+                                src={project.link}
+                                frameBorder="0"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full"
+                            />
+                        </div>
+                    )}
                 </motion.div>
             </motion.div>
         </AnimatePresence>

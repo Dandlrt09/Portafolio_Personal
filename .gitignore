@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Power BI source files
+*.pbix
+pbix_extract/
