@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { Menu, X, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
     const { t, language, toggleLanguage } = useLanguage();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const cvUrl = "https://drive.google.com/file/d/18K0VyqUcnGKAGnFtOs223WszclZnH9YB/view?usp=sharing";
 
     const navLinks = [
         { name: t.nav.about, href: "#about" },
@@ -32,6 +34,17 @@ const Header = () => {
                             {link.name}
                         </a>
                     ))}
+
+                    <a
+                        href={cvUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-sm font-medium text-text-muted hover:text-secondary transition-colors"
+                        title={t.nav.cv}
+                    >
+                        <FileText size={16} />
+                        {t.nav.cv}
+                    </a>
 
                     <div className="h-4 w-[1px] bg-white/20"></div>
 
@@ -72,6 +85,16 @@ const Header = () => {
                                     {link.name}
                                 </a>
                             ))}
+                            <a
+                                href={cvUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-base font-medium text-text-muted hover:text-secondary"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                <FileText size={18} />
+                                {t.nav.cv}
+                            </a>
                             <hr className="border-white/10" />
                             <button
                                 onClick={() => {

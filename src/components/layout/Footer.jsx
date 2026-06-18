@@ -7,7 +7,7 @@ const Footer = () => {
     const year = new Date().getFullYear();
 
     return (
-        <footer id="contact" className="bg-surface py-12 border-t border-white/5 mt-auto">
+        <footer className="bg-surface py-12 border-t border-white/5 mt-auto">
             <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
 
                 <h3 className="text-2xl font-bold mb-6 text-primary">{t.nav.contact}</h3>

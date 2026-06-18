@@ -4,6 +4,7 @@ import Layout from './components/layout/Layout';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
 import ProjectGrid from './components/ProjectGrid';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Hero />
         <Skills />
         <ProjectGrid />
+        <Contact />
       </Layout>
     </LanguageProvider>
   );

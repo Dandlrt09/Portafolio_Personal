@@ -15,6 +15,7 @@ const translations = {
             projects: "Proyectos",
             about: "Sobre Mí",
             contact: "Contacto",
+            cv: "CV",
         },
         projects: {
             title: "Mis Proyectos",
@@ -38,6 +39,13 @@ const translations = {
             bi: "Power BI & Storytelling visual — dashboards que responden preguntas, no solo muestran números",
             storytelling: "Comunicación multicanal — vengo del diseño y la animación, sé cómo hacer que un dato se recuerde"
         },
+        contact: {
+            title: "Contacto",
+            description: "¿Tienes un proyecto en mente o simplemente quieres conectar?",
+            cta: "Enviar Correo",
+            email: "danieldelosriost@gmail.com",
+            cv: "Descargar CV"
+        },
         footer: {
             rights: "Todos los derechos reservados."
         }
@@ -54,6 +62,7 @@ const translations = {
             projects: "Projects",
             about: "About Me",
             contact: "Contact",
+            cv: "CV",
         },
         projects: {
             title: "My Projects",
@@ -76,6 +85,13 @@ const translations = {
             ml: "Applied ML — classification, prediction, and pipelines with PyCaret",
             bi: "Power BI & Visual Storytelling — dashboards that answer questions, not just show numbers",
             storytelling: "Multichannel communication — from design and animation, I know how to make data stick"
+        },
+        contact: {
+            title: "Get in Touch",
+            description: "Have a project in mind or just want to connect?",
+            cta: "Send an Email",
+            email: "danieldelosriost@gmail.com",
+            cv: "Download CV"
         },
         footer: {
             rights: "All rights reserved."
