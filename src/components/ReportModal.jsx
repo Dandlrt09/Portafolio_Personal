@@ -3,26 +3,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Target, Compass, Lightbulb, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-const ContextSection = ({ context }) => (
+const ContextSection = ({ context, labels }) => (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-5 py-4 border-b border-white/10">
         <div className="rounded-lg bg-white/5 border border-white/10 p-4">
             <div className="flex items-center gap-2 mb-2">
                 <Target size={14} className="text-amber-400" />
-                <span className="text-xs font-semibold text-amber-400 uppercase tracking-wide">Problema</span>
+                <span className="text-xs font-semibold text-amber-400 uppercase tracking-wide">{labels.problem}</span>
             </div>
             <p className="text-sm text-white/70 leading-relaxed">{context.problem}</p>
         </div>
         <div className="rounded-lg bg-white/5 border border-white/10 p-4">
             <div className="flex items-center gap-2 mb-2">
                 <Compass size={14} className="text-blue-400" />
-                <span className="text-xs font-semibold text-blue-400 uppercase tracking-wide">Enfoque</span>
+                <span className="text-xs font-semibold text-blue-400 uppercase tracking-wide">{labels.approach}</span>
             </div>
             <p className="text-sm text-white/70 leading-relaxed">{context.approach}</p>
         </div>
         <div className="rounded-lg bg-white/5 border border-white/10 p-4">
             <div className="flex items-center gap-2 mb-2">
                 <Lightbulb size={14} className="text-emerald-400" />
-                <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wide">Insight</span>
+                <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wide">{labels.insight}</span>
             </div>
             <p className="text-sm text-white/70 leading-relaxed">{context.insight}</p>
         </div>
@@ -93,6 +93,7 @@ const ReportModal = ({ project, onClose }) => {
     const { t, language } = useLanguage();
     const isGallery = !!project.pages;
 
+    const title = project.title[language] || project.title?.es;
     const context = project.context?.[language] || project.context?.['es'];
 
     // Construir link externo segun el tipo de proyecto
@@ -102,7 +103,7 @@ const ReportModal = ({ project, onClose }) => {
         ? `${window.location.origin}${project.link}`
         : project.link;
 
-    const externalLabel = project.pdfPath ? 'Descargar PDF' : t.projects.viewReport;
+    const externalLabel = project.pdfPath ? t.projects.viewPdf : t.projects.viewReport;
 
     // Cerrar con Escape
     useEffect(() => {
@@ -138,7 +139,7 @@ const ReportModal = ({ project, onClose }) => {
                     {/* Header bar — siempre visible */}
                     <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 flex-shrink-0">
                         <div className="flex items-center gap-3">
-                            <span className="text-sm font-semibold text-white/80">{project.title}</span>
+                            <span className="text-sm font-semibold text-white/80">{title}</span>
                             <span className="text-xs font-mono bg-accent/20 text-accent px-2 py-0.5 rounded-full border border-accent/30">
                                 {project.tool}
                             </span>
@@ -168,15 +169,15 @@ const ReportModal = ({ project, onClose }) => {
                     {/* Contenido scrolleable */}
                     <div className="flex-1 overflow-y-auto min-h-0">
                         {/* Context cards */}
-                        {context && <ContextSection context={context} />}
+                        {context && <ContextSection context={context} labels={t.projects.contextLabels} />}
 
                         {/* Content: Gallery o Iframe */}
                         {isGallery ? (
-                            <GalleryView pages={project.pages} title={project.title} pageLabels={project.pageLabels?.[language] || project.pageLabels?.es} />
+                            <GalleryView pages={project.pages} title={title} pageLabels={project.pageLabels?.[language] || project.pageLabels?.es} />
                         ) : (
                             <div className="relative" style={{ height: 'calc(100vh - 200px)' }}>
                                 <iframe
-                                    title={project.title}
+                                    title={title}
                                     src={project.link}
                                     frameBorder="0"
                                     allowFullScreen

@@ -35,7 +35,7 @@ const ProjectCard = ({ project, index }) => {
                 </div>
 
                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
+                    {project.title[language] || project.title?.es}
                 </h3>
 
                 <p className="text-text-muted text-sm mb-6 flex-grow line-clamp-3">

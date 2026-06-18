@@ -27,7 +27,13 @@ const translations = {
             viewStreamlit: "Ver en Streamlit",
             stars: "Estrellas",
             comingSoon: "Próximamente…",
-            comingSoonDesc: "Aquí publicaré dashboards e informes interactivos desarrollados con Power BI y otras herramientas de visualización de datos."
+            comingSoonDesc: "Aquí publicaré dashboards e informes interactivos desarrollados con Power BI y otras herramientas de visualización de datos.",
+            viewPdf: "Descargar PDF",
+            contextLabels: {
+                problem: "Problema",
+                approach: "Enfoque",
+                insight: "Insight"
+            }
         },
         about: {
             title: "Sobre Mí",
@@ -74,7 +80,13 @@ const translations = {
             viewStreamlit: "View in Streamlit",
             stars: "Stars",
             comingSoon: "Coming soon…",
-            comingSoonDesc: "Here I will publish interactive dashboards and reports built with Power BI and other data visualization tools."
+            comingSoonDesc: "Here I will publish interactive dashboards and reports built with Power BI and other data visualization tools.",
+            viewPdf: "Download PDF",
+            contextLabels: {
+                problem: "Problem",
+                approach: "Approach",
+                insight: "Insight"
+            }
         },
         about: {
             title: "About Me",

@@ -18,7 +18,7 @@ export const projects = [
     {
         id: 1,
         category: "data-science",
-        title: "Análisis de Ventas - E-commerce Olist",
+        title: { es: "Análisis de Ventas - E-commerce Olist", en: "Sales Analysis - Olist E-commerce" },
         description: {
             es: "Análisis del conjunto de datos de Olist para explorar y visualizar patrones de ventas, identificando categorías rentables y comportamiento de precios.",
             en: "Analysis of the Olist dataset to explore and visualize sales patterns, identifying profitable categories and pricing behavior."
@@ -33,7 +33,7 @@ export const projects = [
     {
         id: 2,
         category: "data-science",
-        title: "Análisis de Ventas Globales — Mercado Interactivo (1985-2016)",
+        title: { es: "Análisis de Ventas Globales — Videojuegos (1985-2016)", en: "Global Sales Analysis — Video Games (1985-2016)" },
         description: {
             es: "Análisis global de ventas de productos de entretenimiento interactivo utilizando técnicas de ML. Dataset de +16,000 lanzamientos, explorando variables como plataforma, género y ventas regionales.",
             en: "Global sales analysis of interactive entertainment products using ML techniques. Dataset of +16,000 releases, exploring platform, genre, and regional sales variables."
@@ -48,7 +48,7 @@ export const projects = [
     {
         id: 3,
         category: "data-science",
-        title: "Predicción de Precios de Diamantes",
+        title: { es: "Predicción de Precios de Diamantes", en: "Diamond Price Prediction" },
         description: {
             es: "Pipeline de Machine Learning con PyCaret para predecir precios de diamantes basado en características físicas. Demostración de herramientas low-code.",
             en: "Machine Learning pipeline with PyCaret to predict diamond prices based on physical characteristics. Demonstration of low-code tools."
@@ -63,7 +63,7 @@ export const projects = [
     {
         id: 4,
         category: "data-science",
-        title: "Predicción de Supervivencia Titanic",
+        title: { es: "Predicción de Supervivencia Titanic", en: "Titanic Survival Prediction" },
         description: {
             es: "Estudio del clásico dataset del Titanic utilizando PyCaret para explorar capacidades de machine learning de bajo código.",
             en: "Study of the classic Titanic dataset using PyCaret to explore low-code machine learning capabilities."
@@ -78,7 +78,7 @@ export const projects = [
     {
         id: 5,
         category: "data-science",
-        title: "Predicción de Fuga de Clientes (Churn Rate)",
+        title: { es: "Predicción de Fuga de Clientes (Churn Rate)", en: "Customer Churn Prediction" },
         description: {
             es: "Análisis y predicción de fuga de clientes en telecomunicaciones usando PyCaret y AdaBoost Classifier. Modelo optimizado para Recall que identifica clientes con alta probabilidad de cancelar servicios.",
             en: "Customer churn analysis and prediction in telecommunications using PyCaret and AdaBoost Classifier. Recall-optimized model that identifies customers with high probability of canceling services."
@@ -109,7 +109,7 @@ export const biProjects = [
     {
         id: 1,
         category: "data-analysis",
-        title: "Global Superstore Project",
+        title: { es: "Global Superstore Project", en: "Global Superstore Project" },
         description: {
             es: "Dashboard interactivo de Power BI que analiza las ventas globales del dataset Global Superstore. Explora métricas clave como ingresos, márgenes de ganancia y tendencias de ventas por región, categoría de producto y segmento de cliente.",
             en: "Interactive Power BI dashboard analyzing global sales from the Global Superstore dataset. Explores key metrics including revenue, profit margins, and sales trends by region, product category, and customer segment."
@@ -136,7 +136,7 @@ export const biProjects = [
     {
         id: 2,
         category: "data-analysis",
-        title: "Dashboard Hospitalario",
+        title: { es: "Dashboard Hospitalario", en: "Hospital Dashboard" },
         description: {
             es: "Dashboard interactivo de análisis hospitalario con datos de 984 pacientes. Visualiza KPIs clave como costo promedio, tasa de readmisión y satisfacción del paciente. Incluye filtros dinámicos por género, resultado clínico y readmisión, con gráficos de condiciones frecuentes, distribución por edad, procedimientos y más.",
             en: "Interactive hospital analytics dashboard with data from 984 patients. Visualizes key KPIs such as average cost, readmission rate, and patient satisfaction. Includes dynamic filters by gender, clinical outcome and readmission, with charts for frequent conditions, age distribution, procedures, and more."
@@ -162,7 +162,7 @@ export const biProjects = [
     {
         id: 4,
         category: "data-analysis",
-        title: "Datara — Analizá datos con lenguaje natural",
+        title: { es: "Datara — Analizá datos con lenguaje natural", en: "Datara — Analyze data with natural language" },
         description: {
             es: "App web interactiva que permite cargar archivos CSV o Excel y hacerles preguntas en español. La IA (Gemini) genera respuestas con texto, tablas y gráficos Plotly automáticamente. Incluye sandbox seguro para ejecutar código, exportación de resultados, y 145 tests automatizados.",
             en: "Interactive web app that lets you upload CSV or Excel files and ask questions in Spanish. The AI (Gemini) automatically generates responses with text, tables, and Plotly charts. Includes a secure code sandbox, result export, and 145 automated tests."
@@ -187,7 +187,7 @@ export const biProjects = [
     {
         id: 3,
         category: "data-analysis",
-        title: "Dashboard de Recursos Humanos",
+        title: { es: "Dashboard de Recursos Humanos", en: "HR Dashboard" },
         description: {
             es: "Dashboard de Recursos Humanos desarrollado en Power BI con 3 páginas interactivas: Resumen Ejecutivo, Análisis de Empleados y Rotación. Visualiza KPIs clave como 311 empleados totales, salario promedio de $69K, tasa de rotación del 33% y promedio de ausencias. Incluye gráficos de contrataciones por año, distribución por género, headcount por departamento y filtros interactivos.",
             en: "Human Resources dashboard built in Power BI with 3 interactive pages: Executive Summary, Employee Analysis, and Turnover. Visualizes key KPIs including 311 total employees, $69K average salary, 33% turnover rate and average absences. Features charts for hires by year, gender distribution, headcount by department, and interactive filters."

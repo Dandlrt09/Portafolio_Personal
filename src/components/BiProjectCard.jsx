@@ -41,7 +41,7 @@ const BiProjectCard = ({ project, index }) => {
                     </div>
 
                     <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
-                        {project.title}
+                        {project.title[language] || project.title?.es}
                     </h3>
 
                     <p className="text-text-muted text-sm mb-6 flex-grow line-clamp-3">
@@ -66,7 +66,7 @@ const BiProjectCard = ({ project, index }) => {
                             className="flex items-center gap-2 text-sm font-medium text-text-muted hover:text-accent transition-colors"
                         >
                             <ExternalLink size={14} />
-                            {project.pdfPath ? 'Descargar PDF' : t.projects.viewReport}
+                            {project.pdfPath ? t.projects.viewPdf : t.projects.viewReport}
                         </a>
                     </div>
                 </div>
