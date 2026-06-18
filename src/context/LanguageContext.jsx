@@ -5,9 +5,9 @@ const LanguageContext = createContext();
 const translations = {
     es: {
         hero: {
-            badge: "ANALISTA DE DATOS & BI",
-            title: "Daniel Josué De los Ríos Trespalacios",
-            subtitle: "Analista de Datos | Python | Power BI | Machine Learning",
+            badge: "DATA SCIENCE & BI",
+            title: "Daniel De los Ríos",
+            subtitle: "Convierto datos complejos en decisiones claras — dashboards, modelos predictivos y aplicaciones analíticas con IA.",
             cta: "Ver Proyectos",
             resume: "Ver CV"
         },
@@ -44,9 +44,9 @@ const translations = {
     },
     en: {
         hero: {
-            badge: "DATA ANALYST & BI",
-            title: "Daniel Josué De los Ríos Trespalacios",
-            subtitle: "Data Analyst | Python | Power BI | Machine Learning",
+            badge: "DATA SCIENCE & BI",
+            title: "Daniel De los Ríos",
+            subtitle: "Turning complex data into clear decisions — dashboards, predictive models, and AI-powered analytics.",
             cta: "View Projects",
             resume: "View CV"
         },
