@@ -129,6 +129,7 @@ export const biProjects = [
         tool: "Power BI",
         image: globalSuperstoreImg,
         pages: [globalResumen, globalGeografico, globalProductos],
+        pageLabels: { es: ["Resumen", "Análisis Geográfico", "Análisis de Productos"], en: ["Overview", "Geographic Analysis", "Product Analysis"] },
         pdfPath: "/Global Superstore Proyect.pdf",
         topics: ["Sales Analytics", "Power BI", "Global"]
     },
@@ -206,6 +207,7 @@ export const biProjects = [
         tool: "Power BI",
         image: hrDashboardImg,
         pages: [hrResumen, hrEmpleados, hrRotacion],
+        pageLabels: { es: ["Resumen Ejecutivo", "Análisis de Empleados", "Rotación"], en: ["Executive Summary", "Employee Analysis", "Turnover"] },
         pdfPath: "/Recursos Humanos.pdf",
         topics: ["Human Resources", "Power BI", "HR Analytics"]
     }

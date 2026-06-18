@@ -29,22 +29,21 @@ const ContextSection = ({ context }) => (
     </div>
 );
 
-const GalleryView = ({ pages, title }) => {
+const GalleryView = ({ pages, title, pageLabels }) => {
     const [current, setCurrent] = useState(0);
 
-    const pageLabels = ['Resumen', 'Análisis Geográfico', 'Análisis de Productos'];
-
     return (
-        <div className="flex-1 flex flex-col min-h-0">
+        <div className="flex flex-col min-h-0">
             {/* Image counter */}
             <div className="flex items-center justify-between px-5 py-2 border-b border-white/5">
                 <span className="text-xs text-text-muted">
-                    {pageLabels[current]} — {current + 1} / {pages.length}
+                    {pageLabels?.[current] || `Página ${current + 1}`} — {current + 1} / {pages.length}
                 </span>
             </div>
 
-            {/* Image container */}
-            <div className="flex-1 relative flex items-center justify-center bg-black/40 p-4">
+            {/* Image container — altura fija para que se vea completo */}
+            <div className="relative flex items-center justify-center bg-black/40 p-4"
+                 style={{ minHeight: '400px', maxHeight: '70vh' }}>
                 <img
                     src={pages[current]}
                     alt={`${title} — ${pageLabels[current]}`}
@@ -136,7 +135,7 @@ const ReportModal = ({ project, onClose }) => {
                     className="relative flex flex-col w-full h-full max-w-6xl mx-auto my-6 rounded-2xl overflow-hidden border border-white/10"
                     style={{ background: '#0f0f1a' }}
                 >
-                    {/* Header bar */}
+                    {/* Header bar — siempre visible */}
                     <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 flex-shrink-0">
                         <div className="flex items-center gap-3">
                             <span className="text-sm font-semibold text-white/80">{project.title}</span>
@@ -166,23 +165,26 @@ const ReportModal = ({ project, onClose }) => {
                         </div>
                     </div>
 
-                    {/* Context cards */}
-                    {context && <ContextSection context={context} />}
+                    {/* Contenido scrolleable */}
+                    <div className="flex-1 overflow-y-auto min-h-0">
+                        {/* Context cards */}
+                        {context && <ContextSection context={context} />}
 
-                    {/* Content: Gallery o Iframe */}
-                    {isGallery ? (
-                        <GalleryView pages={project.pages} title={project.title} />
-                    ) : (
-                        <div className="relative flex-1">
-                            <iframe
-                                title={project.title}
-                                src={project.link}
-                                frameBorder="0"
-                                allowFullScreen
-                                className="absolute inset-0 w-full h-full"
-                            />
-                        </div>
-                    )}
+                        {/* Content: Gallery o Iframe */}
+                        {isGallery ? (
+                            <GalleryView pages={project.pages} title={project.title} pageLabels={project.pageLabels?.[language] || project.pageLabels?.es} />
+                        ) : (
+                            <div className="relative" style={{ height: 'calc(100vh - 200px)' }}>
+                                <iframe
+                                    title={project.title}
+                                    src={project.link}
+                                    frameBorder="0"
+                                    allowFullScreen
+                                    className="absolute inset-0 w-full h-full"
+                                />
+                            </div>
+                        )}
+                    </div>
                 </motion.div>
             </motion.div>
         </AnimatePresence>
