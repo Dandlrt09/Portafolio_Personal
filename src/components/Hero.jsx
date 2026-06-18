@@ -56,7 +56,7 @@ const Hero = () => {
                         <div className="flex items-center gap-4 mt-4 sm:mt-0 sm:ml-4">
                             <SocialLink href="https://github.com/Dandlrt09" icon={<Github size={20} />} />
                             <SocialLink href="https://www.linkedin.com/in/danieldlrt09" icon={<Linkedin size={20} />} />
-                            <SocialLink href="mailto:danieldelosriost@gmail.com" icon={<Mail size={20} />} />
+                            <SocialLink href="mailto:danieldlrt.jobs@gmail.com" icon={<Mail size={20} />} />
                         </div>
                     </div>
                 </motion.div>

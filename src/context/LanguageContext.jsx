@@ -49,7 +49,7 @@ const translations = {
             title: "Contacto",
             description: "¿Tienes un proyecto en mente o simplemente quieres conectar?",
             cta: "Enviar Correo",
-            email: "danieldelosriost@gmail.com",
+            email: "danieldlrt.jobs@gmail.com",
             cv: "Descargar CV"
         },
         footer: {
@@ -102,7 +102,7 @@ const translations = {
             title: "Get in Touch",
             description: "Have a project in mind or just want to connect?",
             cta: "Send an Email",
-            email: "danieldelosriost@gmail.com",
+            email: "danieldlrt.jobs@gmail.com",
             cv: "Download CV"
         },
         footer: {
