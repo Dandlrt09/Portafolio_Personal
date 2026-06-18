@@ -31,20 +31,9 @@ const ProjectGrid = () => {
                     <div className="h-1 w-20 bg-primary rounded-full" />
                 </div>
 
-                {/* ── Sub-section 1: Data Science ── */}
+                {/* ── Sub-section 1: Data Analysis / BI ── */}
                 <div className="mb-20">
-                    <SectionHeader icon={BrainCircuit} title={t.projects.dsTitle} color="primary" />
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {projects.map((project, index) => (
-                            <ProjectCard key={project.id} project={project} index={index} />
-                        ))}
-                    </div>
-                </div>
-
-                {/* ── Sub-section 2: Data Analysis ── */}
-                <div>
                     <SectionHeader icon={BarChart2} title={t.projects.biTitle} color="accent" />
-
                     {biProjects.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {biProjects.map((project, index) => (
@@ -67,6 +56,16 @@ const ProjectGrid = () => {
                             </p>
                         </motion.div>
                     )}
+                </div>
+
+                {/* ── Sub-section 2: Data Science ── */}
+                <div>
+                    <SectionHeader icon={BrainCircuit} title={t.projects.dsTitle} color="primary" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {projects.map((project, index) => (
+                            <ProjectCard key={project.id} project={project} index={index} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
