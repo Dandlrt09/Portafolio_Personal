@@ -28,6 +28,7 @@ export const projects = [
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%201/Main.ipynb",
         streamlit: "https://e-commerce-app-project.streamlit.app",
         stars: 3,
+        metrics: { es: ["+10,000 pedidos analizados", "Categorías rentables identificadas", "Dashboard interactivo en Streamlit"], en: ["+10,000 orders analyzed", "Profitable categories identified", "Interactive Streamlit dashboard"] },
         topics: ["Data Analysis", "E-commerce"]
     },
     {
@@ -43,6 +44,7 @@ export const projects = [
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%202/Main.ipynb",
         streamlit: "https://videogames-analysis.streamlit.app",
         stars: 2,
+        metrics: { es: ["+16,000 lanzamientos analizados", "30 años de datos (1985-2016)", "Patrones de ventas por región y género"], en: ["+16,000 releases analyzed", "30 years of data (1985-2016)", "Sales patterns by region and genre"] },
         topics: ["Machine Learning", "Data Analysis"]
     },
     {
@@ -58,6 +60,7 @@ export const projects = [
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%203/Pycaret%20y%20Entrenamiento.ipynb",
         streamlit: "https://diamond-price-app.streamlit.app",
         stars: 4,
+        metrics: { es: ["Pipeline low-code con PyCaret", "Predicción basada en características físicas", "App interactiva para estimar precio"], en: ["Low-code pipeline with PyCaret", "Prediction based on physical features", "Interactive price estimation app"] },
         topics: ["PyCaret", "Prediction"]
     },
     {
@@ -73,6 +76,7 @@ export const projects = [
         link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%204/Main.ipynb",
         streamlit: "https://supervivencia-titanic.streamlit.app",
         stars: 5,
+        metrics: { es: ["Clasificación con ~80% de precisión", "PyCaret para comparación de modelos", "App funcional para probar predicciones"], en: ["~80% accuracy classification", "PyCaret for model comparison", "Functional prediction test app"] },
         topics: ["PyCaret", "Classification"]
     },
     {
@@ -88,6 +92,7 @@ export const projects = [
         link: "https://github.com/Dandlrt09/Proyecto_Analisis-y-Prediccion-de-Fuga-de-Clientes",
         streamlit: "https://simulador-churn.streamlit.app",
         stars: 4,
+        metrics: { es: ["Recall optimizado para detectar fugas", "Modelo AdaBoost + PyCaret", "Simulador interactivo de predicción"], en: ["Recall-optimized churn detection", "AdaBoost + PyCaret model", "Interactive prediction simulator"] },
         topics: ["Machine Learning", "Classification", "Churn"]
     }
 ];
@@ -145,7 +150,7 @@ export const biProjects = [
             es: {
                 problem: "Un hospital necesita responder 4 preguntas clave: ¿qué enfermedades son más frecuentes?, ¿cuáles generan más costos?, ¿qué pacientes tienen mayor riesgo de urgencias?, y ¿qué procedimientos se usan más?",
                 approach: "Proyecto de exploración: construido con Claude AI usando Chart.js para comparar cómo se siente crear dashboards interactivos fuera de Power BI. El valor está en validar si las respuestas son correctas y entender la experiencia del usuario final.",
-                insight: "Las 4 preguntas se responden con solo 4 gráficos bien elegidos. Esto demuestra que no necesitás 20 visuales para un dashboard útil — necesitás las preguntas correctas primero."
+                insight: "Las 4 preguntas se responden con solo 4 gráficos bien elegidos. Esto demuestra que no necesita 20 visuales para un dashboard útil — necesita las preguntas correctas primero."
             },
             en: {
                 problem: "A hospital needs to answer 4 key questions: what conditions are most frequent?, which generate the highest costs?, which patients have the highest emergency risk?, and which procedures are most used?",
@@ -162,14 +167,14 @@ export const biProjects = [
     {
         id: 4,
         category: "data-analysis",
-        title: { es: "Datara — Analizá datos con lenguaje natural", en: "Datara — Analyze data with natural language" },
+        title: { es: "Datara — Analiza datos con lenguaje natural", en: "Datara — Analyze data with natural language" },
         description: {
             es: "App web interactiva que permite cargar archivos CSV o Excel y hacerles preguntas en español. La IA (Gemini) genera respuestas con texto, tablas y gráficos Plotly automáticamente. Incluye sandbox seguro para ejecutar código, exportación de resultados, y 145 tests automatizados.",
             en: "Interactive web app that lets you upload CSV or Excel files and ask questions in Spanish. The AI (Gemini) automatically generates responses with text, tables, and Plotly charts. Includes a secure code sandbox, result export, and 145 automated tests."
         },
         context: {
             es: {
-                problem: "Para analizar datos con IA tenés que saber programar o usar herramientas en inglés. No hay una opción simple donde subas un archivo, preguntes en español y obtengas resultados al instante sin configurar nada.",
+                problem: "Para analizar datos con IA tiene que saber programar o usar herramientas en inglés. No hay una opción simple donde subas un archivo, preguntes en español y obtengas resultados al instante sin configurar nada.",
                 approach: "App construida con Streamlit + Gemini 2.5 Flash. El usuario sube archivos, escribe preguntas en lenguaje natural, y la IA genera código Python que se ejecuta en un sandbox seguro. El resultado se muestra como texto, tabla o gráfico según lo que tenga sentido para la pregunta.",
                 insight: "El challenge no fue la IA — fue el sandbox. El código generado por la IA puede tener loops infinitos, imports peligrosos o errores de sintaxis. El verdadero trabajo fue construir un entorno de ejecución que fuera seguro pero suficientemente potente para que pandas y plotly funcionen."
             },
@@ -182,6 +187,7 @@ export const biProjects = [
         tool: "Streamlit + Gemini",
         image: dataraImg,
         link: "https://github.com/Dandlrt09/Datara",
+        metrics: { es: ["145 tests automatizados", "Sandbox seguro para código IA", "Pregunta en español, obtiene resultados"], en: ["145 automated tests", "Secure AI code sandbox", "Ask in Spanish, get instant results"] },
         topics: ["Streamlit", "Gemini AI", "Python", "Natural Language", "Data Analysis"]
     },
     {

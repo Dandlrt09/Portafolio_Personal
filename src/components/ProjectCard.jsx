@@ -1,10 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Star, Code } from 'lucide-react';
+import { Github, ExternalLink, Star, TrendingUp } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+
+const StarRating = ({ count }) => (
+    <div className="flex items-center gap-0.5">
+        {[1, 2, 3, 4, 5].map(i => (
+            <Star key={i} size={12} className={i <= count ? 'fill-amber-400 text-amber-400' : 'text-white/10'} />
+        ))}
+    </div>
+);
 
 const ProjectCard = ({ project, index }) => {
     const { t, language } = useLanguage();
+    const metrics = project.metrics?.[language] || project.metrics?.es;
 
     return (
         <motion.div
@@ -32,17 +41,30 @@ const ProjectCard = ({ project, index }) => {
                             </span>
                         ))}
                     </div>
+                    <StarRating count={project.stars} />
                 </div>
 
                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {project.title[language] || project.title?.es}
                 </h3>
 
-                <p className="text-text-muted text-sm mb-6 flex-grow line-clamp-3">
+                <p className="text-text-muted text-sm mb-4 flex-grow line-clamp-3">
                     {project.description[language] || project.description['es']}
                 </p>
 
-                <div className="flex flex-col gap-2 mt-auto">
+                {/* Métricas de resultado */}
+                {metrics && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {metrics.map((m, i) => (
+                            <span key={i} className="flex items-center gap-1 text-xs text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded-full">
+                                <TrendingUp size={11} />
+                                {m}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                <div className="flex flex-col gap-2 mt-auto pt-3 border-t border-white/5">
                     <a
                         href={project.link}
                         target="_blank"
