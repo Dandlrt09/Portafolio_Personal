@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Star, TrendingUp } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -13,6 +13,7 @@ const StarRating = ({ count }) => (
 
 const ProjectCard = ({ project, index }) => {
     const { t, language } = useLanguage();
+    const [expanded, setExpanded] = useState(false);
     const metrics = project.metrics?.[language] || project.metrics?.es;
 
     return (
@@ -48,9 +49,25 @@ const ProjectCard = ({ project, index }) => {
                     {project.title[language] || project.title?.es}
                 </h3>
 
-                <p className="text-text-muted text-sm mb-4 flex-grow line-clamp-3">
-                    {project.description[language] || project.description['es']}
-                </p>
+                {(() => {
+                    const desc = project.description[language] || project.description['es'];
+                    const needsClamp = desc.length > 100;
+                    return (
+                        <>
+                            <p className={`text-text-muted text-sm mb-1 flex-grow ${needsClamp && !expanded ? 'line-clamp-3' : ''}`}>
+                                {desc}
+                            </p>
+                            {needsClamp && (
+                                <button
+                                    onClick={() => setExpanded(!expanded)}
+                                    className="text-xs text-text-muted hover:text-primary transition-colors cursor-pointer mt-1 mb-2"
+                                >
+                                    {expanded ? t.projects.showLess : t.projects.showMore}
+                                </button>
+                            )}
+                        </>
+                    );
+                })()}
 
                 {/* Métricas de resultado */}
                 {metrics && (

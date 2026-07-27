@@ -29,6 +29,8 @@ const translations = {
             comingSoon: "Próximamente…",
             comingSoonDesc: "Aquí publicaré dashboards e informes interactivos desarrollados con Power BI y otras herramientas de visualización de datos.",
             viewPdf: "Descargar PDF",
+            showMore: "Ver más",
+            showLess: "Ver menos",
             contextLabels: {
                 problem: "Problema",
                 approach: "Enfoque",
@@ -82,6 +84,8 @@ const translations = {
             comingSoon: "Coming soon…",
             comingSoonDesc: "Here I will publish interactive dashboards and reports built with Power BI and other data visualization tools.",
             viewPdf: "Download PDF",
+            showMore: "Show more",
+            showLess: "Show less",
             contextLabels: {
                 problem: "Problem",
                 approach: "Approach",
