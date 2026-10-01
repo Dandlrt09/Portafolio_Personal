@@ -1,54 +1,85 @@
-import React, { createContext, useContext, useState } from 'react';
+/* eslint-disable react-refresh/only-export-components -- el provider y el hook viven
+   juntos a propósito: son la misma API pública y separarlos obligaría a tocar cada import. */
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const LanguageContext = createContext();
 
 const translations = {
     es: {
         hero: {
-            badge: "DATA SCIENCE & BI",
+            badge: "Desarrollador de Soluciones de Datos e IA",
             title: "Daniel De los Ríos",
-            subtitle: "Convierto datos complejos en decisiones claras — dashboards, modelos predictivos y aplicaciones analíticas con IA.",
-            cta: "Ver Proyectos",
+            subtitle: "Ingeniero Multimedia que construye aplicaciones de datos e IA de punta a punta — backend, frontend y el modelo en el medio. Del problema a la app que lo resuelve.",
+            cta: "Ver proyectos",
             resume: "Ver CV"
         },
         nav: {
             projects: "Proyectos",
-            about: "Sobre Mí",
+            about: "Sobre mí",
             contact: "Contacto",
             cv: "CV",
+            switchTo: "English"
         },
         projects: {
-            title: "Mis Proyectos",
-            dsTitle: "Ciencia de Datos",
-            biTitle: "Análisis de Datos",
-            viewCode: "Ver Código",
-            viewReport: "Ver Reporte",
-            viewHere: "Ver aquí",
-            viewStreamlit: "Ver en Streamlit",
-            stars: "Estrellas",
-            comingSoon: "Próximamente…",
-            comingSoonDesc: "Aquí publicaré dashboards e informes interactivos desarrollados con Power BI y otras herramientas de visualización de datos.",
-            viewPdf: "Descargar PDF",
-            contextLabels: {
+            title: "Proyectos",
+            featuredTitle: "Aplicaciones de datos e IA",
+            featuredIntro: "Proyectos que construí de punta a punta: el problema, el stack y la decisión técnica detrás de cada uno.",
+            analyticsTitle: "Analítica y BI",
+            analyticsIntro: "Cuadros de mando y modelos predictivos sobre datos reales.",
+            archiveTitle: "Archivo",
+            archiveNote: "Ejercicios de práctica y trabajo de curso. Los dejo acá por completitud, no porque sean mi mejor trabajo.",
+            archiveShow: "Mostrar archivo",
+            archiveHide: "Ocultar archivo",
+            labels: {
                 problem: "Problema",
+                decision: "Decisión técnica",
+                stack: "Stack",
                 approach: "Enfoque",
-                insight: "Insight"
-            }
+                insight: "Insight",
+                close: "Cerrar",
+                page: "Página",
+                previous: "Anterior",
+                next: "Siguiente"
+            },
+            viewRepo: "Ver código",
+            viewDemo: "Ver demo",
+            viewDashboard: "Ver dashboard",
+            viewPdf: "Descargar PDF",
+            viewReport: "Ver reporte"
         },
         about: {
-            title: "Sobre Mí",
-            description: "Vengo de Ingeniería Multimedia, y eso cambia cómo veo los datos. Mientras otros se enfocan solo en el modelo o la query, yo pienso en cómo se va a ver, cómo se va a entender, y — sobre todo — si alguien que no sabe de datos va a poder tomar una decisión con lo que está viendo.\n\nMi approach mezcla lo técnico (Python, Scikit-learn, Power BI) con lo visual que traigo de formación: sé que un dashboard no es bueno porque tenga muchos gráficos, sino porque responde las preguntas correctas en el orden correcto. Eso es lo que me gusta hacer: encontrar la historia que los datos están contando y asegurarme de que se entienda."
+            title: "Sobre mí",
+            description: "Vengo de Ingeniería Multimedia y eso define cómo trabajo: no me quedo en el modelo ni en la query. Pienso la arquitectura, escribo el backend, armo el frontend y me aseguro de que alguien que no sabe de datos pueda decidir con lo que ve.\n\nHoy construyo aplicaciones de datos e IA de punta a punta. En Datara el reto no fue la IA — fue el sandbox donde corre el código que la IA genera. En ANV·BAR fue llevar un catálogo real a producción con autenticación y políticas de acceso. Lo técnico y lo visual no son dos sombreros: son la misma conversación."
         },
         skills: {
-            python: "Python — limpio, analizo y modelo datos con Pandas, NumPy y Scikit-learn",
-            ml: "Machine Learning aplicado — clasificación, predicción y pipelines con PyCaret",
-            bi: "Power BI & Storytelling visual — dashboards que responden preguntas, no solo muestran números",
-            storytelling: "Comunicación multicanal — vengo del diseño y la animación, sé cómo hacer que un dato se recuerde"
+            title: "Habilidades",
+            groups: [
+                {
+                    label: "Desarrollo",
+                    items: ["Python", "FastAPI", "React", "TypeScript", "Tailwind CSS", "SQL", "Postgres", "SQLite", "Supabase", "Git", "pytest", "GitHub Actions"]
+                },
+                {
+                    label: "Datos & ML",
+                    items: ["Pandas", "NumPy", "Scikit-learn", "PyCaret", "EDA", "Ingeniería de características", "Modelado predictivo", "Series temporales", "Jupyter"]
+                },
+                {
+                    label: "IA aplicada",
+                    items: ["Gemini API", "Integración de LLM", "Streamlit", "Desarrollo asistido por agentes"]
+                },
+                {
+                    label: "BI & visualización",
+                    items: ["Power BI", "Matplotlib", "Seaborn", "Data storytelling"]
+                },
+                {
+                    label: "Diseño",
+                    items: ["Adobe Creative Suite", "UX/UI"]
+                }
+            ]
         },
         contact: {
             title: "Contacto",
-            description: "¿Tienes un proyecto en mente o simplemente quieres conectar?",
-            cta: "Enviar Correo",
+            description: "¿Tenés un proyecto en mente, o buscás a alguien que construya la aplicación y no solo el modelo? Escribime.",
+            cta: "Enviar correo",
             email: "danieldlrt.jobs@gmail.com",
             cv: "Descargar CV"
         },
@@ -58,50 +89,79 @@ const translations = {
     },
     en: {
         hero: {
-            badge: "DATA SCIENCE & BI",
+            badge: "Data & AI Solutions Developer",
             title: "Daniel De los Ríos",
-            subtitle: "Turning complex data into clear decisions — dashboards, predictive models, and AI-powered analytics.",
-            cta: "View Projects",
+            subtitle: "Multimedia Engineer building end-to-end data and AI applications — backend, frontend, and the model in between. From the problem to the app that solves it.",
+            cta: "View projects",
             resume: "View CV"
         },
         nav: {
             projects: "Projects",
-            about: "About Me",
+            about: "About",
             contact: "Contact",
             cv: "CV",
+            switchTo: "Español"
         },
         projects: {
-            title: "My Projects",
-            dsTitle: "Data Science",
-            biTitle: "Data Analysis",
-            viewCode: "View Code",
-            viewReport: "View Report",
-            viewHere: "View here",
-            viewStreamlit: "View in Streamlit",
-            stars: "Stars",
-            comingSoon: "Coming soon…",
-            comingSoonDesc: "Here I will publish interactive dashboards and reports built with Power BI and other data visualization tools.",
-            viewPdf: "Download PDF",
-            contextLabels: {
+            title: "Projects",
+            featuredTitle: "Data & AI applications",
+            featuredIntro: "Projects I built end to end: the problem, the stack, and the technical decision behind each one.",
+            analyticsTitle: "Analytics & BI",
+            analyticsIntro: "Dashboards and predictive models on real data.",
+            archiveTitle: "Archive",
+            archiveNote: "Practice exercises and coursework. Kept here for completeness, not because they are my best work.",
+            archiveShow: "Show archive",
+            archiveHide: "Hide archive",
+            labels: {
                 problem: "Problem",
+                decision: "Technical decision",
+                stack: "Stack",
                 approach: "Approach",
-                insight: "Insight"
-            }
+                insight: "Insight",
+                close: "Close",
+                page: "Page",
+                previous: "Previous",
+                next: "Next"
+            },
+            viewRepo: "View code",
+            viewDemo: "View demo",
+            viewDashboard: "View dashboard",
+            viewPdf: "Download PDF",
+            viewReport: "View report"
         },
         about: {
-            title: "About Me",
-            description: "I come from Multimedia Engineering, and that changes how I look at data. While others focus only on the model or the query, I think about how it will look, how it will be understood, and — most importantly — whether someone who doesn't know data will be able to make a decision with what they're seeing.\n\nMy approach blends the technical (Python, Scikit-learn, Power BI) with the visual background I bring: I know a dashboard isn't good because it has many charts, but because it answers the right questions in the right order. That's what I enjoy doing — finding the story the data is telling and making sure it's understood."
+            title: "About",
+            description: "I come from Multimedia Engineering, and that defines how I work: I don't stop at the model or the query. I design the architecture, write the backend, build the frontend, and make sure someone who doesn't know data can decide with what they see.\n\nToday I build end-to-end data and AI applications. At Datara the challenge wasn't the AI — it was the sandbox where the AI-generated code runs. At ANV·BAR it was taking a real catalogue to production with authentication and access policies. The technical and the visual aren't two hats: they're the same conversation."
         },
         skills: {
-            python: "Python — clean, analyze, and model data with Pandas, NumPy, and Scikit-learn",
-            ml: "Applied ML — classification, prediction, and pipelines with PyCaret",
-            bi: "Power BI & Visual Storytelling — dashboards that answer questions, not just show numbers",
-            storytelling: "Multichannel communication — from design and animation, I know how to make data stick"
+            title: "Skills",
+            groups: [
+                {
+                    label: "Development",
+                    items: ["Python", "FastAPI", "React", "TypeScript", "Tailwind CSS", "SQL", "Postgres", "SQLite", "Supabase", "Git", "pytest", "GitHub Actions"]
+                },
+                {
+                    label: "Data & ML",
+                    items: ["Pandas", "NumPy", "Scikit-learn", "PyCaret", "EDA", "Feature engineering", "Predictive modeling", "Time series", "Jupyter"]
+                },
+                {
+                    label: "Applied AI",
+                    items: ["Gemini API", "LLM integration", "Streamlit", "Agent-assisted development"]
+                },
+                {
+                    label: "BI & visualization",
+                    items: ["Power BI", "Matplotlib", "Seaborn", "Data storytelling"]
+                },
+                {
+                    label: "Design",
+                    items: ["Adobe Creative Suite", "UX/UI"]
+                }
+            ]
         },
         contact: {
-            title: "Get in Touch",
-            description: "Have a project in mind or just want to connect?",
-            cta: "Send an Email",
+            title: "Get in touch",
+            description: "Have a project in mind, or looking for someone who builds the application and not just the model? Get in touch.",
+            cta: "Send an email",
             email: "danieldlrt.jobs@gmail.com",
             cv: "Download CV"
         },
@@ -115,6 +175,12 @@ export const LanguageProvider = ({ children }) => {
     const [language, setLanguage] = useState('es');
 
     const t = translations[language];
+
+    // El atributo lang del <html> sigue al idioma activo: sin esto, todo el sitio
+    // queda declarado como español para lectores de pantalla y traductores.
+    useEffect(() => {
+        document.documentElement.lang = language;
+    }, [language]);
 
     const toggleLanguage = () => {
         setLanguage((prev) => (prev === 'es' ? 'en' : 'es'));

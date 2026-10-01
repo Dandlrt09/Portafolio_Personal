@@ -9,15 +9,16 @@ const ProjectCard = ({ project, index }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.05 }}
             className="group relative bg-surface border border-white/5 rounded-xl overflow-hidden hover:border-primary/50 transition-colors flex flex-col h-full"
         >
             {/* Project Image */}
             <div className="h-48 overflow-hidden relative">
                 <img
                     src={project.image}
-                    alt={project.title}
+                    alt={project.title[language] || project.title?.es}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60" />
@@ -50,7 +51,7 @@ const ProjectCard = ({ project, index }) => {
                         className="flex items-center gap-2 text-sm font-medium text-text hover:text-primary transition-colors"
                     >
                         <Github size={16} />
-                        {t.projects.viewCode}
+                        {t.projects.viewRepo}
                     </a>
                     {project.streamlit && (
                         <a
@@ -60,7 +61,7 @@ const ProjectCard = ({ project, index }) => {
                             className="flex items-center gap-2 text-sm font-medium text-text hover:text-primary transition-colors"
                         >
                             <ExternalLink size={16} />
-                            {t.projects.viewStreamlit}
+                            {t.projects.viewDemo}
                         </a>
                     )}
                 </div>

@@ -1,19 +1,39 @@
-import { motion } from 'framer-motion';
-import { BrainCircuit, BarChart2, Clock } from 'lucide-react';
-import { projects, biProjects } from '../data/projects';
+import { BrainCircuit, BarChart2 } from 'lucide-react';
+import { featuredProjects, analyticsProjects } from '../data/projects';
+import FeaturedProjectCard from './FeaturedProjectCard';
 import ProjectCard from './ProjectCard';
 import BiProjectCard from './BiProjectCard';
+import ArchiveSection from './ArchiveSection';
 import { useLanguage } from '../context/LanguageContext';
 
-const SectionHeader = ({ icon: Icon, title, color = "primary" }) => (
-    <div className="flex items-center gap-3 mb-8">
-        <div className={`p-2 rounded-lg bg-${color}/10 border border-${color}/20`}>
-            <Icon size={20} className={`text-${color}`} />
+const tones = {
+    primary: {
+        box: 'bg-primary/10 border-primary/20',
+        icon: 'text-primary',
+        rule: 'from-primary/30',
+    },
+    accent: {
+        box: 'bg-accent/10 border-accent/20',
+        icon: 'text-accent',
+        rule: 'from-accent/30',
+    },
+};
+
+const SectionHeader = ({ icon: Icon, title, color = 'primary' }) => {
+    const tone = tones[color] || tones.primary;
+
+    return (
+        <div className="mb-8">
+            <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-lg border ${tone.box}`}>
+                    <Icon size={20} className={tone.icon} />
+                </div>
+                <h3 className={`text-2xl font-bold ${tone.icon}`}>{title}</h3>
+                <div className={`flex-1 h-px bg-gradient-to-r to-transparent ${tone.rule}`} />
+            </div>
         </div>
-        <h3 className={`text-2xl font-bold text-${color}`}>{title}</h3>
-        <div className={`flex-1 h-px bg-gradient-to-r from-${color}/30 to-transparent`} />
-    </div>
-);
+    );
+};
 
 const ProjectGrid = () => {
     const { t } = useLanguage();
@@ -22,7 +42,7 @@ const ProjectGrid = () => {
         <section id="projects" className="py-20 bg-background relative">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Main heading */}
-                <div className="mb-14">
+                <div className="mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
                         <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                             {t.projects.title}
@@ -31,41 +51,34 @@ const ProjectGrid = () => {
                     <div className="h-1 w-20 bg-primary rounded-full" />
                 </div>
 
-                {/* ── Sub-section 1: Data Analysis / BI ── */}
-                <div className="mb-20">
-                    <SectionHeader icon={BarChart2} title={t.projects.biTitle} color="accent" />
-                    {biProjects.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {biProjects.map((project, index) => (
-                                <BiProjectCard key={project.id} project={project} index={index} />
-                            ))}
-                        </div>
-                    ) : (
-                        <motion.div
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="flex flex-col items-center justify-center gap-4 py-16 rounded-2xl border border-dashed border-accent/20 bg-accent/5"
-                        >
-                            <div className="p-4 rounded-full bg-accent/10">
-                                <Clock size={28} className="text-accent opacity-70" />
-                            </div>
-                            <p className="text-xl font-semibold text-accent/80">{t.projects.comingSoon}</p>
-                            <p className="text-sm text-text-muted text-center max-w-md px-4">
-                                {t.projects.comingSoonDesc}
-                            </p>
-                        </motion.div>
-                    )}
-                </div>
+                {/* ── Sub-section 1: Featured — data & AI applications ── */}
+                <div className="mb-24">
+                    <SectionHeader icon={BrainCircuit} title={t.projects.featuredTitle} color="primary" />
+                    <p className="mb-8 max-w-2xl text-text-muted">{t.projects.featuredIntro}</p>
 
-                {/* ── Sub-section 2: Data Science ── */}
-                <div>
-                    <SectionHeader icon={BrainCircuit} title={t.projects.dsTitle} color="primary" />
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {projects.map((project, index) => (
-                            <ProjectCard key={project.id} project={project} index={index} />
+                    <div className="flex flex-col gap-8">
+                        {featuredProjects.map((project, index) => (
+                            <FeaturedProjectCard key={project.id} project={project} index={index} />
                         ))}
                     </div>
+                </div>
+
+                {/* ── Sub-section 2: Analytics & BI ── */}
+                <div>
+                    <SectionHeader icon={BarChart2} title={t.projects.analyticsTitle} color="accent" />
+                    <p className="mb-8 max-w-2xl text-text-muted">{t.projects.analyticsIntro}</p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {analyticsProjects.map((project, index) =>
+                            project.kind === 'bi' ? (
+                                <BiProjectCard key={project.id} project={project} index={index} />
+                            ) : (
+                                <ProjectCard key={project.id} project={project} index={index} />
+                            )
+                        )}
+                    </div>
+
+                    <ArchiveSection />
                 </div>
             </div>
         </section>
@@ -73,4 +86,3 @@ const ProjectGrid = () => {
 };
 
 export default ProjectGrid;
-

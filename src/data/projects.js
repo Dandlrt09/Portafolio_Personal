@@ -1,214 +1,222 @@
+import dataraBrand from '../assets/projects/datara.webp';
+import anvbarHero from '../assets/projects/anvbar.webp';
 import olistImg from '../assets/projects/olist_app.png';
-import gamesImg from '../assets/projects/games_app.png';
-import diamondsImg from '../assets/projects/diamonds_app.png';
-import titanicImg from '../assets/projects/titanic_app.png';
 import churnImg from '../assets/projects/churn_app.png';
 import globalSuperstoreImg from '../assets/projects/global_superstore.png';
 import globalResumen from '../assets/projects/global_resumen.png';
 import globalGeografico from '../assets/projects/global_geografico.png';
 import globalProductos from '../assets/projects/global_productos.png';
-import hospitalDashboardImg from '../assets/projects/hospital_dashboard.png';
 import hrDashboardImg from '../assets/projects/hr_dashboard.png';
 import hrResumen from '../assets/projects/hr_resumen.png';
 import hrEmpleados from '../assets/projects/hr_empleados.png';
 import hrRotacion from '../assets/projects/hr_rotacion.png';
-import dataraImg from '../assets/projects/datara.png';
 
-export const projects = [
+/**
+ * Featured projects — end-to-end data and AI applications.
+ * Every card answers: what problem, what stack, what technical decision, where to see it.
+ */
+export const featuredProjects = [
     {
-        id: 1,
-        category: "data-science",
-        title: { es: "Análisis de Ventas - E-commerce Olist", en: "Sales Analysis - Olist E-commerce" },
-        description: {
-            es: "Análisis del conjunto de datos de Olist para explorar y visualizar patrones de ventas, identificando categorías rentables y comportamiento de precios.",
-            en: "Analysis of the Olist dataset to explore and visualize sales patterns, identifying profitable categories and pricing behavior."
+        id: 'datara',
+        category: 'ai',
+        status: { es: 'En desarrollo activo', en: 'Active development' },
+        title: { es: 'Datara', en: 'Datara' },
+        tagline: {
+            es: 'Análisis de datos con chat en lenguaje natural',
+            en: 'Data analysis through a natural-language chat'
         },
-        tech: ["Python", "Pandas", "Matplotlib", "NumPy"],
-        image: olistImg,
-        link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%201/Main.ipynb",
-        streamlit: "https://e-commerce-app-project.streamlit.app",
-        stars: 3,
-        topics: ["Data Analysis", "E-commerce"]
+        problem: {
+            es: 'Para analizar datos con IA hay que saber programar o usar herramientas en inglés. No existía una opción simple: subir un archivo, preguntar en español y obtener el resultado con gráficos y tablas, sin configurar nada.',
+            en: 'Analyzing data with AI requires knowing how to code or using English-only tools. No simple option existed: upload a file, ask in Spanish, and get results with charts and tables — without configuring anything.'
+        },
+        decision: {
+            es: 'El reto no fue la IA, fue el sandbox. El código que genera el modelo puede tener loops infinitos, imports peligrosos o errores de sintaxis, así que construí un entorno de ejecución aislado y a la vez potente como para que pandas y Plotly funcionen. La arquitectura está separada en tres capas — core, server y web — con proveedores de LLM intercambiables, para no quedar atado a uno solo.',
+            en: 'The challenge was not the AI — it was the sandbox. Model-generated code can contain infinite loops, dangerous imports, or syntax errors, so I built an isolated execution environment that is still powerful enough for pandas and Plotly to run. The architecture is split into three layers — core, server, and web — with interchangeable LLM providers so the project is not tied to a single one.'
+        },
+        stack: ['Python', 'FastAPI', 'React', 'TypeScript', 'SQLite', 'Gemini API'],
+        image: dataraBrand,
+        imageAlt: {
+            es: 'Wordmark de Datara sobre el fondo oscuro de su design system',
+            en: 'Datara wordmark on its dark design system background'
+        },
+        repo: 'https://github.com/Dandlrt09/Datara-2',
+        meta: { es: 'Open source (MIT) · pytest · CI', en: 'Open source (MIT) · pytest · CI' }
     },
     {
-        id: 2,
-        category: "data-science",
-        title: { es: "Análisis de Ventas Globales — Videojuegos (1985-2016)", en: "Global Sales Analysis — Video Games (1985-2016)" },
-        description: {
-            es: "Análisis global de ventas de productos de entretenimiento interactivo utilizando técnicas de ML. Dataset de +16,000 lanzamientos, explorando variables como plataforma, género y ventas regionales.",
-            en: "Global sales analysis of interactive entertainment products using ML techniques. Dataset of +16,000 releases, exploring platform, genre, and regional sales variables."
+        id: 'anvbar',
+        category: 'client',
+        status: { es: 'Proyecto para cliente', en: 'Client project' },
+        title: { es: 'ANV·BAR Web', en: 'ANV·BAR Web' },
+        tagline: {
+            es: 'Tienda y panel de administración para una marca de moda',
+            en: 'Storefront and admin panel for a fashion brand'
         },
-        tech: ["Python", "Pandas", "Seaborn", "Scikit-learn"],
-        image: gamesImg,
-        link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%202/Main.ipynb",
-        streamlit: "https://videogames-analysis.streamlit.app",
-        stars: 2,
-        topics: ["Machine Learning", "Data Analysis"]
+        problem: {
+            es: 'Una marca de moda femenina hecha a mano necesitaba vender sin carrito ni pasarela de pago: catálogo en vivo, pedidos por WhatsApp y un panel propio para gestionar productos y testimonios sin depender de un desarrollador para cada cambio.',
+            en: 'A handmade women\'s fashion brand needed to sell without a shopping cart or payment gateway: a live catalogue, WhatsApp orders, and its own panel to manage products and testimonials without a developer for every change.'
+        },
+        decision: {
+            es: 'El catálogo se lee en vivo desde Supabase con un gate de pantalla completa que bloquea el render hasta que la carga termina, así nadie ve un catálogo a medias. La seguridad la resolví con Supabase Auth, políticas RLS y una lista de administradores autorizados, en lugar de manejar permisos en el frontend. El código está organizado por dominio de negocio — catalog, favorites, reviews, admin — no por tipo de archivo.',
+            en: 'The catalogue is read live from Supabase behind a full-screen gate that blocks rendering until loading finishes, so nobody ever sees a half-loaded catalogue. Security is handled with Supabase Auth, RLS policies, and an allowlist of administrators instead of frontend-side permission checks. The code is organized by business domain — catalog, favorites, reviews, admin — not by file type.'
+        },
+        stack: ['React 19', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Postgres', 'RLS'],
+        image: anvbarHero,
+        imageAlt: {
+            es: 'Página de inicio de la tienda ANV·BAR con una prenda bordó sobre fondo floral',
+            en: 'ANV·BAR storefront home page with a burgundy garment on a floral background'
+        },
+        repo: 'https://github.com/Dandlrt09/P-gina-Web-ANV-BAR',
+        meta: { es: 'Cliente real · catálogo en vivo', en: 'Real client · live catalogue' }
     },
     {
-        id: 3,
-        category: "data-science",
-        title: { es: "Predicción de Precios de Diamantes", en: "Diamond Price Prediction" },
-        description: {
-            es: "Pipeline de Machine Learning con PyCaret para predecir precios de diamantes basado en características físicas. Demostración de herramientas low-code.",
-            en: "Machine Learning pipeline with PyCaret to predict diamond prices based on physical characteristics. Demonstration of low-code tools."
+        id: 'aipdf',
+        category: 'ai',
+        status: null,
+        title: { es: 'AI PDF Generator', en: 'AI PDF Generator' },
+        tagline: {
+            es: 'Documentos generados con IA, con formato determinista',
+            en: 'AI-generated documents with deterministic formatting'
         },
-        tech: ["PyCaret", "Python", "Pandas", "Jupyter"],
-        image: diamondsImg,
-        link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%203/Pycaret%20y%20Entrenamiento.ipynb",
-        streamlit: "https://diamond-price-app.streamlit.app",
-        stars: 4,
-        topics: ["PyCaret", "Prediction"]
-    },
-    {
-        id: 4,
-        category: "data-science",
-        title: { es: "Predicción de Supervivencia Titanic", en: "Titanic Survival Prediction" },
-        description: {
-            es: "Estudio del clásico dataset del Titanic utilizando PyCaret para explorar capacidades de machine learning de bajo código.",
-            en: "Study of the classic Titanic dataset using PyCaret to explore low-code machine learning capabilities."
+        problem: {
+            es: 'Generar documentos con IA suele terminar en layouts inconsistentes: el modelo también decide el formato y cada corrida sale distinta. Un mismo pedido debería producir siempre el mismo documento.',
+            en: 'Generating documents with AI usually ends in inconsistent layouts: the model also decides the formatting, so every run looks different. The same request should always produce the same document.'
         },
-        tech: ["PyCaret", "Pandas", "NumPy"],
-        image: titanicImg,
-        link: "https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%204/Main.ipynb",
-        streamlit: "https://supervivencia-titanic.streamlit.app",
-        stars: 5,
-        topics: ["PyCaret", "Classification"]
-    },
-    {
-        id: 5,
-        category: "data-science",
-        title: { es: "Predicción de Fuga de Clientes (Churn Rate)", en: "Customer Churn Prediction" },
-        description: {
-            es: "Análisis y predicción de fuga de clientes en telecomunicaciones usando PyCaret y AdaBoost Classifier. Modelo optimizado para Recall que identifica clientes con alta probabilidad de cancelar servicios.",
-            en: "Customer churn analysis and prediction in telecommunications using PyCaret and AdaBoost Classifier. Recall-optimized model that identifies customers with high probability of canceling services."
+        decision: {
+            es: 'Separé responsabilidades en lugar de dejar todo al modelo: el LLM redacta el contenido y Python determinista (ReportLab) renderiza el layout. Cinco tipos de documento — factura, propuesta, informe, carta y resumen — comparten un mismo motor, y la CLI y la app de Streamlit son envoltorios finos sobre la misma función. Un test verifica que ambos caminos producen PDFs byte-idénticos.',
+            en: 'I separated responsibilities instead of leaving everything to the model: the LLM writes the content and deterministic Python (ReportLab) renders the layout. Five document types — invoice, proposal, report, letter, and summary — share one engine, and the CLI and the Streamlit app are thin wrappers over the same function. A test asserts that both paths produce byte-identical PDFs.'
         },
-        tech: ["PyCaret", "Python", "Pandas", "AdaBoost"],
-        image: churnImg,
-        link: "https://github.com/Dandlrt09/Proyecto_Analisis-y-Prediccion-de-Fuga-de-Clientes",
-        streamlit: "https://simulador-churn.streamlit.app",
-        stars: 4,
-        topics: ["Machine Learning", "Classification", "Churn"]
+        stack: ['Python', 'Streamlit', 'ReportLab', 'Gemini', 'OpenAI', 'pytest'],
+        image: null,
+        imageAlt: null,
+        repo: 'https://github.com/Dandlrt09/Freelancer_Proyects/tree/main/ai-pdf-generator',
+        meta: { es: 'CI · CLI + web sobre un mismo core', en: 'CI · CLI + web over a single core' }
     }
 ];
 
-// Proyectos de Análisis de Datos (Power BI, Tableau, Looker, etc.)
-// Agrega aquí tus proyectos de BI cuando estén listos.
-// Ejemplo de estructura:
-// {
-//     id: 1,
-//     category: "data-analysis",
-//     title: "Dashboard de Ventas - Power BI",
-//     description: { es: "...", en: "..." },
-//     tool: "Power BI",
-//     image: someImg,
-//     link: "https://...",
-//     topics: ["Sales", "Dashboard"]
-// }
-export const biProjects = [
+/**
+ * Analytics work — dashboards and predictive models.
+ * `kind` selects the card component: 'bi' renders the report gallery, 'ds' links the notebook and demo.
+ */
+export const analyticsProjects = [
     {
-        id: 1,
-        category: "data-analysis",
-        title: { es: "Global Superstore Project", en: "Global Superstore Project" },
+        id: 'churn',
+        kind: 'ds',
+        category: 'data-science',
+        title: { es: 'Predicción de fuga de clientes (Churn)', en: 'Customer Churn Prediction' },
         description: {
-            es: "Dashboard interactivo de Power BI que analiza las ventas globales del dataset Global Superstore. Explora métricas clave como ingresos, márgenes de ganancia y tendencias de ventas por región, categoría de producto y segmento de cliente.",
-            en: "Interactive Power BI dashboard analyzing global sales from the Global Superstore dataset. Explores key metrics including revenue, profit margins, and sales trends by region, product category, and customer segment."
+            es: 'Pipeline en PyCaret que cubre EDA, ingeniería de características y balanceo de clases, con un clasificador AdaBoost que alcanza un Recall del 64% sobre clientes con alta probabilidad de cancelar. Publicado como simulador interactivo.',
+            en: 'PyCaret pipeline covering EDA, feature engineering, and class balancing, with an AdaBoost classifier reaching 64% Recall on customers likely to cancel. Published as an interactive simulator.'
+        },
+        tech: ['PyCaret', 'Python', 'Pandas', 'AdaBoost'],
+        image: churnImg,
+        link: 'https://github.com/Dandlrt09/Proyecto_Analisis-y-Prediccion-de-Fuga-de-Clientes',
+        streamlit: 'https://simulador-churn.streamlit.app',
+        topics: ['Machine Learning', 'Classification', 'Churn']
+    },
+    {
+        id: 'olist',
+        kind: 'ds',
+        category: 'data-science',
+        title: { es: 'Análisis de ventas — E-commerce Olist', en: 'Sales Analysis — Olist E-commerce' },
+        description: {
+            es: 'Análisis del dataset de Olist para explorar patrones de ventas e identificar las categorías realmente rentables, separando volumen de margen.',
+            en: 'Analysis of the Olist dataset to explore sales patterns and identify genuinely profitable categories, separating volume from margin.'
+        },
+        tech: ['Python', 'Pandas', 'Matplotlib', 'NumPy'],
+        image: olistImg,
+        link: 'https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%201/Main.ipynb',
+        streamlit: 'https://e-commerce-app-project.streamlit.app',
+        topics: ['Data Analysis', 'E-commerce']
+    },
+    {
+        id: 'superstore',
+        kind: 'bi',
+        category: 'data-analysis',
+        title: { es: 'Global Superstore', en: 'Global Superstore' },
+        description: {
+            es: 'Cuadro de mando en Power BI con KPIs de ingresos, márgenes y distribución por categorías, aplicando data storytelling para una audiencia no técnica.',
+            en: 'Power BI dashboard with revenue, margin, and category-distribution KPIs, applying data storytelling for a non-technical audience.'
         },
         context: {
             es: {
-                problem: "Una empresa con operaciones globales necesita entender de un vistazo qué regiones, categorías y segmentos generan ganancias reales versus cuáles están drenando recursos.",
-                approach: "Dashboard con filtros por región, categoría y segmento para identificar rápidamente dónde están las oportunidades y los problemas de rentabilidad.",
-                insight: "Las ventas altas no significan ganancias altas. Algunas regiones con mayor facturación tienen márgenes negativos — la decisión correcta es mirar rentabilidad, no solo volumen."
+                problem: 'Una empresa con operaciones globales necesita ver de un vistazo qué regiones, categorías y segmentos generan ganancias reales y cuáles están drenando recursos.',
+                approach: 'Dashboard con filtros por región, categoría y segmento para ubicar rápido las oportunidades y los problemas de rentabilidad.',
+                insight: 'Vender mucho no es ganar mucho. Algunas regiones con la facturación más alta tienen márgenes negativos: la decisión correcta es mirar rentabilidad, no volumen.'
             },
             en: {
-                problem: "A company with global operations needs to understand at a glance which regions, categories and segments generate real profit versus which are draining resources.",
-                approach: "Dashboard with filters by region, category and segment to quickly identify where opportunities and profitability issues lie.",
-                insight: "High sales don't mean high profits. Some regions with the highest revenue have negative margins — the right decision is to look at profitability, not just volume."
+                problem: 'A company with global operations needs to see at a glance which regions, categories, and segments generate real profit and which are draining resources.',
+                approach: 'Dashboard with filters by region, category, and segment to quickly locate opportunities and profitability problems.',
+                insight: 'High sales do not mean high profit. Some regions with the highest revenue have negative margins: the right decision is to look at profitability, not volume.'
             }
         },
-        tool: "Power BI",
+        tool: 'Power BI',
         image: globalSuperstoreImg,
         pages: [globalResumen, globalGeografico, globalProductos],
-        pageLabels: { es: ["Resumen", "Análisis Geográfico", "Análisis de Productos"], en: ["Overview", "Geographic Analysis", "Product Analysis"] },
-        pdfPath: "/Global Superstore Proyect.pdf",
-        topics: ["Sales Analytics", "Power BI", "Global"]
+        pageLabels: { es: ['Resumen', 'Análisis geográfico', 'Análisis de productos'], en: ['Overview', 'Geographic analysis', 'Product analysis'] },
+        pdfPath: '/Global Superstore Proyect.pdf',
+        topics: ['Sales Analytics', 'Power BI', 'Global']
     },
     {
-        id: 2,
-        category: "data-analysis",
-        title: { es: "Dashboard Hospitalario", en: "Hospital Dashboard" },
+        id: 'hr',
+        kind: 'bi',
+        category: 'data-analysis',
+        title: { es: 'Dashboard de Recursos Humanos', en: 'Human Resources Dashboard' },
         description: {
-            es: "Dashboard interactivo de análisis hospitalario con datos de 984 pacientes. Visualiza KPIs clave como costo promedio, tasa de readmisión y satisfacción del paciente. Incluye filtros dinámicos por género, resultado clínico y readmisión, con gráficos de condiciones frecuentes, distribución por edad, procedimientos y más.",
-            en: "Interactive hospital analytics dashboard with data from 984 patients. Visualizes key KPIs such as average cost, readmission rate, and patient satisfaction. Includes dynamic filters by gender, clinical outcome and readmission, with charts for frequent conditions, age distribution, procedures, and more."
+            es: 'Dashboard en Power BI con tres vistas jerárquicas: resumen ejecutivo para una lectura de 30 segundos, análisis de empleados y rotación. Parte de 311 empleados, $69K de salario promedio y 33% de rotación.',
+            en: 'Power BI dashboard with three hierarchical views: an executive summary readable in 30 seconds, employee analysis, and turnover. Built on 311 employees, $69K average salary, and 33% turnover.'
         },
         context: {
             es: {
-                problem: "Un hospital necesita responder 4 preguntas clave: ¿qué enfermedades son más frecuentes?, ¿cuáles generan más costos?, ¿qué pacientes tienen mayor riesgo de urgencias?, y ¿qué procedimientos se usan más?",
-                approach: "Proyecto de exploración: construido con Claude AI usando Chart.js para comparar cómo se siente crear dashboards interactivos fuera de Power BI. El valor está en validar si las respuestas son correctas y entender la experiencia del usuario final.",
-                insight: "Las 4 preguntas se responden con solo 4 gráficos bien elegidos. Esto demuestra que no necesitás 20 visuales para un dashboard útil — necesitás las preguntas correctas primero."
+                problem: 'La organización necesita monitorear la salud de su capital humano: quién se va, por qué y qué patrones aparecen en desempeño y rotación. Sin datos claros, las decisiones de retención son reactivas.',
+                approach: 'Tres vistas jerárquicas: resumen ejecutivo, detalle por manager y una vista de desempeño y rotación para responder la pregunta crítica: ¿se van los mejores o los peores?',
+                insight: 'Una rotación del 33% no es un número abstracto: cada salida tiene un perfil. Identificar patrones por departamento, antigüedad y desempeño permite actuar antes de perder los perfiles clave.'
             },
             en: {
-                problem: "A hospital needs to answer 4 key questions: what conditions are most frequent?, which generate the highest costs?, which patients have the highest emergency risk?, and which procedures are most used?",
-                approach: "Exploration project: built with Claude AI using Chart.js to compare the experience of creating interactive dashboards outside Power BI. The value is in validating whether the answers are correct and understanding the end-user experience.",
-                insight: "All 4 questions are answered with just 4 well-chosen charts. This proves you don't need 20 visuals for a useful dashboard — you need the right questions first."
+                problem: 'The organization needs to monitor the health of its human capital: who is leaving, why, and what patterns emerge in performance and turnover. Without clear data, retention decisions are reactive.',
+                approach: 'Three hierarchical views: an executive summary, per-manager detail, and a performance and turnover view to answer the critical question: are the best or the worst leaving?',
+                insight: 'A 33% turnover rate is not an abstract number: every departure has a profile. Identifying patterns by department, tenure, and performance enables action before key profiles are lost.'
             }
         },
-        tool: "Chart.js",
-        image: hospitalDashboardImg,
-        link: "/hospital_dashboard.html",
-        localFile: true,
-        topics: ["Healthcare", "Dashboard", "Chart.js"]
-    },
-    {
-        id: 4,
-        category: "data-analysis",
-        title: { es: "Datara — Analizá datos con lenguaje natural", en: "Datara — Analyze data with natural language" },
-        description: {
-            es: "App web interactiva que permite cargar archivos CSV o Excel y hacerles preguntas en español. La IA (Gemini) genera respuestas con texto, tablas y gráficos Plotly automáticamente. Incluye sandbox seguro para ejecutar código, exportación de resultados, y 145 tests automatizados.",
-            en: "Interactive web app that lets you upload CSV or Excel files and ask questions in Spanish. The AI (Gemini) automatically generates responses with text, tables, and Plotly charts. Includes a secure code sandbox, result export, and 145 automated tests."
-        },
-        context: {
-            es: {
-                problem: "Para analizar datos con IA tenés que saber programar o usar herramientas en inglés. No hay una opción simple donde subas un archivo, preguntes en español y obtengas resultados al instante sin configurar nada.",
-                approach: "App construida con Streamlit + Gemini 2.5 Flash. El usuario sube archivos, escribe preguntas en lenguaje natural, y la IA genera código Python que se ejecuta en un sandbox seguro. El resultado se muestra como texto, tabla o gráfico según lo que tenga sentido para la pregunta.",
-                insight: "El challenge no fue la IA — fue el sandbox. El código generado por la IA puede tener loops infinitos, imports peligrosos o errores de sintaxis. El verdadero trabajo fue construir un entorno de ejecución que fuera seguro pero suficientemente potente para que pandas y plotly funcionen."
-            },
-            en: {
-                problem: "To analyze data with AI you either need to know how to code or use English-only tools. There's no simple option where you upload a file, ask in Spanish, and get instant results without configuration.",
-                approach: "App built with Streamlit + Gemini 2.5 Flash. Users upload files, ask questions in natural language, and the AI generates Python code that executes in a secure sandbox. Results are shown as text, tables, or charts depending on what makes sense for the question.",
-                insight: "The challenge wasn't the AI — it was the sandbox. AI-generated code can have infinite loops, dangerous imports, or syntax errors. The real work was building a secure execution environment that's still powerful enough for pandas and plotly to work."
-            }
-        },
-        tool: "Streamlit + Gemini",
-        image: dataraImg,
-        link: "https://github.com/Dandlrt09/Datara",
-        topics: ["Streamlit", "Gemini AI", "Python", "Natural Language", "Data Analysis"]
-    },
-    {
-        id: 3,
-        category: "data-analysis",
-        title: { es: "Dashboard de Recursos Humanos", en: "HR Dashboard" },
-        description: {
-            es: "Dashboard de Recursos Humanos desarrollado en Power BI con 3 páginas interactivas: Resumen Ejecutivo, Análisis de Empleados y Rotación. Visualiza KPIs clave como 311 empleados totales, salario promedio de $69K, tasa de rotación del 33% y promedio de ausencias. Incluye gráficos de contrataciones por año, distribución por género, headcount por departamento y filtros interactivos.",
-            en: "Human Resources dashboard built in Power BI with 3 interactive pages: Executive Summary, Employee Analysis, and Turnover. Visualizes key KPIs including 311 total employees, $69K average salary, 33% turnover rate and average absences. Features charts for hires by year, gender distribution, headcount by department, and interactive filters."
-        },
-        context: {
-            es: {
-                problem: "Una organización necesita monitorear la salud de su capital humano: quién se va, por qué, y qué patrones aparecen en el desempeño y la rotación. Sin datos claros, las decisiones de retención son reactivas en lugar de preventivas.",
-                approach: "Tres vistas jerárquicas: un resumen ejecutivo para visión general en 30 segundos, un análisis personal para detalle individual por manager, y una vista de desempeño y rotación para responder a la pregunta crítica: ¿se van los mejores o los peores?",
-                insight: "La rotación del 33% no es un número abstracto — cada salida tiene un perfil. Identificar patrones por departamento, antigüedad y desempeño permite actuar antes de que se vayan los perfiles clave."
-            },
-            en: {
-                problem: "An organization needs to monitor the health of its human capital: who is leaving, why, and what patterns emerge in performance and turnover. Without clear data, retention decisions are reactive rather than preventive.",
-                approach: "Three hierarchical views: an executive summary for a 30-second overview, a personal analysis for individual detail per manager, and a performance & turnover view to answer the critical question: are the best or the worst leaving?",
-                insight: "A 33% turnover rate is not an abstract number — each departure has a profile. Identifying patterns by department, tenure, and performance enables action before key profiles leave."
-            }
-        },
-        tool: "Power BI",
+        tool: 'Power BI',
         image: hrDashboardImg,
         pages: [hrResumen, hrEmpleados, hrRotacion],
-        pageLabels: { es: ["Resumen Ejecutivo", "Análisis de Empleados", "Rotación"], en: ["Executive Summary", "Employee Analysis", "Turnover"] },
-        pdfPath: "/Recursos Humanos.pdf",
-        topics: ["Human Resources", "Power BI", "HR Analytics"]
+        pageLabels: { es: ['Resumen ejecutivo', 'Análisis de empleados', 'Rotación'], en: ['Executive summary', 'Employee analysis', 'Turnover'] },
+        pdfPath: '/Recursos Humanos.pdf',
+        topics: ['Human Resources', 'Power BI', 'HR Analytics']
+    }
+];
+
+/**
+ * Archive — practice and course work, kept for completeness but out of the main path.
+ * Compact list, no cards.
+ */
+export const archivedProjects = [
+    {
+        id: 'games',
+        title: { es: 'Análisis de ventas globales — Videojuegos (1985-2016)', en: 'Global Sales Analysis — Video Games (1985-2016)' },
+        detail: { es: 'Dataset de +16.000 lanzamientos · Python, Seaborn', en: 'Dataset of +16,000 releases · Python, Seaborn' },
+        link: 'https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%202/Main.ipynb',
+        demo: 'https://videogames-analysis.streamlit.app'
+    },
+    {
+        id: 'diamonds',
+        title: { es: 'Predicción de precios de diamantes', en: 'Diamond Price Prediction' },
+        detail: { es: 'Dataset de práctica · PyCaret', en: 'Practice dataset · PyCaret' },
+        link: 'https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%203/Pycaret%20y%20Entrenamiento.ipynb',
+        demo: 'https://diamond-price-app.streamlit.app'
+    },
+    {
+        id: 'titanic',
+        title: { es: 'Predicción de supervivencia Titanic', en: 'Titanic Survival Prediction' },
+        detail: { es: 'Dataset de práctica · PyCaret', en: 'Practice dataset · PyCaret' },
+        link: 'https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%204/Main.ipynb',
+        demo: 'https://supervivencia-titanic.streamlit.app'
+    },
+    {
+        id: 'hospital',
+        title: { es: 'Dashboard hospitalario', en: 'Hospital Dashboard' },
+        detail: { es: 'Exploración con Chart.js fuera de Power BI', en: 'Exploration with Chart.js outside Power BI' },
+        link: '/hospital_dashboard.html',
+        local: true
     }
 ];

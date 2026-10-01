@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #0f172a;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #f8fafc;
+    position: relative;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 76px;
+  }
+  .glow-a {
+    position: absolute; top: -160px; left: -80px; width: 520px; height: 520px;
+    background: rgba(139, 92, 246, 0.22); border-radius: 999px; filter: blur(120px);
+  }
+  .glow-b {
+    position: absolute; bottom: -180px; right: -60px; width: 460px; height: 460px;
+    background: rgba(6, 182, 212, 0.16); border-radius: 999px; filter: blur(120px);
+  }
+  .inner { position: relative; }
+  .badge {
+    display: inline-block; padding: 6px 13px; margin-bottom: 24px;
+    font-size: 12.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.25);
+    border-radius: 999px; background: rgba(6, 182, 212, 0.07);
+  }
+  h1 { font-size: 66px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; }
+  .grad {
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub {
+    margin-top: 22px; max-width: 780px;
+    font-size: 21px; line-height: 1.5; color: #94a3b8;
+  }
+  .strip {
+    margin-top: 46px; display: flex; align-items: center; gap: 14px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 14.5px; color: rgba(248, 250, 252, 0.5);
+  }
+  .dot { width: 5px; height: 5px; border-radius: 999px; background: rgba(248, 250, 252, 0.25); }
+  .url {
+    position: absolute; bottom: 42px; left: 76px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 14px; color: rgba(248, 250, 252, 0.38);
+  }
+</style>
+</head>
+<body>
+  <div class="glow-a"></div>
+  <div class="glow-b"></div>
+
+  <div class="inner">
+    <div class="badge">Desarrollador de Soluciones de Datos e IA</div>
+    <h1>Daniel <span class="grad">De los Ríos</span></h1>
+    <p class="sub">Ingeniero Multimedia que construye aplicaciones de datos e IA de punta a punta — backend, frontend y el modelo en el medio.</p>
+
+    <div class="strip">
+      <span>Datara</span>
+      <span class="dot"></span>
+      <span>ANV·BAR Web</span>
+      <span class="dot"></span>
+      <span>AI PDF Generator</span>
+    </div>
+  </div>
+
+  <div class="url">portafolio-personal-sage.vercel.app</div>
+</body>
+</html>

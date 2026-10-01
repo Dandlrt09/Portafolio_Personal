@@ -2,10 +2,10 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Mail, Github, Linkedin, FileText, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { CV_URL, GITHUB_URL, LINKEDIN_URL } from '../data/site';
 
 const Contact = () => {
     const { t } = useLanguage();
-    const cvUrl = "https://drive.google.com/file/d/18K0VyqUcnGKAGnFtOs223WszclZnH9YB/view?usp=sharing";
 
     return (
         <section id="contact" className="py-20 bg-gradient-to-t from-surface/50 to-background">
@@ -57,7 +57,7 @@ const Contact = () => {
                     {/* Social + CV row */}
                     <div className="flex items-center gap-4 mt-4">
                         <a
-                            href="https://github.com/Dandlrt09"
+                            href={GITHUB_URL}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-3 text-text-muted hover:text-primary hover:bg-white/5 rounded-full transition-all border border-white/5"
@@ -66,7 +66,7 @@ const Contact = () => {
                             <Github size={22} />
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/danieldlrt09"
+                            href={LINKEDIN_URL}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-3 text-text-muted hover:text-primary hover:bg-white/5 rounded-full transition-all border border-white/5"
@@ -75,7 +75,7 @@ const Contact = () => {
                             <Linkedin size={22} />
                         </a>
                         <a
-                            href={cvUrl}
+                            href={CV_URL}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-3 text-text-muted hover:text-secondary hover:bg-white/5 rounded-full transition-all border border-white/5"

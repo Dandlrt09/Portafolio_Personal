@@ -12,15 +12,16 @@ const BiProjectCard = ({ project, index }) => {
         <>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
                 className="group relative bg-surface border border-white/5 rounded-xl overflow-hidden hover:border-accent/50 transition-colors flex flex-col h-full"
             >
                 {/* Project Image */}
                 <div className="h-48 overflow-hidden relative">
                     <img
                         src={project.image}
-                        alt={project.title}
+                        alt={project.title[language] || project.title?.es}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60" />
@@ -55,7 +56,7 @@ const BiProjectCard = ({ project, index }) => {
                             className="flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-lg bg-accent/15 text-accent border border-accent/25 hover:bg-accent/25 transition-colors"
                         >
                             <Maximize2 size={14} />
-                            {t.projects.viewHere}
+                            {t.projects.viewDashboard}
                         </button>
 
                         {/* Ver Reporte / Descargar PDF */}
@@ -72,10 +73,13 @@ const BiProjectCard = ({ project, index }) => {
                 </div>
             </motion.div>
 
-            {/* Modal con iframe */}
-            {modalOpen && (
-                <ReportModal project={project} onClose={() => setModalOpen(false)} />
-            )}
+            {/* Modal con galería o iframe. Se mantiene montado para que AnimatePresence
+                pueda animar la salida; la visibilidad la controla `isOpen`. */}
+            <ReportModal
+                project={project}
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+            />
         </>
     );
 };

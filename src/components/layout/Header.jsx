@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { Menu, X, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CV_URL } from '../../data/site';
 
 const Header = () => {
     const { t, language, toggleLanguage } = useLanguage();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const cvUrl = "https://drive.google.com/file/d/18K0VyqUcnGKAGnFtOs223WszclZnH9YB/view?usp=sharing";
 
     const navLinks = [
         { name: t.nav.about, href: "#about" },
@@ -36,7 +35,7 @@ const Header = () => {
                     ))}
 
                     <a
-                        href={cvUrl}
+                        href={CV_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-1.5 text-sm font-medium text-text-muted hover:text-secondary transition-colors"
@@ -50,6 +49,7 @@ const Header = () => {
 
                     <button
                         onClick={toggleLanguage}
+                        aria-label={`Cambiar idioma a ${t.nav.switchTo}`}
                         className="text-xs font-semibold px-3 py-1 rounded-full border border-white/10 hover:bg-white/5 transition-colors"
                     >
                         {language === 'es' ? 'EN' : 'ES'}
@@ -59,6 +59,8 @@ const Header = () => {
                 {/* Mobile Menu Button */}
                 <button
                     className="md:hidden text-text hover:text-primary"
+                    aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+                    aria-expanded={isMenuOpen}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                     {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -86,7 +88,7 @@ const Header = () => {
                                 </a>
                             ))}
                             <a
-                                href={cvUrl}
+                                href={CV_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-base font-medium text-text-muted hover:text-secondary"
@@ -103,7 +105,7 @@ const Header = () => {
                                 }}
                                 className="text-sm font-semibold text-left text-text-muted hover:text-primary"
                             >
-                                Switch to {language === 'es' ? 'English' : 'Español'}
+                                {t.nav.switchTo}
                             </button>
                         </div>
                     </motion.div>

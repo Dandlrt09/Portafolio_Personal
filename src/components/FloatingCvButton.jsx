@@ -2,14 +2,14 @@ import React from 'react';
 import { FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { CV_URL } from '../data/site';
 
 const FloatingCvButton = () => {
     const { t } = useLanguage();
-    const cvUrl = "https://drive.google.com/file/d/18K0VyqUcnGKAGnFtOs223WszclZnH9YB/view?usp=sharing";
 
     return (
         <motion.a
-            href={cvUrl}
+            href={CV_URL}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, scale: 0 }}
