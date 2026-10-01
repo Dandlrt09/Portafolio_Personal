@@ -66,6 +66,7 @@ export const featuredProjects = [
             en: 'ANV·BAR storefront home page with a burgundy garment on a floral background'
         },
         repo: 'https://github.com/Dandlrt09/P-gina-Web-ANV-BAR',
+        demo: 'https://anvbarpage.danieldelosriost.workers.dev',
         meta: { es: 'Cliente real · catálogo en vivo', en: 'Real client · live catalogue' }
     },
     {
