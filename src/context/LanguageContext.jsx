@@ -45,7 +45,9 @@ const translations = {
             viewDemo: "Ver demo",
             viewDashboard: "Ver dashboard",
             viewPdf: "Descargar PDF",
-            viewReport: "Ver reporte"
+            viewReport: "Ver reporte",
+            showMore: "Ver más",
+            showLess: "Ver menos"
         },
         about: {
             title: "Sobre mí",
@@ -127,7 +129,9 @@ const translations = {
             viewDemo: "View demo",
             viewDashboard: "View dashboard",
             viewPdf: "Download PDF",
-            viewReport: "View report"
+            viewReport: "View report",
+            showMore: "Show more",
+            showLess: "Show less"
         },
         about: {
             title: "About",

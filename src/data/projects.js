@@ -111,6 +111,8 @@ export const analyticsProjects = [
         image: churnImg,
         link: 'https://github.com/Dandlrt09/Proyecto_Analisis-y-Prediccion-de-Fuga-de-Clientes',
         streamlit: 'https://simulador-churn.streamlit.app',
+        stars: 4,
+        metrics: { es: ['Recall optimizado para detectar fugas', 'Modelo AdaBoost + PyCaret', 'Simulador interactivo de predicción'], en: ['Recall-optimized churn detection', 'AdaBoost + PyCaret model', 'Interactive prediction simulator'] },
         topics: ['Machine Learning', 'Classification', 'Churn']
     },
     {
@@ -126,6 +128,8 @@ export const analyticsProjects = [
         image: olistImg,
         link: 'https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%201/Main.ipynb',
         streamlit: 'https://e-commerce-app-project.streamlit.app',
+        stars: 3,
+        metrics: { es: ['+10,000 pedidos analizados', 'Categorías rentables identificadas', 'Dashboard interactivo en Streamlit'], en: ['+10,000 orders analyzed', 'Profitable categories identified', 'Interactive Streamlit dashboard'] },
         topics: ['Data Analysis', 'E-commerce']
     },
     {
@@ -151,6 +155,8 @@ export const analyticsProjects = [
         },
         tool: 'Power BI',
         image: globalSuperstoreImg,
+        stars: 3,
+        metrics: { es: ['3 páginas interactivas', 'Análisis por región, categoría y segmento', 'Rentabilidad vs. volumen de ventas'], en: ['3 interactive pages', 'Analysis by region, category, and segment', 'Profitability vs. sales volume'] },
         pages: [globalResumen, globalGeografico, globalProductos],
         pageLabels: { es: ['Resumen', 'Análisis geográfico', 'Análisis de productos'], en: ['Overview', 'Geographic analysis', 'Product analysis'] },
         pdfPath: '/Global Superstore Proyect.pdf',
@@ -179,6 +185,8 @@ export const analyticsProjects = [
         },
         tool: 'Power BI',
         image: hrDashboardImg,
+        stars: 4,
+        metrics: { es: ['311 empleados totales', '3 páginas interactivas', 'Tasa de rotación del 33%'], en: ['311 total employees', '3 interactive pages', '33% turnover rate'] },
         pages: [hrResumen, hrEmpleados, hrRotacion],
         pageLabels: { es: ['Resumen ejecutivo', 'Análisis de empleados', 'Rotación'], en: ['Executive summary', 'Employee analysis', 'Turnover'] },
         pdfPath: '/Recursos Humanos.pdf',
