@@ -50,6 +50,32 @@ S15. **AI PDF Generator** es un brief real de Workana resuelto por iniciativa pr
 | T5 | Convertir `stars` en complejidad etiquetada y anclada | S9, S10 | inline | — |
 | T6 | Verificar que las 9 fichas renderizan en es/en con el orden nuevo | S1-S10 | inline | — |
 
+## Commits
+
+Rama `feat/portfolio-revamp`; `main` queda intacto. Seis rodajas, cada una coherente y
+construible en el orden en que se apilaron:
+
+| Commit | Que contiene | Relacion con esta feature |
+| --- | --- | --- |
+| `35bf674` | `chore(hero)`: orbit field, portrait, Inter self-hosted | Trabajo previo a esta sesion, ajeno a la feature |
+| `efa8459` | `fix(dev)`: polling para WSL | Ajeno a la feature |
+| `8f6a536` | `docs`: snapshot del design system + este documento | Sin tareas |
+| `051e15e` | `feat(skills)`: constelacion + separacion de About | Ajeno a la feature |
+| `a9a055c` | `feat(projects)`: rol, tiempo y complejidad | **Evidencia de T2, T3, T4, T5 y T7** |
+| `c7021c9` | `style(sections)`: H2 unificado, grilla 2x2 y CTA | **Evidencia de T6** y de los ajustes de seccion |
+
+**Frontera de rodaja.** 4392 inserciones en total, pero **2659 son artboards de `design/` y
+assets binarios** (60%). El codigo propio de `src/` son 1608 lineas en 16 archivos. El commit
+de codigo mas grande es `a9a055c` con ~268 lineas, dentro del limite de ~400. Las rodajas que
+superan ese numero lo hacen por artboards de diseno o documentacion, no por codigo de producto.
+
+**Antes del proximo commit hay que decidir la estrategia de entrega.** Un PR unico seria de
+~4400 lineas. Recomendacion (ver skill `chained-pr`): dejar `design/` y los assets fuera del PR
+de producto, o sacar el hero a su propio PR, porque no pertenece a ninguna de las features de
+esta sesion.
+
+**Estado: sin push.** Daniel pidio pushear recien cuando esten cerrados todos los puntos.
+
 ## Log
 
 L1 (pedido original, literal):
