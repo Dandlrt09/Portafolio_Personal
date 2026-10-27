@@ -17,7 +17,7 @@ const Contact = () => {
                     viewport={{ once: true }}
                     className="text-3xl md:text-4xl font-bold mb-4"
                 >
-                    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <span className="border-b-4 border-primary pb-2">
                         {t.contact.title}
                     </span>
                 </motion.h2>

@@ -43,12 +43,11 @@ const ProjectGrid = () => {
             <div className="max-w-7xl mx-auto px-6">
                 {/* Main heading */}
                 <div className="mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                        <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <h2 className="text-3xl md:text-4xl font-bold">
+                        <span className="border-b-4 border-primary pb-2">
                             {t.projects.title}
                         </span>
                     </h2>
-                    <div className="h-1 w-20 bg-primary rounded-full" />
                 </div>
 
                 {/* ── Sub-section 1: Featured — data & AI applications ── */}
@@ -68,7 +67,10 @@ const ProjectGrid = () => {
                     <SectionHeader icon={BarChart2} title={t.projects.analyticsTitle} color="accent" />
                     <p className="mb-8 max-w-2xl text-text-muted">{t.projects.analyticsIntro}</p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Dos columnas a proposito, no tres: son cuatro tarjetas y con
+                        `lg:grid-cols-3` quedaban 3 + 1 huerfana. En 2x2 ademas se
+                        agrupan solas — las dos de data science arriba, las dos de BI abajo. */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {analyticsProjects.map((project, index) =>
                             project.kind === 'bi' ? (
                                 <BiProjectCard key={project.id} project={project} index={index} />
