@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, BarChart2, Maximize2, Star, TrendingUp } from 'lucide-react';
+import { ExternalLink, BarChart2, Maximize2, TrendingUp } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import ReportModal from './ReportModal';
-
-const StarRating = ({ count }) => (
-    <div className="flex items-center gap-0.5">
-        {[1, 2, 3, 4, 5].map(i => (
-            <Star key={i} size={12} className={i <= count ? 'fill-amber-400 text-amber-400' : 'text-white/10'} />
-        ))}
-    </div>
-);
+import { ProjectRole, ComplexityRating } from './ProjectBlocks';
 
 const BiProjectCard = ({ project, index }) => {
     const { t, language } = useLanguage();
@@ -51,12 +44,13 @@ const BiProjectCard = ({ project, index }) => {
                                 </span>
                             ))}
                         </div>
-                        <StarRating count={project.stars} />
                     </div>
 
                     <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
                         {project.title[language] || project.title?.es}
                     </h3>
+
+                    <ProjectRole role={project.role} timeline={project.timeline} className="mb-4" />
 
                     {(() => {
                         const desc = project.description[language] || project.description['es'];
@@ -90,26 +84,31 @@ const BiProjectCard = ({ project, index }) => {
                         </div>
                     )}
 
-                    <div className="flex items-center gap-4 mt-auto">
-                        {/* Ver aquí — abre el modal */}
-                        <button
-                            onClick={() => setModalOpen(true)}
-                            className="flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-lg bg-accent/15 text-accent border border-accent/25 hover:bg-accent/25 transition-colors"
-                        >
-                            <Maximize2 size={14} />
-                            {t.projects.viewDashboard}
-                        </button>
+                    <ComplexityRating complexity={project.complexity} className="mb-4" />
 
-                        {/* Ver Reporte / Descargar PDF */}
+                    {/* El mismo par de CTA que las tarjetas de data science: secundario a la
+                        izquierda, primario solido a la derecha. El informe abre la fila porque
+                        es el detalle; el dashboard, que abre el modal, es la accion principal y
+                        usa el violeta de accion del sistema en vez del rosa de la seccion. */}
+                    <div className="mt-auto flex gap-3 border-t border-white/5 pt-4">
                         <a
                             href={project.pdfPath || project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm font-medium text-text-muted hover:text-accent transition-colors"
+                            className="flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors border border-white/10 bg-white/5 text-text hover:bg-white/10"
                         >
-                            <ExternalLink size={14} />
+                            <ExternalLink size={16} />
                             {project.pdfPath ? t.projects.viewPdf : t.projects.viewReport}
                         </a>
+
+                        <button
+                            type="button"
+                            onClick={() => setModalOpen(true)}
+                            className="flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors bg-primary text-white hover:bg-primary/90"
+                        >
+                            <Maximize2 size={16} />
+                            {t.projects.viewDashboard}
+                        </button>
                     </div>
                 </div>
             </motion.div>

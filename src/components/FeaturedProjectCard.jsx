@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink, Target, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { cn } from '../lib/utils';
+import { ProjectRole, ComplexityRating } from './ProjectBlocks';
 
 const LabeledBlock = ({ label, text, icon: Icon, iconClass }) => (
     <div>
@@ -59,18 +60,23 @@ const FeaturedProjectCard = ({ project, index }) => {
                     <p className="mt-1 text-sm font-medium text-primary">{tagline}</p>
                 </div>
 
-                <LabeledBlock
-                    label={labels.problem}
-                    text={project.problem[language] || project.problem.es}
-                    icon={Target}
-                    iconClass="text-amber-400"
-                />
+                {/* El orden manda: primero quien lo hizo, despues que hizo, y recien
+                    despues el problema. Antes el problema iba primero y la persona
+                    aparecia recien en la mitad de la decision tecnica. */}
+                <ProjectRole role={project.role} timeline={project.timeline} />
 
                 <LabeledBlock
                     label={labels.decision}
                     text={project.decision[language] || project.decision.es}
                     icon={Lightbulb}
                     iconClass="text-emerald-400"
+                />
+
+                <LabeledBlock
+                    label={labels.problem}
+                    text={project.problem[language] || project.problem.es}
+                    icon={Target}
+                    iconClass="text-amber-400"
                 />
 
                 <div>
@@ -88,6 +94,8 @@ const FeaturedProjectCard = ({ project, index }) => {
                         ))}
                     </div>
                 </div>
+
+                <ComplexityRating complexity={project.complexity} />
 
                 <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-1">
                     <a

@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Star, TrendingUp } from 'lucide-react';
+import { Github, ExternalLink, TrendingUp } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-
-const StarRating = ({ count }) => (
-    <div className="flex items-center gap-0.5">
-        {[1, 2, 3, 4, 5].map(i => (
-            <Star key={i} size={12} className={i <= count ? 'fill-amber-400 text-amber-400' : 'text-white/10'} />
-        ))}
-    </div>
-);
+import { ProjectRole, ComplexityRating } from './ProjectBlocks';
 
 const ProjectCard = ({ project, index }) => {
     const { t, language } = useLanguage();
@@ -43,12 +36,13 @@ const ProjectCard = ({ project, index }) => {
                             </span>
                         ))}
                     </div>
-                    <StarRating count={project.stars} />
                 </div>
 
                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {project.title[language] || project.title?.es}
                 </h3>
+
+                <ProjectRole role={project.role} timeline={project.timeline} className="mb-4" />
 
                 {(() => {
                     const desc = project.description[language] || project.description['es'];
@@ -82,12 +76,22 @@ const ProjectCard = ({ project, index }) => {
                     </div>
                 )}
 
-                <div className="flex flex-col gap-2 mt-auto pt-3 border-t border-white/5">
+                <ComplexityRating complexity={project.complexity} className="mb-4" />
+
+                {/* Dos CTA rellenos, lado a lado y a mitad cada uno. Nunca los dos solidos:
+                    `design/system.md` define primary (accion) y secondary (apoyo), y dos
+                    rellenos primarios competirian entre si. El demo va primero porque es la
+                    prueba de que funciona; si no hay demo, el codigo toma el rol primario. */}
+                <div className="mt-auto flex gap-3 border-t border-white/5 pt-4">
                     <a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-medium text-text hover:text-primary transition-colors"
+                        className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                            project.streamlit
+                                ? 'border border-white/10 bg-white/5 text-text hover:bg-white/10'
+                                : 'bg-primary text-white hover:bg-primary/90'
+                        }`}
                     >
                         <Github size={16} />
                         {t.projects.viewRepo}
@@ -97,7 +101,7 @@ const ProjectCard = ({ project, index }) => {
                             href={project.streamlit}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm font-medium text-text hover:text-primary transition-colors"
+                            className="flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors bg-primary text-white hover:bg-primary/90"
                         >
                             <ExternalLink size={16} />
                             {t.projects.viewDemo}
