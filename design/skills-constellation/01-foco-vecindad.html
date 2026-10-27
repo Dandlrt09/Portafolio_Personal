@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Habilidades — Constelación con foco de vecindad</title>
+<style>
+  :root{
+    --background:#0f172a;
+    --surface:#1e293b;
+    --primary:#8b5cf6;
+    --secondary:#06b6d4;
+    --accent:#f43f5e;
+    --text:#f8fafc;
+    --text-muted:#94a3b8;
+    --hairline:rgba(255,255,255,.10);
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--background);color:var(--text);font-family:var(--font);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Header — reglas de design/system.md, wordmark con el gradiente de identidad */
+  header{
+    position:sticky;top:0;z-index:50;height:64px;display:flex;align-items:center;
+    background:rgba(15,23,42,.8);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--hairline);
+  }
+  .header-inner{width:100%;max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+  .wordmark{font-weight:700;font-size:16px;background:linear-gradient(90deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--text-muted)}
+  nav span[data-current]{color:var(--text)}
+
+  section{max-width:1280px;margin:0 auto;padding:56px 24px 64px}
+
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin:0 0 10px}
+  h2{margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em}
+  .lead{margin:12px 0 0;max-width:620px;font-size:16px;line-height:1.7;color:var(--text-muted)}
+
+  /* Leyenda de categorías */
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 8px}
+  .legend button{
+    font:inherit;font-size:12px;font-weight:500;letter-spacing:.02em;
+    color:var(--text-muted);background:rgba(255,255,255,.05);
+    border:1px solid var(--hairline);border-radius:999px;padding:4px 10px;cursor:pointer;
+    transition:color .16s ease,border-color .16s ease,background-color .16s ease;
+  }
+  .legend button:hover{color:var(--text);background:rgba(255,255,255,.09)}
+
+  /* Lienzo del grafo */
+  .field{position:relative;width:100%;aspect-ratio:1180/640;margin-top:8px}
+  .field svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .edge{stroke:var(--secondary);stroke-width:1;opacity:.09;transition:opacity .18s ease,stroke-width .18s ease}
+  .edge.is-base{opacity:.07}
+  .edge.is-live{opacity:.5;stroke-width:1.6}
+
+  .node{
+    position:absolute;transform:translate(-50%,-50%);
+    display:flex;align-items:center;gap:7px;padding:5px 8px;
+    background:none;border:0;font:inherit;cursor:pointer;border-radius:8px;
+    transition:opacity .18s ease,background-color .16s ease;
+  }
+  .node .dot{
+    width:9px;height:9px;border-radius:50%;flex:none;
+    background:var(--surface);border:1.5px solid rgba(148,163,184,.55);
+    transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
+  }
+  .node .name{font-size:12px;font-weight:500;color:var(--text-muted);white-space:nowrap;transition:color .16s ease}
+  .node.to-left{flex-direction:row-reverse}
+
+  .node:hover{background:rgba(255,255,255,.05)}
+  .node:hover .name,.node:focus-visible .name{color:var(--text)}
+  .node:hover .dot,.node:focus-visible .dot{border-color:var(--secondary)}
+  .node:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+  .node.is-focus .dot{background:var(--primary);border-color:var(--primary);box-shadow:0 0 0 4px rgba(139,92,246,.22)}
+  .node.is-focus .name{color:var(--text);font-weight:600}
+  .node.is-neighbor .dot{border-color:var(--secondary)}
+  .node.is-neighbor .name{color:var(--text)}
+  .node.is-dim{opacity:.22}
+
+  /* Tarjeta de detalle */
+  .detail{
+    position:absolute;right:8px;bottom:8px;width:308px;
+    background:rgba(30,41,59,.92);backdrop-filter:blur(10px);
+    border:1px solid var(--hairline);border-radius:14px;padding:18px 18px 16px;
+  }
+  .detail .cat{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--secondary);margin:0 0 6px}
+  .detail h3{margin:0;font-size:18px;font-weight:600}
+  .detail .hint{margin:0;font-size:13px;line-height:1.6;color:var(--text-muted)}
+  .detail .block{margin-top:14px}
+  .detail .block-label{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin:0 0 7px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:12px;font-weight:500;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--hairline);border-radius:6px;padding:3px 8px}
+  .chip.link{color:var(--secondary);border-color:rgba(6,182,212,.25);background:rgba(6,182,212,.06)}
+  .empty{font-size:12px;color:var(--text-muted);font-style:italic}
+
+  .foot{display:flex;justify-content:space-between;gap:24px;margin-top:8px;font-size:12px;color:var(--text-muted)}
+  .foot kbd{font-family:var(--font);font-size:11px;border:1px solid var(--hairline);border-radius:4px;padding:1px 5px}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <span class="wordmark">Daniel DLRT</span>
+    <nav aria-label="Secciones">
+      <span>Proyectos</span>
+      <span data-current>Sobre mí</span>
+      <span>Contacto</span>
+      <span>CV</span>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section aria-labelledby="skills-title">
+  <p class="eyebrow">Sobre mí</p>
+  <h2 id="skills-title">Habilidades</h2>
+  <p class="lead">No son una lista: son un grafo. Cada línea une dos tecnologías que convivieron
+    en un proyecto real. Pasá el mouse por una habilidad para ver con qué trabaja y dónde.</p>
+
+  <div class="legend" id="legend" aria-label="Categorías"></div>
+
+  <div class="field" id="field">
+    <svg id="edges" aria-hidden="true"></svg>
+    <div class="detail" id="detail" role="status" aria-live="polite"></div>
+  </div>
+
+  <p class="foot">
+    <span>31 habilidades · 9 proyectos · la conexión es evidencia, no decoración</span>
+    <span><kbd>Tab</kbd> recorre · <kbd>Enter</kbd> fija el foco</span>
+  </p>
+</section>
+</main>
+
+<script>
+/* ------------------------------------------------------------------ *
+ * Datos reales — extraídos de src/data/projects.js y de los cinco
+ * grupos de src/context/LanguageContext.jsx (rama es).
+ * ------------------------------------------------------------------ */
+const CLUSTERS = [
+  { id:'dev',    label:'Desarrollo',          center:[268,168],  radius:158,
+    skills:['Python','FastAPI','React','TypeScript','Tailwind CSS','SQL','Postgres','SQLite','Supabase','Git','pytest','GitHub Actions'] },
+  { id:'data',   label:'Datos & ML',          center:[322,468],  radius:148,
+    skills:['Pandas','NumPy','Scikit-learn','PyCaret','EDA','Feature engineering','Predictive modeling','Time series','Jupyter'] },
+  { id:'ai',     label:'IA aplicada',         center:[706,132],  radius:100,
+    skills:['Gemini API','LLM integration','Streamlit','Agent-assisted development'] },
+  { id:'bi',     label:'BI & visualización',  center:[1000,196], radius:100,
+    skills:['Power BI','Matplotlib','Seaborn','Data storytelling'] },
+  { id:'design', label:'Diseño',              center:[1078,468], radius:78,
+    skills:['Adobe Creative Suite','UX/UI'] },
+];
+
+const PROJECTS = [
+  { name:'Datara',              stack:['Python','FastAPI','React','TypeScript','SQLite','Gemini API'] },
+  { name:'ANV·BAR Web',         stack:['React','TypeScript','Tailwind CSS','Supabase','Postgres','SQL'] },
+  { name:'AI PDF Generator',    stack:['Python','Streamlit','Gemini API','pytest','LLM integration'] },
+  { name:'Churn',               stack:['Python','Pandas','PyCaret','Scikit-learn','EDA','Feature engineering','Predictive modeling'] },
+  { name:'Olist',               stack:['Python','Pandas','NumPy','Matplotlib','EDA','Jupyter'] },
+  { name:'Global Superstore',   stack:['Power BI','Data storytelling'] },
+  { name:'RRHH Dashboard',      stack:['Power BI','Data storytelling'] },
+  { name:'Videojuegos 1985–2016',stack:['Python','Pandas','Seaborn','Matplotlib','Jupyter'] },
+  { name:'Portafolio',          stack:['React','TypeScript','Tailwind CSS','Git','GitHub Actions','UX/UI'] },
+];
+
+const VIEW = { w:1180, h:640 };
+
+/* Posición determinista: cada grupo reparte sus habilidades en un anillo. */
+const nodes = [];
+CLUSTERS.forEach((cluster) => {
+  const n = cluster.skills.length;
+  cluster.skills.forEach((skill, i) => {
+    const angle = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+    nodes.push({
+      id: skill,
+      cluster: cluster.label,
+      x: cluster.center[0] + cluster.radius * Math.cos(angle),
+      y: cluster.center[1] + cluster.radius * Math.sin(angle),
+    });
+  });
+});
+const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
+
+/* Aristas = dos habilidades compartieron al menos un proyecto. */
+const edgeMap = new Map();
+PROJECTS.forEach((project) => {
+  const stack = project.stack.filter((s) => byId[s]);
+  for (let i = 0; i < stack.length; i += 1) {
+    for (let j = i + 1; j < stack.length; j += 1) {
+      const key = [stack[i], stack[j]].sort().join('|');
+      if (!edgeMap.has(key)) {
+        edgeMap.set(key, { a: byId[stack[i]], b: byId[stack[j]], projects: [] });
+      }
+      edgeMap.get(key).projects.push(project.name);
+    }
+  }
+});
+const edges = [...edgeMap.values()];
+
+const neighbors = Object.fromEntries(nodes.map((n) => [n.id, new Set()]));
+edges.forEach((e) => {
+  neighbors[e.a.id].add(e.b.id);
+  neighbors[e.b.id].add(e.a.id);
+});
+const projectsOf = Object.fromEntries(
+  nodes.map((n) => [n.id, PROJECTS.filter((p) => p.stack.includes(n.id)).map((p) => p.name)]),
+);
+
+/* ------------------------------------------------------------------ *
+ * Render
+ * ------------------------------------------------------------------ */
+const svg = document.getElementById('edges');
+const svgNS = 'http://www.w3.org/2000/svg';
+svg.setAttribute('viewBox', `0 0 ${VIEW.w} ${VIEW.h}`);
+
+const edgeEls = edges.map((edge) => {
+  const line = document.createElementNS(svgNS, 'line');
+  line.setAttribute('x1', edge.a.x); line.setAttribute('y1', edge.a.y);
+  line.setAttribute('x2', edge.b.x); line.setAttribute('y2', edge.b.y);
+  line.setAttribute('class', 'edge is-base');
+  svg.appendChild(line);
+  return { edge, line };
+});
+
+const field = document.getElementById('field');
+const nodeEls = new Map();
+nodes.forEach((node) => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'node' + (node.x > VIEW.w * 0.7 ? ' to-left' : '');
+  button.style.left = `${(node.x / VIEW.w) * 100}%`;
+  button.style.top = `${(node.y / VIEW.h) * 100}%`;
+  button.setAttribute('aria-label', `${node.id}, ${node.cluster}`);
+  button.innerHTML = `<span class="dot"></span><span class="name">${node.id}</span>`;
+
+  button.addEventListener('pointerenter', () => focus(node.id));
+  button.addEventListener('focus', () => focus(node.id));
+  button.addEventListener('pointerleave', () => release(node.id));
+  button.addEventListener('blur', () => release(node.id));
+  button.addEventListener('click', () => (pinned === node.id ? unpin() : pin(node.id)));
+
+  field.appendChild(button);
+  nodeEls.set(node.id, button);
+});
+
+/* Leyenda: cada grupo enciende su anillo entero. */
+const legend = document.getElementById('legend');
+CLUSTERS.forEach((cluster) => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = `${cluster.label} · ${cluster.skills.length}`;
+  button.addEventListener('pointerenter', () => clusterFocus(cluster));
+  button.addEventListener('pointerleave', () => release());
+  button.addEventListener('focus', () => clusterFocus(cluster));
+  button.addEventListener('blur', () => release());
+  legend.appendChild(button);
+});
+
+const detail = document.getElementById('detail');
+let focused = null;
+let pinned = null;
+
+const HINT = `<p class="cat">Explorá el grafo</p>
+  <p class="hint">Pasá el mouse por una habilidad. La línea es un proyecto compartido:
+  no es una habilidad “parecida”, es una que usaste junto a esta.</p>`;
+
+function renderDetail(id) {
+  if (!id) { detail.innerHTML = HINT; return; }
+  const node = byId[id];
+  const projects = projectsOf[id];
+  const linked = [...neighbors[id]];
+  detail.innerHTML = `
+    <p class="cat">${node.cluster}</p>
+    <h3>${node.id}</h3>
+    <div class="block">
+      <p class="block-label">Usada en</p>
+      ${projects.length
+        ? `<div class="chips">${projects.map((p) => `<span class="chip">${p}</span>`).join('')}</div>`
+        : '<p class="empty">Todavía sin proyecto que la respalde.</p>'}
+    </div>
+    <div class="block">
+      <p class="block-label">Trabaja junto a · ${linked.length}</p>
+      ${linked.length
+        ? `<div class="chips">${linked.map((s) => `<span class="chip link">${s}</span>`).join('')}</div>`
+        : '<p class="empty">Sin conexiones todavía.</p>'}
+    </div>`;
+}
+
+function paint(active, liveEdges) {
+  nodeEls.forEach((el, id) => {
+    el.classList.remove('is-focus', 'is-neighbor', 'is-dim');
+    if (active && id === focused) el.classList.add('is-focus');
+    else if (active && active.has(id)) el.classList.add('is-neighbor');
+    else if (active) el.classList.add('is-dim');
+  });
+  edgeEls.forEach(({ edge, line }) => {
+    line.classList.remove('is-base', 'is-live');
+    line.classList.add(liveEdges && liveEdges.has(edge) ? 'is-live' : 'is-base');
+  });
+}
+
+function focus(id) {
+  if (pinned && pinned !== id) return;
+  focused = id;
+  const active = new Set([id, ...neighbors[id]]);
+  const liveEdges = new Set(edges.filter((e) => e.a.id === id || e.b.id === id));
+  paint(active, liveEdges);
+  renderDetail(id);
+}
+
+function clusterFocus(cluster) {
+  if (pinned) return;
+  focused = null;
+  const inCluster = new Set(cluster.skills);
+  const active = new Set([
+    ...cluster.skills,
+    ...cluster.skills.flatMap((s) => [...neighbors[s]]),
+  ]);
+  const liveEdges = new Set(
+    edges.filter((e) => inCluster.has(e.a.id) || inCluster.has(e.b.id)),
+  );
+  paint(active, liveEdges);
+  detail.innerHTML = `<p class="cat">Grupo</p><h3>${cluster.label}</h3>
+    <div class="block"><p class="block-label">${cluster.skills.length} habilidades</p>
+    <div class="chips">${cluster.skills.map((s) => `<span class="chip">${s}</span>`).join('')}</div></div>`;
+}
+
+function release(id) {
+  if (pinned) return;
+  if (id && focused !== id) return;
+  focused = null;
+  paint(null, null);
+  renderDetail(null);
+}
+
+function pin(id) {
+  pinned = id;
+  focus(id);
+}
+
+function unpin() {
+  pinned = null;
+  paint(null, null);
+  renderDetail(null);
+}
+
+renderDetail(null);
+</script>
+</body>
+</html>

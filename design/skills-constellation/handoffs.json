@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "chosen": "04-hubs-ordenado.html",
+  "handoffs": {
+    "04-hubs-ordenado.html": {
+      "status": "implemented",
+      "queued": false,
+      "sentAt": "2026-10-27T22:42:13.524Z",
+      "startedAt": null,
+      "implementedAt": "2026-10-27T22:46:20.927Z",
+      "note": "Implementado en src/components/Skills.jsx + src/data/skills.js: 8 hubs, 31 filas con barra de nivel, conexiones solo bajo foco.",
+      "previewUrl": "http://localhost:5173/"
+    }
+  }
+}

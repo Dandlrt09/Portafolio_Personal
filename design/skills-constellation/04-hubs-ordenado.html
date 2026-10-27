@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Habilidades — Hubs de proyecto, ordenado y con nivel</title>
+<style>
+  :root{
+    --background:#0f172a; --surface:#1e293b; --primary:#8b5cf6; --secondary:#06b6d4;
+    --text:#f8fafc; --text-muted:#94a3b8;
+    --hairline:rgba(255,255,255,.10);
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--background);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
+
+  header{position:sticky;top:0;z-index:50;height:64px;display:flex;align-items:center;
+    background:rgba(15,23,42,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--hairline)}
+  .header-inner{width:100%;max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+  .wordmark{font-weight:700;font-size:16px;background:linear-gradient(90deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--text-muted)}
+  nav span[data-current]{color:var(--text)}
+
+  section{max-width:1280px;margin:0 auto;padding:56px 24px 64px}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin:0 0 10px}
+  h2{margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em}
+  .lead{margin:12px 0 0;max-width:640px;font-size:16px;line-height:1.7;color:var(--text-muted)}
+
+  /* Control de nivel mínimo */
+  .filter{display:flex;align-items:center;gap:8px;flex:none;padding-bottom:4px}
+  .filter span{font-size:12px;font-weight:500;color:var(--text-muted)}
+  .filter button{font:inherit;font-size:12px;font-weight:500;color:var(--text-muted);
+    background:rgba(255,255,255,.05);border:1px solid var(--hairline);border-radius:999px;
+    padding:4px 11px;cursor:pointer;transition:color .15s ease,border-color .15s ease,background-color .15s ease}
+  .filter button:hover{color:var(--text)}
+  .filter button[aria-pressed="true"]{color:var(--secondary);border-color:rgba(6,182,212,.35);background:rgba(6,182,212,.08)}
+
+  /* ---- El mapa: franja de proyectos + grilla de habilidades ---- */
+  .map{position:relative;margin-top:34px}
+
+  .rail-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 10px}
+  .hubs{display:flex;flex-wrap:wrap;gap:10px}
+  .hub{font:inherit;font-size:12.5px;font-weight:600;color:var(--text);white-space:nowrap;
+    background:rgba(30,41,59,.9);border:1px solid var(--hairline);border-radius:999px;
+    padding:6px 14px;cursor:pointer;
+    transition:opacity .16s ease,border-color .16s ease,background-color .16s ease,color .16s ease}
+  .hub small{font-weight:500;color:var(--text-muted);margin-left:6px;font-size:11px}
+  .hub:hover,.hub:focus-visible{border-color:var(--primary);background:rgba(139,92,246,.14)}
+  .hub:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+  .hub.is-focus{border-color:var(--primary);background:rgba(139,92,246,.2)}
+  .hub.is-dim{opacity:.2}
+
+  .caption{margin:16px 0 20px;min-height:20px;font-size:13px;color:var(--text-muted);
+    border-top:1px solid var(--hairline);padding-top:12px}
+  .caption b{color:var(--text);font-weight:600}
+  .caption .chip{display:inline-block;font-size:11.5px;font-weight:500;color:var(--secondary);
+    background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.25);border-radius:5px;
+    padding:1px 6px;margin-left:5px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(276px,1fr));gap:26px 28px}
+  .col-head{display:flex;align-items:baseline;gap:8px;margin:0 0 8px}
+  .col-head h3{margin:0;font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted)}
+  .col-head .n{font-size:11px;color:rgba(148,163,184,.65)}
+  .col-head .rule{flex:1;height:1px;background:var(--hairline)}
+
+  .row{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;
+    background:none;border:0;border-radius:7px;padding:5px 8px;cursor:pointer;
+    transition:background-color .14s ease,opacity .16s ease}
+  .row .name{flex:1;min-width:0;font-size:13.5px;font-weight:500;color:var(--text-muted);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .14s ease}
+  .row:hover{background:rgba(255,255,255,.05)}
+  .row:hover .name,.row:focus-visible .name{color:var(--text)}
+  .row:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+  .row.is-focus{background:rgba(139,92,246,.13)}
+  .row.is-focus .name{color:var(--text);font-weight:600}
+  .row.is-lit .name{color:var(--text)}
+  .row.is-dim{opacity:.22}
+  .row.no-project .name{color:rgba(148,163,184,.75)}
+  .row.no-project .name::after{content:"◦";margin-left:6px;color:rgba(148,163,184,.5)}
+
+  /* Nivel 1–5: cinco segmentos, la información va en la forma, no en un color nuevo */
+  .lv{display:inline-flex;gap:2px;flex:none}
+  .lv i{display:block;width:7px;height:4px;border-radius:1px;background:rgba(255,255,255,.10);transition:background-color .14s ease}
+  .lv i.on{background:var(--secondary)}
+  .num{width:9px;flex:none;font-size:11px;font-weight:500;color:rgba(148,163,184,.6);text-align:right}
+
+  /* Capa de conexiones: sólo existe cuando hay foco */
+  .links{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  .links path{fill:none;stroke:var(--secondary);stroke-width:1.2;opacity:.42}
+  .links circle{fill:var(--secondary);opacity:.55}
+
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:26px;
+    padding-top:14px;border-top:1px solid var(--hairline);font-size:12px;color:var(--text-muted)}
+  .foot kbd{font-family:var(--font);font-size:11px;border:1px solid var(--hairline);border-radius:4px;padding:1px 5px}
+
+  @media (max-width:1100px){
+    .head{display:block}
+    .filter{margin-top:18px}
+  }
+  /* Mobile: se va la franja de proyectos y las conexiones; queda la lista ordenada, que es el artboard 03 */
+  @media (max-width:820px){
+    .rail-label,.caption,.links{display:none}
+    .hubs{display:none}
+    .grid{grid-template-columns:1fr;gap:22px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <span class="wordmark">Daniel DLRT</span>
+    <nav aria-label="Secciones">
+      <span>Proyectos</span><span data-current>Sobre mí</span><span>Contacto</span><span>CV</span>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section aria-labelledby="skills-title">
+  <div class="head">
+    <div>
+      <p class="eyebrow">Sobre mí</p>
+      <h2 id="skills-title">Habilidades</h2>
+      <p class="lead">Arriba, los proyectos. Abajo, las habilidades ordenadas por grupo con mi nivel
+        del 1 al 5. Al pasar el mouse por una habilidad se encienden los proyectos donde la usé;
+        al pasar por un proyecto, todo su stack.</p>
+    </div>
+    <div class="filter">
+      <span>Nivel mínimo</span>
+      <button type="button" id="only45" aria-pressed="false">Sólo 4–5</button>
+    </div>
+  </div>
+
+  <div class="map" id="map">
+    <p class="rail-label">Proyectos</p>
+    <div class="hubs" id="hubs"></div>
+
+    <p class="caption" id="caption" role="status" aria-live="polite"></p>
+
+    <div class="grid" id="grid"></div>
+
+    <svg class="links" id="links" aria-hidden="true"></svg>
+  </div>
+
+  <p class="foot">
+    <span>Cada segmento es un nivel: <b>Python</b> y <b>SQL</b> llenos, <b>GitHub Actions</b> con uno.
+      El círculo <b>◦</b> marca una habilidad que todavía no tiene proyecto que la respalde.</span>
+    <span><kbd>Tab</kbd> recorre · <kbd>Enter</kbd> fija el foco</span>
+  </p>
+</section>
+</main>
+
+<script>
+/* Niveles declarados por Daniel (1–5). */
+const LEVEL = {
+  'Python':5,'FastAPI':3,'React':3,'TypeScript':3,'Tailwind CSS':2,'SQL':5,'Postgres':3,
+  'SQLite':5,'Supabase':3,'Git':4,'pytest':2,'GitHub Actions':1,
+  'Pandas':4,'NumPy':4,'Scikit-learn':3,'PyCaret':2,'EDA':1,'Feature engineering':1,
+  'Predictive modeling':2,'Time series':1,'Jupyter':4,
+  'Gemini API':4,'LLM integration':3,'Streamlit':3,'Agent-assisted development':3,
+  'Power BI':5,'Matplotlib':4,'Seaborn':4,'Data storytelling':5,
+  'Adobe Creative Suite':2,'UX/UI':4,
+};
+
+/* Grupos reales de src/context/LanguageContext.jsx (rama es). */
+const GROUPS = [
+  { label:'Desarrollo',         skills:['Python','FastAPI','React','TypeScript','Tailwind CSS','SQL','Postgres','SQLite','Supabase','Git','pytest','GitHub Actions'] },
+  { label:'Datos & ML',         skills:['Pandas','NumPy','Scikit-learn','PyCaret','EDA','Feature engineering','Predictive modeling','Time series','Jupyter'] },
+  { label:'IA aplicada',        skills:['Gemini API','LLM integration','Streamlit','Agent-assisted development'] },
+  { label:'BI & visualización', skills:['Power BI','Matplotlib','Seaborn','Data storytelling'] },
+  { label:'Diseño',             skills:['Adobe Creative Suite','UX/UI'] },
+];
+
+/* Stacks reales de src/data/projects.js. */
+const PROJECTS = [
+  { name:'Datara',                label:'Datara',      stack:['Python','FastAPI','React','TypeScript','SQLite','Gemini API'] },
+  { name:'ANV·BAR Web',           label:'ANV·BAR',     stack:['React','TypeScript','Tailwind CSS','Supabase','Postgres','SQL'] },
+  { name:'AI PDF Generator',      label:'AI PDF',      stack:['Python','Streamlit','Gemini API','pytest','LLM integration'] },
+  { name:'Churn',                 label:'Churn',       stack:['Python','Pandas','PyCaret','Scikit-learn','EDA','Feature engineering','Predictive modeling'] },
+  { name:'Olist',                 label:'Olist',       stack:['Python','Pandas','NumPy','Matplotlib','EDA','Jupyter'] },
+  { name:'Global Superstore',     label:'Superstore',  stack:['Power BI','Data storytelling'] },
+  { name:'RRHH Dashboard',        label:'RRHH',        stack:['Power BI','Data storytelling'] },
+  { name:'Videojuegos 1985–2016', label:'Videojuegos', stack:['Python','Pandas','Seaborn','Matplotlib','Jupyter'] },
+  { name:'Portafolio',            label:'Portafolio',  stack:['React','TypeScript','Tailwind CSS','Git','GitHub Actions','UX/UI'] },
+];
+
+const projectsOf = Object.fromEntries(
+  Object.keys(LEVEL).map((s) => [s, PROJECTS.filter((p) => p.stack.includes(s)).map((p) => p.name)]),
+);
+
+/* ------------------------------- Render ------------------------------- */
+const NS = 'http://www.w3.org/2000/svg';
+const map = document.getElementById('map');
+const links = document.getElementById('links');
+const caption = document.getElementById('caption');
+const grid = document.getElementById('grid');
+const hubWrap = document.getElementById('hubs');
+const hubEls = new Map();
+const rowEls = new Map();
+
+/* Franja de proyectos, ordenada y siempre en el mismo lugar. */
+PROJECTS.forEach((project) => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'hub';
+  b.innerHTML = `${project.label}<small>${project.stack.length}</small>`;
+  b.setAttribute('aria-label', `Proyecto ${project.name}, ${project.stack.length} tecnologías`);
+  b.addEventListener('pointerenter', () => focusHub(project.name));
+  b.addEventListener('focus', () => focusHub(project.name));
+  b.addEventListener('pointerleave', () => release(project.name));
+  b.addEventListener('blur', () => release(project.name));
+  b.addEventListener('click', () => togglePin(project.name, focusHub));
+  hubWrap.appendChild(b);
+  hubEls.set(project.name, b);
+});
+
+/* Grilla: columnas por grupo, y dentro de cada una el nivel más alto primero. */
+GROUPS.forEach((group) => {
+  const col = document.createElement('div');
+  const sorted = [...group.skills].sort((a, b) => LEVEL[b] - LEVEL[a] || a.localeCompare(b, 'es'));
+  const head = document.createElement('div');
+  head.className = 'col-head';
+  head.innerHTML = `<h3>${group.label}</h3><span class="n">${group.skills.length}</span><span class="rule"></span>`;
+  col.appendChild(head);
+
+  sorted.forEach((skill) => {
+    const level = LEVEL[skill];
+    const backed = projectsOf[skill].length > 0;
+    const row = document.createElement('button');
+    row.type = 'button';
+    row.className = 'row' + (backed ? '' : ' no-project');
+    row.dataset.level = String(level);
+    row.innerHTML = `
+      <span class="name">${skill}</span>
+      <span class="lv" aria-hidden="true">${[1, 2, 3, 4, 5]
+        .map((i) => `<i class="${i <= level ? 'on' : ''}"></i>`).join('')}</span>
+      <span class="num" aria-hidden="true">${level}</span>`;
+    row.setAttribute('aria-label',
+      `${skill}, nivel ${level} de 5. ${backed ? `En ${projectsOf[skill].length} proyectos: ${projectsOf[skill].join(', ')}` : 'Todavía sin proyecto que la respalde.'}`);
+    row.addEventListener('pointerenter', () => focusSkill(skill));
+    row.addEventListener('focus', () => focusSkill(skill));
+    row.addEventListener('pointerleave', () => release(skill));
+    row.addEventListener('blur', () => release(skill));
+    row.addEventListener('click', () => togglePin(skill, focusSkill));
+    col.appendChild(row);
+    rowEls.set(skill, row);
+  });
+  grid.appendChild(col);
+});
+
+/* --------------------- Conexiones: sólo bajo foco ---------------------- */
+function clearLinks() { links.replaceChildren(); }
+
+function drawLinks(fromSkill) {
+  clearLinks();
+  const row = rowEls.get(fromSkill);
+  const targets = projectsOf[fromSkill];
+  if (!row || !targets.length) return;
+
+  const base = map.getBoundingClientRect();
+  links.setAttribute('viewBox', `0 0 ${Math.round(base.width)} ${Math.round(base.height)}`);
+
+  const r = row.getBoundingClientRect();
+  const x1 = r.left - base.left;
+  const y1 = r.top - base.top + r.height / 2;
+
+  targets.forEach((name) => {
+    const hub = hubEls.get(name);
+    if (!hub) return;
+    const h = hub.getBoundingClientRect();
+    const x2 = h.left - base.left + h.width / 2;
+    const y2 = h.top - base.top + h.height;
+    const bend = Math.max(24, (y1 - y2) * 0.5);
+
+    const path = document.createElementNS(NS, 'path');
+    path.setAttribute('d', `M${x2},${y2} C${x2},${y2 + bend} ${x1},${y1 - bend} ${x1},${y1}`);
+    links.appendChild(path);
+
+    const dot = document.createElementNS(NS, 'circle');
+    dot.setAttribute('cx', x2); dot.setAttribute('cy', y2); dot.setAttribute('r', 2.5);
+    links.appendChild(dot);
+  });
+}
+
+/* --------------------------- Estado y pintado -------------------------- */
+const IDLE = `Pasá el mouse por una habilidad para ver en qué proyectos vive, o por un proyecto para ver su stack completo.`;
+let focused = null;
+let pinned = null;
+let filtering = false;
+
+caption.innerHTML = IDLE;
+
+function dim(filtered) {
+  rowEls.forEach((el) => {
+    el.classList.toggle('is-dim', filtered || (focused && !el.classList.contains('is-lit') && !el.classList.contains('is-focus')));
+  });
+}
+
+function base() {
+  rowEls.forEach((el) => el.classList.remove('is-focus', 'is-lit', 'is-dim'));
+  hubEls.forEach((el) => el.classList.remove('is-focus', 'is-dim'));
+  clearLinks();
+  if (filtering) dim(false);
+  caption.innerHTML = IDLE;
+}
+
+function focusSkill(skill) {
+  if (pinned && pinned !== skill) return;
+  base();
+  focused = skill;
+  rowEls.get(skill)?.classList.add('is-focus');
+  const targets = projectsOf[skill];
+  targets.forEach((name) => hubEls.get(name)?.classList.add('is-focus'));
+  hubEls.forEach((el, name) => { if (!targets.includes(name)) el.classList.add('is-dim'); });
+  drawLinks(skill);
+  dim(false);
+
+  const level = LEVEL[skill];
+  if (!targets.length) {
+    caption.innerHTML = `<b>${skill}</b> · nivel ${level}/5 · todavía sin proyecto que la respalde.`;
+  } else {
+    caption.innerHTML = `<b>${skill}</b> · nivel ${level}/5 · en ${targets.length} `
+      + `proyecto${targets.length > 1 ? 's' : ''}:${targets.map((n) => `<span class="chip">${n}</span>`).join('')}`;
+  }
+}
+
+function focusHub(name) {
+  if (pinned && pinned !== name) return;
+  base();
+  focused = name;
+  const project = PROJECTS.find((p) => p.name === name);
+  hubEls.get(name)?.classList.add('is-focus');
+  project.stack.forEach((s) => rowEls.get(s)?.classList.add('is-lit'));
+  dim(false);
+  caption.innerHTML = `<b>${name}</b> · ${project.stack.length} tecnologías:`
+    + project.stack.map((s) => `<span class="chip">${s}</span>`).join('');
+}
+
+function release(id) {
+  if (pinned) return;
+  if (id && focused !== id) return;
+  focused = null;
+  base();
+}
+
+function togglePin(id, focusFn) {
+  if (pinned === id) { pinned = null; focused = null; base(); return; }
+  pinned = id;
+  focusFn(id);
+}
+
+window.addEventListener('resize', () => { if (focused && rowEls.has(focused)) drawLinks(focused); });
+
+/* Filtro de nivel mínimo: atenúa lo que no llega, sin esconderlo. */
+const toggle = document.getElementById('only45');
+toggle.addEventListener('click', () => {
+  filtering = !filtering;
+  toggle.setAttribute('aria-pressed', String(filtering));
+  rowEls.forEach((el) => {
+    el.classList.toggle('is-dim', filtering && Number(el.dataset.level) < 4);
+  });
+});
+</script>
+</body>
+</html>
