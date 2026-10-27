@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>01 · Portrait aurora — Hero</title>
+<style>
+  :root{
+    --background:#0f172a; --surface:#1e293b; --primary:#8b5cf6; --secondary:#06b6d4;
+    --accent:#f43f5e; --text:#f8fafc; --text-muted:#94a3b8;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Inter, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--background); color:var(--text); font-family:var(--sans);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--secondary);outline-offset:3px;border-radius:6px}
+
+  /* ---------- Header ---------- */
+  .site-header{
+    position:fixed;inset:0 0 auto 0;height:64px;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 24px;background:rgba(15,23,42,.8);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .wordmark{
+    font-size:20px;font-weight:700;
+    background:linear-gradient(90deg,var(--primary),var(--secondary));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .site-header nav{display:flex;align-items:center;gap:32px;font-size:14px;font-weight:500}
+  .site-header nav a{color:var(--text-muted);transition:color .2s}
+  .site-header nav a:hover{color:var(--primary)}
+  .divider{width:1px;height:16px;background:rgba(255,255,255,.2)}
+  .lang{
+    font:inherit;font-size:12px;font-weight:600;color:var(--text);cursor:pointer;
+    padding:4px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.1);
+    background:transparent;transition:background .2s;
+  }
+  .lang:hover{background:rgba(255,255,255,.05)}
+
+  /* ---------- Hero shell ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;display:block;will-change:transform}
+  .blob-a{width:620px;height:620px;top:-180px;left:34%;background:rgba(139,92,246,.22);filter:blur(120px);animation:drift-a 22s ease-in-out infinite}
+  .blob-b{width:460px;height:460px;bottom:-160px;right:-60px;background:rgba(6,182,212,.14);filter:blur(110px);animation:drift-b 27s ease-in-out infinite}
+  .blob-c{width:340px;height:340px;bottom:8%;left:-120px;background:rgba(244,63,94,.10);filter:blur(100px);animation:drift-c 31s ease-in-out infinite}
+  @keyframes drift-a{
+    0%,100%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(-90px,60px,0) scale(1.12)}
+  }
+  @keyframes drift-b{
+    0%,100%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(-70px,-50px,0) scale(1.08)}
+  }
+  @keyframes drift-c{
+    0%,100%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(60px,-40px,0) scale(1.15)}
+  }
+  .grid-lines{
+    position:absolute;inset:0;opacity:.5;
+    background-image:
+      linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(circle at 50% 45%,#000 20%,transparent 78%);
+    mask-image:radial-gradient(circle at 50% 45%,#000 20%,transparent 78%);
+  }
+  .vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 35%,rgba(15,23,42,.75) 100%)}
+
+  .inner{
+    position:relative;z-index:10;width:100%;max-width:1280px;margin:0 auto;
+    padding:120px 24px 72px;display:grid;grid-template-columns:1.05fr .95fr;
+    gap:56px;align-items:center;
+  }
+
+  /* ---------- Copy ---------- */
+  .badge{
+    display:inline-block;margin:0 0 20px;padding:4px 12px;font-size:12px;font-weight:500;
+    letter-spacing:.05em;color:var(--secondary);border:1px solid rgba(6,182,212,.2);
+    background:rgba(6,182,212,.05);border-radius:999px;
+  }
+  h1{margin:0 0 22px;font-size:72px;line-height:1.02;letter-spacing:-.03em;font-weight:700}
+  h1 .grad{
+    background:linear-gradient(100deg,var(--primary) 10%,var(--secondary) 55%,var(--primary) 95%);
+    background-size:220% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:sheen 9s linear infinite;
+  }
+  @keyframes sheen{from{background-position:0% 0}to{background-position:220% 0}}
+  .lead{margin:0 0 32px;max-width:52ch;font-size:18px;line-height:1.65;color:var(--text-muted)}
+  .actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+  .btn-primary,.btn-secondary{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 32px;border-radius:8px;
+    font-size:15px;font-weight:500;transition:transform .18s ease,background .2s ease;
+  }
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:rgba(139,92,246,.9);transform:translateY(-2px)}
+  .btn-secondary{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff}
+  .btn-secondary:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+  .socials{display:flex;gap:12px;list-style:none;margin:28px 0 0;padding:0}
+  .socials a{
+    width:40px;height:40px;display:grid;place-items:center;border-radius:999px;
+    border:1px solid rgba(255,255,255,.05);color:var(--text-muted);
+    transition:color .2s,background .2s,transform .2s;
+  }
+  .socials a:hover{color:var(--primary);background:rgba(255,255,255,.05);transform:translateY(-2px)}
+  .socials svg{width:19px;height:19px;fill:currentColor}
+
+  /* ---------- Portrait ---------- */
+  .portrait-wrap{
+    --px:0px; --py:0px;
+    position:relative;width:400px;height:500px;justify-self:center;
+    transform:translate3d(var(--px),var(--py),0);
+    transition:transform .35s cubic-bezier(.2,.7,.3,1);
+  }
+  .ring{
+    position:absolute;width:520px;height:600px;
+    background:conic-gradient(from 0deg,rgba(139,92,246,0),rgba(139,92,246,.75),rgba(6,182,212,.6),rgba(244,63,94,.35),rgba(139,92,246,0));
+    filter:blur(46px);opacity:.75;
+    border-radius:50% 50% 32px 32px;
+    animation:spin 16s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .glow{
+    position:absolute;width:430px;height:520px;border-radius:50% 50% 28px 28px;
+    background:rgba(139,92,246,.28);filter:blur(80px);
+    animation:pulse 7s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.55}50%{opacity:.9}}
+  figure.portrait{position:absolute;inset:0;margin:0;animation:float 8s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .photo{
+    position:relative;width:400px;height:500px;overflow:hidden;
+    border-radius:50% 50% 28px 28px;
+    border:1px solid rgba(255,255,255,.1);
+    background:
+      radial-gradient(120% 80% at 50% 8%,rgba(139,92,246,.35),transparent 60%),
+      linear-gradient(180deg,var(--surface),var(--background));
+    box-shadow:0 30px 80px -30px rgba(139,92,246,.55);
+    display:grid;place-items:end center;
+  }
+  .photo svg{width:78%;height:auto;opacity:.55}
+  .photo-note{
+    position:absolute;left:50%;bottom:22px;transform:translateX(-50%);
+    white-space:nowrap;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--text-muted);background:rgba(15,23,42,.72);
+    border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:5px 12px;
+  }
+  .float-tag{
+    position:absolute;font-size:12px;font-weight:500;color:var(--text);
+    padding:6px 14px;border-radius:999px;background:rgba(30,41,59,.85);
+    border:1px solid rgba(255,255,255,.1);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    box-shadow:0 10px 30px -12px rgba(0,0,0,.8);
+  }
+  .tag-1{top:12%;left:-30px;animation:bob 6s ease-in-out infinite}
+  .tag-2{bottom:22%;right:-38px;animation:bob 7.5s ease-in-out .8s infinite}
+  .tag-3{top:54%;left:-44px;animation:bob 6.8s ease-in-out .4s infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  /* ---------- Entrance ---------- */
+  .reveal{opacity:0;animation:rise .9s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:var(--d,0ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+  @media (max-width:900px){
+    .inner{grid-template-columns:1fr;padding-top:104px;text-align:center;gap:40px}
+    .lead{margin-inline:auto}
+    .actions,.socials{justify-content:center}
+    h1{font-size:52px}
+    .photo{width:290px;height:360px}
+    .ring{width:360px;height:430px}
+    .glow{width:300px;height:370px}
+    .float-tag{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal{opacity:1}
+    .portrait-wrap{transform:none}
+  }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#hero">Daniel DLRT</a>
+    <nav aria-label="Navegación principal">
+      <a href="#about">Sobre mí</a>
+      <a href="#projects">Proyectos</a>
+      <a href="#contact">Contacto</a>
+      <a href="#cv">CV</a>
+      <span class="divider" aria-hidden="true"></span>
+      <button class="lang" type="button" aria-label="Cambiar idioma a English">EN</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="bg" aria-hidden="true">
+        <span class="blob blob-a"></span>
+        <span class="blob blob-b"></span>
+        <span class="blob blob-c"></span>
+        <div class="grid-lines"></div>
+        <div class="vignette"></div>
+      </div>
+
+      <div class="inner">
+        <div class="copy">
+          <p class="badge reveal" style="--d:0ms">Desarrollador de Soluciones de Datos e IA</p>
+          <h1 id="hero-title" class="reveal" style="--d:120ms">
+            <span class="grad">Daniel<br />De los Ríos</span>
+          </h1>
+          <p class="lead reveal" style="--d:240ms">
+            Ingeniero Multimedia que construye aplicaciones de datos e IA de punta a punta —
+            backend, frontend y el modelo en el medio. Del problema a la app que lo resuelve.
+          </p>
+          <div class="actions reveal" style="--d:360ms">
+            <a class="btn-primary" href="#projects">Ver proyectos <span aria-hidden="true">→</span></a>
+            <a class="btn-secondary" href="#cv">Ver CV</a>
+          </div>
+          <ul class="socials reveal" style="--d:480ms">
+            <li><a href="#github" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.55v-2c-3.2.7-3.88-1.4-3.88-1.4-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.72 1.27 3.38.97.11-.76.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.42.36.79 1.08.79 2.18v3.23c0 .31.21.66.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+            </a></li>
+            <li><a href="#linkedin" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.4 2.4 4.4 5.6V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-1.98 0-2.28 1.5-2.28 3.1V21h-4V9Z"/></svg>
+            </a></li>
+            <li><a href="#email" aria-label="Enviar correo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13A2.5 2.5 0 0 1 19.5 21h-15A2.5 2.5 0 0 1 2 18.5v-13Zm2.2.5 7.8 5.6L19.8 6H4.2Z"/></svg>
+            </a></li>
+          </ul>
+        </div>
+
+        <div class="portrait-wrap" id="portraitWrap">
+          <div class="ring" aria-hidden="true"></div>
+          <div class="glow" aria-hidden="true"></div>
+          <figure class="portrait">
+            <div class="photo" role="img" aria-label="Retrato de Daniel De los Ríos — pendiente reemplazar por la foto real">
+              <svg viewBox="0 0 200 220" aria-hidden="true">
+                <circle cx="100" cy="74" r="42" fill="rgba(148,163,184,.35)" />
+                <path d="M100 126c-46 0-78 30-84 68h168c-6-38-38-68-84-68Z" fill="rgba(148,163,184,.28)" />
+              </svg>
+              <p class="photo-note">Foto real → src/assets/profile/</p>
+            </div>
+          </figure>
+          <span class="float-tag tag-1">Python</span>
+          <span class="float-tag tag-2">FastAPI</span>
+          <span class="float-tag tag-3">React</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var hero = document.getElementById('hero');
+      var wrap = document.getElementById('portraitWrap');
+      if (!hero || !wrap) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.matchMedia('(hover: none)').matches) return;
+      hero.addEventListener('pointermove', function (e) {
+        var r = hero.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        wrap.style.setProperty('--px', (x * 20).toFixed(2) + 'px');
+        wrap.style.setProperty('--py', (y * 20).toFixed(2) + 'px');
+      });
+      hero.addEventListener('pointerleave', function () {
+        wrap.style.setProperty('--px', '0px');
+        wrap.style.setProperty('--py', '0px');
+      });
+    })();
+  </script>
+</body>
+</html>

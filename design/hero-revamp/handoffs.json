@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "chosen": "02-data-canvas.html",
+  "handoffs": {
+    "02-data-canvas.html": {
+      "status": "implemented",
+      "queued": false,
+      "sentAt": "2026-10-27T21:17:06.772Z",
+      "startedAt": null,
+      "implementedAt": "2026-10-27T21:33:16.453Z",
+      "note": "Implementado en Hero.jsx: panel con red de nodos en canvas (pausa fuera de viewport, respeta reduced-motion), foto real en circulo, 4 nodos, chips de stack y nombre completo con el gradiente de marca. Inter self-hosteada. Los iconos sociales salieron del hero: la direccion elegida no los tiene.",
+      "previewUrl": "http://127.0.0.1:5173/"
+    }
+  }
+}

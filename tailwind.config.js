@@ -16,7 +16,19 @@ export default {
         "text-muted": "#94a3b8", // Slate 400
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        // Inter is self-hosted from src/assets/fonts — see the @font-face in src/index.css.
+        // The fallback chain only runs while the font is loading or if it fails.
+        sans: [
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
       },
     },
   },
