@@ -29,7 +29,7 @@ Portafolio profesional de Data Science & Business Intelligence. Construido con R
 ### Análisis de Datos / BI
 - **Global Superstore** — Dashboard Power BI con análisis de ventas globales
 - **Dashboard Hospitalario** — Dashboard interactivo con Chart.js
-- **Datara** — Analizá datos con lenguaje natural (Streamlit + Gemini AI)
+- **Datara** — Analiza datos con lenguaje natural (Streamlit + Gemini AI)
 - **Dashboard RRHH** — Dashboard Power BI: resumen ejecutivo, análisis de empleados y rotación
 
 ## Funcionalidades
