@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink, Target, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { cn } from '../lib/utils';
+import { useReveal } from '../lib/motion';
 import { ProjectRole, ComplexityRating } from './ProjectBlocks';
 
 const LabeledBlock = ({ label, text, icon: Icon, iconClass }) => (
@@ -24,13 +25,13 @@ const FeaturedProjectCard = ({ project, index }) => {
     const tagline = project.tagline[language] || project.tagline.es;
     const status = project.status ? project.status[language] || project.status.es : null;
     const alt = project.imageAlt ? project.imageAlt[language] || project.imageAlt.es : title;
+    /* `margin: '-60px'` mantiene el margen negativo que ya tenía: la ficha entra un poco más
+       tarde, cuando de verdad está en pantalla y no asomando por el borde. */
+    const reveal = useReveal({ duration: 0.5, from: 24, margin: '-60px' });
 
     return (
         <motion.article
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5 }}
+            {...reveal}
             className="grid overflow-hidden rounded-2xl border border-white/10 bg-surface lg:grid-cols-2"
         >
             {/* Media */}

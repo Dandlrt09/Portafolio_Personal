@@ -2,19 +2,18 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, TrendingUp } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useReveal } from '../lib/motion';
 import { ProjectRole, ComplexityRating } from './ProjectBlocks';
 
 const ProjectCard = ({ project, index }) => {
     const { t, language } = useLanguage();
     const [expanded, setExpanded] = useState(false);
     const metrics = project.metrics?.[language] || project.metrics?.es;
+    const reveal = useReveal({ delay: index * 0.05 });
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.05 }}
+            {...reveal}
             className="group relative bg-surface border border-white/5 rounded-xl overflow-hidden hover:border-primary/50 transition-colors flex flex-col h-full"
         >
             {/* Project Image */}

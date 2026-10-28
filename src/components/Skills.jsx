@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { revealProps } from '../lib/motion';
 import { SKILL_GROUPS, SKILL_PROJECTS } from '../data/skills';
 
 /** Tailwind's `lg` breakpoint. Below it the rail and the connection layer are dropped. */
@@ -33,6 +34,9 @@ const CaptionChip = ({ children }) => (
 
 const Skills = () => {
     const { t, language } = useLanguage();
+    /* El retraso depende del índice dentro del mapa, así que acá no se puede llamar al hook por
+       grupo: se resuelve una vez y `revealProps` (que es puro) arma los props de cada uno. */
+    const reduceMotion = useReducedMotion();
 
     /** Focus is a single key, `skill:<id>` or `project:<id>`, so it never re-fires on the same entry. */
     const [focus, setFocus] = useState(null);
@@ -321,10 +325,7 @@ const Skills = () => {
                         {groups.map((group, groupIndex) => (
                             <motion.div
                                 key={group.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: groupIndex * 0.06 }}
+                                {...revealProps({ reduceMotion, duration: 0.4, delay: groupIndex * 0.06 })}
                             >
                                 <div className="mb-3 flex items-baseline gap-2">
                                     <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
