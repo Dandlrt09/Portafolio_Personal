@@ -6,7 +6,7 @@ import { useReducedMotion } from 'framer-motion';
  * Dos reglas, y las dos importan:
  *
  * 1. La animación **se repite** cada vez que el bloque vuelve a entrar en pantalla. Antes cada
- *    sitio llevaba `once: true`, que en framer-motion significa "animá solo la primera vez": al
+ *    sitio llevaba `once: true`, que en framer-motion significa "anima solo la primera vez": al
  *    volver a la sección ya no se reproducía nada hasta recargar la página.
  * 2. Con `prefers-reduced-motion` **no hay animación**: el bloque aparece ya visible. Esto pesa
  *    más ahora que la animación se repite, porque repetir movimiento castiga justo a quien pidió

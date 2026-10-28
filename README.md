@@ -2,7 +2,7 @@
 
 Portafolio profesional de Data Science & Business Intelligence. Construido con React + Vite, muestra proyectos de análisis de datos, machine learning y dashboards interactivos.
 
-🔗 **Demo en vivo:** [dandlrt09.github.io/Portafolio_Personal](https://dandlrt09.github.io/Portafolio_Personal)
+🔗 **Demo en vivo:** [portafolio-personal-sage.vercel.app](https://portafolio-personal-sage.vercel.app/)
 
 ---
 
@@ -29,7 +29,7 @@ Portafolio profesional de Data Science & Business Intelligence. Construido con R
 ### Análisis de Datos / BI
 - **Global Superstore** — Dashboard Power BI con análisis de ventas globales
 - **Dashboard Hospitalario** — Dashboard interactivo con Chart.js
-- **Datara** — Analizá datos con lenguaje natural (Streamlit + Gemini AI)
+- **Datara** — Analiza datos con lenguaje natural (Streamlit + Gemini AI)
 - **Dashboard RRHH** — Dashboard Power BI: resumen ejecutivo, análisis de empleados y rotación
 
 ## Funcionalidades
@@ -49,7 +49,7 @@ npm install
 npm run dev
 ```
 
-Abrí [http://localhost:5173](http://localhost:5173) en el navegador.
+Abre [http://localhost:5173](http://localhost:5173) en el navegador.
 
 ### Build para producción
 
@@ -60,4 +60,6 @@ npm run preview
 
 ## Despliegue
 
-El proyecto se deploya automáticamente a **Vercel** con cada push a `main`. También incluye un workflow de **GitHub Actions** para GitHub Pages como respaldo.
+El proyecto se deploya automáticamente a **Vercel** con cada push a `main`. Cada pull request genera además un deploy preview con su propia URL.
+
+La publicación anterior en **GitHub Pages** quedó retirada junto con su workflow. La rama `gh-pages` todavía existe pero ya no se actualiza: la URL que sirve corresponde a una versión vieja del portafolio.
