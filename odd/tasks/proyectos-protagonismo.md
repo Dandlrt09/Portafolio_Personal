@@ -88,6 +88,14 @@ su presupuesto de contexto y **no creo ninguna autoridad** (no hay nada quemado 
 Reintentar el mismo candidato no puede funcionar; exige "a chained sequence of smaller reviewable
 commits, each under the budget". Es decir: la entrega se hace por rodajas chicas o no hay review.
 
+**Disposicion permanente de Daniel (2026-10-28).** Ante tres generaciones consecutivas del mismo
+alcance (`paths_digest` identico `sha256:49472524...`) — una rechazada por
+`lens_context_budget_exceeded` y dos declinadas en el consentimiento del host — eligio:
+**"No me preguntes mas por ahora"**. Los candidatos de esta rama quedan sin revisar hasta que el
+diga lo contrario. El switch de RDD **no se toca** (sigue `on` global). No corresponde volver a
+disparar `inspect`+`start` en cada generacion nueva: eso es ceremonia y le cuesta un dialogo de
+consentimiento cada vez. Al llegar el push se le plantea **una sola vez**, con los numeros.
+
 **Estado: sin push.** Daniel pidio pushear recien cuando esten cerrados todos los puntos.
 
 ## Log
