@@ -39,6 +39,18 @@ export function buildContactPayload(values, captchaToken) {
 }
 
 /**
+ * Marca que el mensaje de éxito reemplaza por la dirección del visitante.
+ *
+ * El texto arma la promesa de a quién le va a llegar la respuesta, así que la
+ * interpolación se hace acá y no en el JSX: un token mal escrito no rompe nada
+ * visible, solo promete un correo que no existe. Ver tools/verify-contact.mjs.
+ */
+export const EMAIL_TOKEN = '{email}';
+
+export const buildSuccessMessage = (template, email) =>
+    typeof template === 'string' && email ? template.split(EMAIL_TOKEN).join(email) : template;
+
+/**
  * Manda el mensaje. Nunca lanza: cualquier falla (red caída, 400, quota) vuelve como
  * `{ ok: false, message }` para que la UI pueda mostrarla y ofrecer el correo como
  * salida alternativa. Un formulario de contacto que falla en silencio pierde el

@@ -3,7 +3,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { Send, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { CONTACT_EMAIL, HCAPTCHA_FREE_SITEKEY } from '../data/site';
-import { sendContactMessage } from '../lib/contactForm';
+import { sendContactMessage, buildSuccessMessage } from '../lib/contactForm';
 
 const EMPTY = { name: '', email: '', subject: '', message: '' };
 
@@ -52,6 +52,9 @@ const ContactForm = () => {
     const [errors, setErrors] = useState({});
     const [status, setStatus] = useState('idle'); // idle | sending | success | error
     const [errorMessage, setErrorMessage] = useState('');
+    // El correo del visitante se guarda aparte porque `values` se limpia al enviar, y el
+    // mensaje de éxito tiene que poder nombrar a qué dirección va a llegar la respuesta.
+    const [sentTo, setSentTo] = useState('');
     const [captchaToken, setCaptchaToken] = useState('');
     const captchaRef = useRef(null);
 
@@ -78,6 +81,7 @@ const ContactForm = () => {
         const result = await sendContactMessage(values, captchaToken);
 
         if (result.ok) {
+            setSentTo(values.email);
             setValues(EMPTY);
             setErrors({});
             setCaptchaToken('');
@@ -170,7 +174,8 @@ const ContactForm = () => {
                     <p className="flex items-start gap-2 rounded-lg border border-secondary/30 bg-secondary/10 px-4 py-3 text-sm text-text">
                         <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-secondary" />
                         <span>
-                            <strong className="font-semibold">{copy.successTitle}</strong> {copy.successBody}
+                            <strong className="font-semibold">{copy.successTitle}</strong>{' '}
+                            {buildSuccessMessage(copy.successBody, sentTo)}
                         </span>
                     </p>
                 )}

@@ -111,7 +111,7 @@ const libPath = path.join(root, 'src', 'lib', 'contactForm.js');
 if (!existsSync(libPath)) {
     check('S5-S9: existe src/lib/contactForm.js', false, 'el módulo de envío no existe todavía');
 } else {
-    const { buildContactPayload, sendContactMessage } = loadBundle(await buildBundle(libPath, 'contactForm.cjs'));
+    const { buildContactPayload, sendContactMessage, buildSuccessMessage } = loadBundle(await buildBundle(libPath, 'contactForm.cjs'));
     const values = { name: 'Ana', email: 'ana@ejemplo.com', subject: 'Consulta', message: 'Hola Daniel' };
 
     const payload = buildContactPayload(values, 'token-123');
@@ -175,6 +175,18 @@ if (!existsSync(libPath)) {
         Object.keys(buildContactPayload(values, 'tok')).sort().join(',') ===
             'access_key,botcheck,email,h-captcha-response,message,name,subject',
         `claves=${Object.keys(buildContactPayload(values, 'tok')).sort().join(',')}`
+    );
+
+    // El mensaje de éxito promete a qué dirección va a llegar la respuesta: si el token
+    // no se reemplaza, promete un correo que no existe y nadie lo nota.
+    check(
+        'S8: el mensaje de éxito nombra la dirección del visitante',
+        buildSuccessMessage('Te respondo a {email}.', 'ana@ejemplo.com') === 'Te respondo a ana@ejemplo.com.',
+        `resultado=${buildSuccessMessage('Te respondo a {email}.', 'ana@ejemplo.com')}`
+    );
+    check(
+        'S8: sin dirección el mensaje igual se renderiza',
+        buildSuccessMessage('Sin token', 'ana@ejemplo.com') === 'Sin token'
     );
 }
 
