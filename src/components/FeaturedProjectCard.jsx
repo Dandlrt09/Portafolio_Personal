@@ -37,6 +37,17 @@ const FeaturedProjectCard = ({ project, index }) => {
             <div className={cn('relative min-h-[240px]', reversed && 'lg:order-2')}>
                 {project.image ? (
                     <img src={project.image} alt={alt} className="h-full w-full object-cover" />
+                ) : project.logo ? (
+                    /* Lockup: símbolo + nombre, dibujado en HTML y no como una sola imagen. El
+                       nombre tiene que salir en la Inter del sitio, y un SVG cargado como <img>
+                       no puede usar los @font-face de la página (un PNG directamente trae los
+                       píxeles cocidos). El símbolo sí es un SVG, y adentro no tiene texto. */
+                    <div className="flex h-full w-full flex-col items-center justify-center gap-5 bg-surface px-8 py-12 text-center">
+                        {/* 46% del ancho del panel: es lo que especifica el artboard aprobado, y
+                            el contenedor está topado en ~615px, así que no crece sin control. */}
+                        <img src={project.logo} alt="" className="w-[46%]" />
+                        <span className="text-xl font-semibold tracking-tight text-white/90">{title}</span>
+                    </div>
                 ) : (
                     <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-background px-8 py-12 text-center">
                         <span className="text-2xl font-bold tracking-tight text-white/85">{title}</span>

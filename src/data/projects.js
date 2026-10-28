@@ -1,5 +1,6 @@
 import dataraBrand from '../assets/projects/datara.webp';
 import anvbarHero from '../assets/projects/anvbar.webp';
+import aiPdfMark from '../assets/projects/ai-pdf-mark.svg';
 import olistImg from '../assets/projects/olist_app.png';
 import churnImg from '../assets/projects/churn_app.png';
 import globalSuperstoreImg from '../assets/projects/global_superstore.png';
@@ -161,6 +162,10 @@ export const featuredProjects = [
         },
         image: null,
         imageAlt: null,
+        /* Sin foto: la ficha se marca con el símbolo del proyecto y su nombre debajo.
+           Se declara explícito para no pisar el fallback genérico, que sirve para cualquier
+           proyecto sin imagen. */
+        logo: aiPdfMark,
         repo: 'https://github.com/Dandlrt09/Freelancer_Proyects/tree/main/ai-pdf-generator',
         meta: { es: 'CI · CLI + web sobre un mismo core', en: 'CI · CLI + web over a single core' }
     }
