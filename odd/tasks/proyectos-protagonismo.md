@@ -63,16 +63,30 @@ construible en el orden en que se apilaron:
 | `051e15e` | `feat(skills)`: constelacion + separacion de About | Ajeno a la feature |
 | `a9a055c` | `feat(projects)`: rol, tiempo y complejidad | **Evidencia de T2, T3, T4, T5 y T7** |
 | `c7021c9` | `style(sections)`: H2 unificado, grilla 2x2 y CTA | **Evidencia de T6** y de los ajustes de seccion |
+| `d1cea49` | `fix(projects)`: encuadre de las miniaturas de analitica | Correccion posterior, no es ninguna T |
 
 **Frontera de rodaja.** 4392 inserciones en total, pero **2659 son artboards de `design/` y
 assets binarios** (60%). El codigo propio de `src/` son 1608 lineas en 16 archivos. El commit
 de codigo mas grande es `a9a055c` con ~268 lineas, dentro del limite de ~400. Las rodajas que
 superan ese numero lo hacen por artboards de diseno o documentacion, no por codigo de producto.
 
-**Antes del proximo commit hay que decidir la estrategia de entrega.** Un PR unico seria de
-~4400 lineas. Recomendacion (ver skill `chained-pr`): dejar `design/` y los assets fuera del PR
-de producto, o sacar el hero a su propio PR, porque no pertenece a ninguna de las features de
-esta sesion.
+**Correccion posterior (`d1cea49`).** Las 4 miniaturas de analitica median una franja de
+**602x192 (ratio 3.14)** porque el contenedor tenia altura fija `h-48`, mientras que las
+imagenes naturales van de 800x429 a una cuadrada de 640x640. `object-cover` recortaba ~68% de la
+cuadrada. Ahora `aspect-[16/10]`: **602x376 (ratio 1.60)**, medido en el navegador antes y
+despues. Se uso `aspect-*` y no otra altura fija para que no vuelva a desincronizarse si la
+grilla cambia.
+
+**La estrategia de entrega quedo diferida al final, por decision de Daniel** (L11 en el Log).
+Un PR unico de ~5500 lineas no es revisable. Recomendacion vigente (skill `chained-pr`): partir
+por feature, dejar `design/` y los assets binarios fuera del PR de producto, y sacar el hero a su
+propio PR porque no pertenece a ninguna de estas features.
+
+**El corte ya no es opcional.** Al intentar la review nativa del candidato completo, el proveedor
+la rechazo en preflight con `lens_context_budget_exceeded`: la evidencia del reviewer no entra en
+su presupuesto de contexto y **no creo ninguna autoridad** (no hay nada quemado ni que reparar).
+Reintentar el mismo candidato no puede funcionar; exige "a chained sequence of smaller reviewable
+commits, each under the budget". Es decir: la entrega se hace por rodajas chicas o no hay review.
 
 **Estado: sin push.** Daniel pidio pushear recien cuando esten cerrados todos los puntos.
 
@@ -187,3 +201,23 @@ L7 (riesgo de encuadre que Daniel debe decidir): publicar "1 día" en las cuatro
 puede leerse como poco profundo si no se explica de dónde viene la velocidad. Propuesta:
 medir esas fichas como trabajo de análisis y dejar que el criterio y la complejidad lleven el
 peso, no las horas. Decisión pendiente.
+
+L11 (respuesta de Daniel sobre la entrega, literal):
+> "La cosa es que como tal aún faltan mas cosas que hacer antes de finalizar y tirar un push"
+
+Aplicado: **la estrategia de entrega se decide al final, no ahora.** Daniel sigue sumando
+puntos antes del push, así que la rama y las rodajas no se reestructuran todavía. Consecuencia
+que queda registrada: el candidato de review crece con cada punto nuevo, y como el proveedor ya
+rechazó el candidato completo por presupuesto de contexto, **el corte en rodajas chicas es
+requisito de entrega**, no una preferencia.
+
+L12 (estado del trabajo pendiente al cierre de esta sesión, para no re-descubrirlo):
+- `h-48` de las miniaturas de analítica → **resuelto** en `d1cea49` (602x192 → 602x376).
+- El **"1 día"** sigue visible en las 4 fichas de práctica (Churn, Olist, Superstore, RRHH):
+decisión pendiente (L7).
+- El rosa `accent` sigue decorando las tarjetas de BI, la subsección Analítica y el
+`ReportModal`, aunque `design/system.md` lo reserva para error/alerta. En el formulario de
+contacto ya se usa en su rol correcto.
+- Los 4 del **Archivo** (Videojuegos, Diamantes, Titanic, Hospital) siguen sin `role` ni
+`complexity`: `ArchiveSection` es una lista compacta, así que sería decisión de estructura.
+- Decisiones del hero sin tomar: iconos sociales de vuelta, tamaño del retrato.
