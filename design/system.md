@@ -66,6 +66,12 @@ None declared. Depth is produced with blurred color blobs
   `border border-secondary/20`, `bg-secondary/5`, `rounded-full`.
 - **Social icon**: circular, `border border-white/5`, `text-text-muted`, hover
   `text-primary` with `bg-white/5`.
+- **Campo de formulario** (`ContactForm.jsx`): label `text-xs font-medium text-text-muted`
+  arriba del campo; control `w-full rounded-lg border bg-background/60 px-4 py-3 text-sm`,
+  `placeholder:text-text-muted/50`, foco `focus:ring-2 focus:ring-primary/40`. Borde normal
+  `border-white/10`; **con error** `border-accent/60` y el mensaje en `text-xs text-accent`.
+  El estado del envío usa `secondary` para el éxito y `accent` para el error: es el único
+  lugar del sitio donde `accent` cumple su rol declarado (alerta/error) en vez de decorar.
 - **Motion** (`framer-motion`): entrance `opacity 0→1`, `y 20→0`, `duration 0.8`;
   interactive elements use `whileHover={{ scale: 1.05 }}` / `whileTap={{ scale: 0.95 }}`.
 
@@ -74,10 +80,10 @@ None declared. Depth is produced with blurred color blobs
 Una sola familia en todo el sitio. Nunca una segunda familia, ni siquiera para
 código o cifras.
 
-**Familia:** `Inter` — declarada en `tailwind.config.js` (`theme.extend.fontFamily.sans`).
-Producción debe **self-hostearla** (woff2, subset latin, `font-display: swap`).
-Hoy `index.html` no carga ninguna webfont, así que el sitio cae a la sans del
-sistema: esa es la causa raíz de que la tipografía se sienta inconsistente.
+**Familia:** `Inter` — declarada en `tailwind.config.js` (`theme.extend.fontFamily.sans`) y
+**self-hosteada**: `@font-face` en `src/index.css` sobre
+`src/assets/fonts/inter-latin-var.woff2` (variable, subset latin, `font-display: swap`), con
+ruta **relativa** porque `vite.config.js` usa `base: './'` para el subpath de GitHub Pages.
 
 ### Escala canónica
 
@@ -114,7 +120,7 @@ entre plano y degradado lo convierte en dos objetos visuales distintos.
 | `text-muted` `#94a3b8` | Cuerpo, subtítulos, labels secundarios |
 | `primary` `#8b5cf6` | Acción e identidad: CTA, palabra clave |
 | `secondary` `#06b6d4` | Información y estado: badge, link, indicador |
-| `accent` `#f43f5e` | Solo alerta o error. Hoy sin uso |
+| `accent` `#f43f5e` | Solo alerta o error. Uso actual: el error del formulario de contacto |
 
 Nunca dos acentos compitiendo en el mismo bloque. El violeta indica acción, el cian
 indica información: no se intercambian.
