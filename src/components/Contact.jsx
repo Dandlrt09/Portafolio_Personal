@@ -1,9 +1,10 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Mail, Github, Linkedin, FileText } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { CONTACT_EMAIL, CV_URL, GITHUB_URL, LINKEDIN_URL } from '../data/site';
+import { CONTACT_EMAIL } from '../data/site';
 import ContactForm from './ContactForm';
+import SocialLinks from './SocialLinks';
 
 const fadeIn = (delay) => ({
     initial: { opacity: 0, y: 20 },
@@ -14,12 +15,6 @@ const fadeIn = (delay) => ({
 
 const Contact = () => {
     const { t } = useLanguage();
-
-    const social = [
-        { href: GITHUB_URL, label: 'GitHub', icon: Github, hover: 'hover:text-primary' },
-        { href: LINKEDIN_URL, label: 'LinkedIn', icon: Linkedin, hover: 'hover:text-primary' },
-        { href: CV_URL, label: t.contact.cv, icon: FileText, hover: 'hover:text-secondary' },
-    ];
 
     return (
         <section id="contact" className="py-20 bg-gradient-to-t from-surface/50 to-background">
@@ -52,21 +47,7 @@ const Contact = () => {
                             </a>
                         </div>
 
-                        <div className="flex items-center justify-center gap-4 lg:justify-start">
-                            {social.map(({ href, label, icon: Icon, hover }) => (
-                                <a
-                                    key={label}
-                                    href={href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={label}
-                                    title={label}
-                                    className={`rounded-full border border-white/5 p-3 text-text-muted transition-all hover:bg-white/5 ${hover}`}
-                                >
-                                    <Icon size={22} />
-                                </a>
-                            ))}
-                        </div>
+                        <SocialLinks withCv className="justify-center lg:justify-start" />
                     </motion.div>
 
                     <motion.div {...fadeIn(0.3)}>

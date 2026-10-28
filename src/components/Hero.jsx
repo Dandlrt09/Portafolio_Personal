@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { ArrowRight, FileText } from 'lucide-react';
 import { CV_URL, HERO_STACK } from '../data/site';
+import SocialLinks from './SocialLinks';
 import HeroOrbit from './HeroOrbit';
 import danielPhoto from '../assets/profile/daniel.webp';
 
@@ -236,6 +237,12 @@ const Hero = () => {
                             {t.hero.resume}
                             <FileText size={18} aria-hidden="true" />
                         </a>
+
+                        {/* Los iconos sociales vuelven al hero. Van en la misma fila de CTA para
+                            no sumar un bloque vertical: el presupuesto de encuadre a 1440x900
+                            está justo (pt-24 + panel + pb-16). El CV no va acá: ya es el botón
+                            de al lado, mismo destino. */}
+                        <SocialLinks />
                     </motion.div>
 
                     {/* Static fallback for the orbit: narrow viewports and reduced motion. */}

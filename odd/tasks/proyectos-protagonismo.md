@@ -35,7 +35,9 @@ S13. **Datara es Daniel + agentes de IA**, no un equipo humano. La asistencia de
      ya listada en nivel 3.
 S14. Duraciones reales: Datara en desarrollo desde septiembre del año en curso (activo);
      ANV·BAR 4 semanas; AI PDF Generator 2 días; Churn, Olist, Superstore y RRHH 1 día cada
-     uno, usando IA como guía en la parte pesada de código.
+     uno, usando IA como guía en la parte pesada de código. **Las cuatro prácticas NO declaran
+     `timeline` en `projects.js`**: su duración queda registrada acá, pero no se muestra en la
+     ficha (decisión de Daniel, L13).
 S15. **AI PDF Generator** es un brief real de Workana resuelto por iniciativa propia, sin
      cliente. Eso va al frente de la ficha: la iniciativa es el activo, no algo que esconder.
 
@@ -229,3 +231,20 @@ contacto ya se usa en su rol correcto.
 - Los 4 del **Archivo** (Videojuegos, Diamantes, Titanic, Hospital) siguen sin `role` ni
 `complexity`: `ArchiveSection` es una lista compacta, así que sería decisión de estructura.
 - Decisiones del hero sin tomar: iconos sociales de vuelta, tamaño del retrato.
+
+L13 (decisión de Daniel sobre la duración, opción que eligió):
+> "Ocultar la duración"
+
+Aplicado: se quitó `timeline` de Churn, Olist, Superstore y RRHH en `projects.js`, y el
+comentario del array `analyticsProjects` explica por qué ninguna de las cuatro lo declara.
+`ProjectRole` ya devolvía nada cuando falta `timeline`, así que no hubo que tocar la tarjeta.
+Las otras fichas conservan su duración porque ahí sí aporta: Datara activo desde septiembre,
+ANV·BAR entregado en 4 semanas, AI PDF resuelto en 2 días.
+
+L14 (decisiones de Daniel en la misma pasada):
+> Iconos sociales en el hero: "Que vuelvan al hero"
+> hCaptcha en el panel de Web3Forms: "Lo dejamos así"
+> Los 4 del Archivo: "Ahora vamos a trabajar en esto, ya te explico"
+
+Aplicado: hCaptcha queda como barrera del navegador y no del servidor (los mensajes llegan
+igual, confirmado por él). Los 4 del Archivo quedan esperando su explicación: NO se tocan.
