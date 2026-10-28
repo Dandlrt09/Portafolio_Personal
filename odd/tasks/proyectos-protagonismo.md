@@ -302,3 +302,23 @@ Verificado en el navegador: arranca cerrado, abre con 4 tarjetas de niveles 5/4/
 2/2/2/1 botones, se desmonta al cerrar, y en inglés lee "Complexity 5/5". `lint` exit 0,
 `npm run verify:contact` 30/30 (regresión: se tocó `LanguageContext`, que es compartido) y
 `build` exit 0.
+
+L17 (rechazo de Daniel, literal, con la captura del logo generado):
+> "No me convence"
+
+Diagnóstico: el prompt que le pasé (hoja de documento + destello cyan) era **demasiado
+literal**, y el modelo devolvió el cliché máximo — contorno de hoja, esquina doblada y
+destello. Encima el fondo de la imagen no coincidía con la superficie de la tarjeta, así que
+se veía el cuadrado. Nada de eso dice algo sobre *este* proyecto, que no es "un documento con
+IA" sino un **motor de layout determinista** con cinco tipos de documento encima.
+
+Aplicado: `design/ai-pdf-logo/` con 3 conceptos **dibujados como SVG vectorial de verdad**, no
+generados. Cada artboard los muestra **dentro del marco real** (panel de 420 px con el ratio
+medido 615/750 y la etiqueta de estado en su esquina) y los prueba a 110/64/32 px:
+`01-grilla-modulos.html` (grilla determinista, cuatro módulos iguales y uno vivo),
+`02-capas.html` (varias hojas apiladas sobre un motor) y `03-bloque-esquina.html` (bloque
+macizo, sin contorno de hoja, con la esquina cortada). **El elegido se puede usar tal cual**:
+es vector, pesa cientos de bytes y usa los tokens exactos del sitio.
+
+Abierto: que elija concepto. Después: wireear `image`/`imageAlt` en los dos idiomas y pasar esa
+ficha a `object-contain`, porque con `object-cover` el logo se recortaría.
