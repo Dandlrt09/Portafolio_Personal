@@ -21,7 +21,10 @@ const BiProjectCard = ({ project, index }) => {
                 className="group relative bg-surface border border-white/5 rounded-xl overflow-hidden hover:border-accent/50 transition-colors flex flex-col h-full"
             >
                 {/* Project Image */}
-                <div className="h-48 overflow-hidden relative">
+                {/* aspect-[16/10] en vez de h-48: en la grilla de 2 columnas la tarjeta mide
+                    ~600px de ancho, así que una altura fija de 192px dejaba una franja 3.14:1
+                    que recortaba el 68% de una imagen cuadrada. */}
+                <div className="aspect-[16/10] overflow-hidden relative">
                     <img
                         src={project.image}
                         alt={project.title[language] || project.title?.es}
