@@ -19,7 +19,10 @@
     border:1px solid rgba(255,255,255,.1);overflow:hidden;display:grid;place-items:center}
   .frame .badge{position:absolute;left:16px;top:16px;border-radius:9999px;border:1px solid rgba(255,255,255,.15);
     background:rgba(0,0,0,.6);padding:5px 12px;font-size:12px;font-weight:500;color:rgba(255,255,255,.85)}
-  .mark{width:60%}
+  .lockup{width:100%;display:flex;flex-direction:column;align-items:center;gap:24px}
+  .lockup .mark{width:46%}
+  .wordmark{font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--text)}
+  .rule{margin:10px 0 0;font-size:12px;color:var(--muted)}
   .mark svg{display:block;width:100%;height:auto}
   .sizes{display:flex;align-items:end;gap:26px;margin:26px 0 0;padding:22px;border-radius:12px;
     background:var(--surface);border:1px solid rgba(255,255,255,.1)}
@@ -48,13 +51,16 @@
     <div>
       <div class="frame">
         <span class="badge">Iniciativa propia</span>
-        <div class="mark">
+        <div class="lockup">
+          <div class="mark">
           <!-- B: dos hojas apiladas en diagonal, la de adelante con un punto cyan -->
           <svg viewBox="0 0 64 64" fill="none" aria-label="Logo: capas apiladas">
             <rect x="17" y="9" width="38" height="38" rx="9" stroke="var(--primary)" stroke-width="3.5" opacity=".38"/>
             <rect x="9" y="17" width="38" height="38" rx="9" stroke="var(--primary)" stroke-width="3.5"/>
             <circle cx="28" cy="36" r="5" fill="var(--secondary)"/>
           </svg>
+          </div>
+          <span class="wordmark">AI PDF Generator</span>
         </div>
       </div>
 
@@ -63,6 +69,7 @@
         <figure><div class="box b64"><svg viewBox="0 0 64 64" fill="none"><rect x="17" y="9" width="38" height="38" rx="9" stroke="var(--primary)" stroke-width="3.5" opacity=".38"/><rect x="9" y="17" width="38" height="38" rx="9" stroke="var(--primary)" stroke-width="3.5"/><circle cx="28" cy="36" r="5" fill="var(--secondary)"/></svg></div><figcaption>64px</figcaption></figure>
         <figure><div class="box b32"><svg viewBox="0 0 64 64" fill="none"><rect x="17" y="9" width="38" height="38" rx="9" stroke="var(--primary)" stroke-width="3.5" opacity=".38"/><rect x="9" y="17" width="38" height="38" rx="9" stroke="var(--primary)" stroke-width="3.5"/><circle cx="28" cy="36" r="5" fill="var(--secondary)"/></svg></div><figcaption>32px</figcaption></figure>
       </div>
+      <p class="rule">Debajo de ~48 px el wordmark se cae: ahí se usa solo el símbolo.</p>
     </div>
 
     <div>
