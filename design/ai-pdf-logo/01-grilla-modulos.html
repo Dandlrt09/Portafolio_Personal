@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI PDF — A · Grilla de módulos</title>
+<style>
+  /* Tokens de design/system.md: surface #1e293b, primary #8b5cf6, secondary #06b6d4, background #0f172a. */
+  :root{--background:#0f172a;--surface:#1e293b;--primary:#8b5cf6;--secondary:#06b6d4;--text:#f8fafc;--muted:#94a3b8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--background);color:var(--text);
+    font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1280px;margin:0 auto;padding:48px 24px 64px}
+  h2{font-size:30px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+  h2 span{border-bottom:4px solid var(--primary);padding-bottom:6px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 28px;max-width:80ch;line-height:1.6}
+  .cols{display:grid;grid-template-columns:420px minmax(0,1fr);gap:40px;align-items:start}
+
+  /* El marco real de la ficha: 615x750 medido = ratio 0.82, con la etiqueta de estado arriba a la izquierda. */
+  .frame{position:relative;width:420px;aspect-ratio:615/750;border-radius:16px;background:var(--surface);
+    border:1px solid rgba(255,255,255,.1);overflow:hidden;display:grid;place-items:center}
+  .frame .badge{position:absolute;left:16px;top:16px;border-radius:9999px;border:1px solid rgba(255,255,255,.15);
+    background:rgba(0,0,0,.6);padding:5px 12px;font-size:12px;font-weight:500;color:rgba(255,255,255,.85)}
+  .lockup{width:100%;display:flex;flex-direction:column;align-items:center;gap:24px}
+  .lockup .mark{width:46%}
+  .wordmark{font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--text)}
+  .rule{margin:10px 0 0;font-size:12px;color:var(--muted)}
+  .mark svg{display:block;width:100%;height:auto}
+
+  /* Prueba de tamaño: el mismo mark chico, que es donde se cae la mitad de los logos. */
+  .sizes{display:flex;align-items:end;gap:26px;margin:26px 0 0;padding:22px;border-radius:12px;
+    background:var(--surface);border:1px solid rgba(255,255,255,.1)}
+  .sizes figure{margin:0;text-align:center}
+  .sizes .box{width:110px;height:110px;border-radius:10px;background:var(--surface);border:1px solid rgba(255,255,255,.06);display:grid;place-items:center}
+  .sizes .b64{width:64px;height:64px}
+  .sizes .b32{width:32px;height:32px}
+  .sizes svg{display:block;width:76%;height:auto}
+  .sizes figcaption{margin-top:8px;font-size:11px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  h3{font-size:15px;font-weight:600;margin:0 0 10px}
+  .why{font-size:14px;line-height:1.65;color:var(--muted);margin:0 0 18px}
+  .why strong{color:var(--text)}
+  .anno{border:1px dashed rgba(251,191,36,.45);background:rgba(251,191,36,.06);border-radius:10px;
+    padding:14px 18px;font-size:12.5px;line-height:1.65;color:#fde68a}
+  .anno strong{color:#fef3c7}
+  @media (max-width:980px){.cols{grid-template-columns:1fr}.frame{width:100%;max-width:420px}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2><span>AI PDF Generator — A · Grilla de módulos</span></h2>
+  <p class="sub">El proyecto no es "un documento con IA": es un <strong>motor que garantiza el mismo layout siempre</strong>, con cinco tipos de documento encima. Este mark dice eso: una grilla estricta donde un solo módulo está vivo.</p>
+
+  <div class="cols">
+    <div>
+      <div class="frame">
+        <span class="badge">Iniciativa propia</span>
+        <div class="lockup">
+          <div class="mark">
+          <!-- A: marco + grilla de 4 módulos, el inferior derecho encendido en cyan -->
+          <svg viewBox="0 0 64 64" fill="none" aria-label="Logo: grilla de módulos">
+            <rect x="8" y="8" width="48" height="48" rx="9" stroke="var(--primary)" stroke-width="3.5"/>
+            <rect x="17.5" y="17.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/>
+            <rect x="34.5" y="17.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/>
+            <rect x="17.5" y="34.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/>
+            <rect x="34.5" y="34.5" width="12" height="12" rx="2.5" fill="var(--secondary)"/>
+          </svg>
+          </div>
+          <span class="wordmark">AI PDF Generator</span>
+        </div>
+      </div>
+
+      <div class="sizes">
+        <figure><div class="box"><svg viewBox="0 0 64 64" fill="none"><rect x="8" y="8" width="48" height="48" rx="9" stroke="var(--primary)" stroke-width="3.5"/><rect x="17.5" y="17.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="34.5" y="17.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="17.5" y="34.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="34.5" y="34.5" width="12" height="12" rx="2.5" fill="var(--secondary)"/></svg></div><figcaption>110px</figcaption></figure>
+        <figure><div class="box b64"><svg viewBox="0 0 64 64" fill="none"><rect x="8" y="8" width="48" height="48" rx="9" stroke="var(--primary)" stroke-width="3.5"/><rect x="17.5" y="17.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="34.5" y="17.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="17.5" y="34.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="34.5" y="34.5" width="12" height="12" rx="2.5" fill="var(--secondary)"/></svg></div><figcaption>64px</figcaption></figure>
+        <figure><div class="box b32"><svg viewBox="0 0 64 64" fill="none"><rect x="8" y="8" width="48" height="48" rx="9" stroke="var(--primary)" stroke-width="3.5"/><rect x="17.5" y="17.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="34.5" y="17.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="17.5" y="34.5" width="12" height="12" rx="2.5" stroke="var(--primary)" stroke-width="3.5"/><rect x="34.5" y="34.5" width="12" height="12" rx="2.5" fill="var(--secondary)"/></svg></div><figcaption>32px</figcaption></figure>
+      </div>
+      <p class="rule">Debajo de ~48 px el wordmark se cae: ahí se usa solo el símbolo.</p>
+    </div>
+
+    <div>
+      <h3>Qué dice</h3>
+      <p class="why">Una <strong>grilla cerrada con cuatro módulos iguales</strong> y uno solo encendido. Se lee como un motor de layout: todo tiene su lugar, y lo que cambia es un módulo, no el documento entero. Es lo opuesto al ícono de hoja: no hay papel, no hay esquina doblada, no hay destello genérico.</p>
+      <h3>Por qué funciona en este marco</h3>
+      <p class="why">El mark es <strong>casi cuadrado y compacto</strong>, así que sobrevive el recorte sin depender de la proporción del recuadro. Al ser geometría pura no hay texto que se deforme ni detalles que se pierdan a 32px.</p>
+      <h3>Tradeoff</h3>
+      <p class="why">Es el más <strong>abstracto</strong> de los tres: puede leerse como "grilla" o "módulos" antes que como "documentos con IA". Gana en limpieza y en que no se parece a nada del resto del sitio — las Skills usan puntos y conexiones, esto usa bloques.</p>
+      <div class="anno">
+        <strong>Anotación (no va a producción).</strong> Los tres conceptos están dibujados como <strong>SVG vectorial de verdad</strong>, no como imagen generada. Eso significa que este mark se puede <strong>usar tal cual</strong> en la ficha: nítido a cualquier tamaño, unos cientos de bytes, y con los colores exactos del sitio. Si preferís la versión renderizada por IA, el concepto elegido sirve de referencia para el prompt.
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -2,6 +2,7 @@ import React from 'react';
 import { LanguageProvider } from './context/LanguageContext';
 import Layout from './components/layout/Layout';
 import Hero from './components/Hero';
+import About from './components/About';
 import Skills from './components/Skills';
 import ProjectGrid from './components/ProjectGrid';
 import Contact from './components/Contact';
@@ -11,6 +12,7 @@ function App() {
     <LanguageProvider>
       <Layout>
         <Hero />
+        <About />
         <Skills />
         <ProjectGrid />
         <Contact />

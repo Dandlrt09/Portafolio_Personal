@@ -1,0 +1,28 @@
+{
+  "title": "Análisis y resultados de proyectos",
+  "brief": "Rediseñar el desplegable del Archivo (4 ejercicios de práctica) como tarjetas simplificadas: sigue siendo un desplegable, se renombra a \"Análisis y resultados de proyectos\" y cada proyecto muestra un símbolo simple (gráfico ascendente), las estrellas de complejidad y botones más livianos que los de las fichas destacadas.",
+  "feature": "odd/tasks/proyectos-protagonismo.md",
+  "artboards": [
+    {
+      "file": "01-lista-compacta.html",
+      "title": "Lista compacta",
+      "tradeoff": "Máxima densidad y escaneo en un vistazo; rompe el lenguaje de tarjeta del sitio y deja el puntaje sin la línea que lo justifica (regla S10)",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "02-tarjetas-horizontales.html",
+      "title": "Tarjetas horizontales",
+      "tradeoff": "Conserva el lenguaje de tarjeta y respeta el puntaje anclado; es la que más alto ocupa y puede competir con las fichas grandes",
+      "width": 1440,
+      "height": 1100
+    },
+    {
+      "file": "03-grilla-minima.html",
+      "title": "Grilla mínima con acciones de ícono",
+      "tradeoff": "La más liviana y la que menos compite; pierde el texto de los botones y la justificación del puntaje",
+      "width": 1440,
+      "height": 1000
+    }
+  ]
+}

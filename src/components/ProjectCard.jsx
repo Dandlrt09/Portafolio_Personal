@@ -1,31 +1,26 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Star, TrendingUp } from 'lucide-react';
+import { Github, ExternalLink, TrendingUp } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-
-const StarRating = ({ count }) => (
-    <div className="flex items-center gap-0.5">
-        {[1, 2, 3, 4, 5].map(i => (
-            <Star key={i} size={12} className={i <= count ? 'fill-amber-400 text-amber-400' : 'text-white/10'} />
-        ))}
-    </div>
-);
+import { useReveal } from '../lib/motion';
+import { ProjectRole, ComplexityRating } from './ProjectBlocks';
 
 const ProjectCard = ({ project, index }) => {
     const { t, language } = useLanguage();
     const [expanded, setExpanded] = useState(false);
     const metrics = project.metrics?.[language] || project.metrics?.es;
+    const reveal = useReveal({ delay: index * 0.05 });
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.05 }}
+            {...reveal}
             className="group relative bg-surface border border-white/5 rounded-xl overflow-hidden hover:border-primary/50 transition-colors flex flex-col h-full"
         >
             {/* Project Image */}
-            <div className="h-48 overflow-hidden relative">
+            {/* aspect-[16/10] en vez de h-48: en la grilla de 2 columnas la tarjeta mide
+                ~600px de ancho, así que una altura fija de 192px dejaba una franja 3.14:1
+                que recortaba el 68% de una imagen cuadrada. */}
+            <div className="aspect-[16/10] overflow-hidden relative">
                 <img
                     src={project.image}
                     alt={project.title[language] || project.title?.es}
@@ -43,12 +38,13 @@ const ProjectCard = ({ project, index }) => {
                             </span>
                         ))}
                     </div>
-                    <StarRating count={project.stars} />
                 </div>
 
                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {project.title[language] || project.title?.es}
                 </h3>
+
+                <ProjectRole role={project.role} timeline={project.timeline} className="mb-4" />
 
                 {(() => {
                     const desc = project.description[language] || project.description['es'];
@@ -82,12 +78,22 @@ const ProjectCard = ({ project, index }) => {
                     </div>
                 )}
 
-                <div className="flex flex-col gap-2 mt-auto pt-3 border-t border-white/5">
+                <ComplexityRating complexity={project.complexity} className="mb-4" />
+
+                {/* Dos CTA rellenos, lado a lado y a mitad cada uno. Nunca los dos solidos:
+                    `design/system.md` define primary (accion) y secondary (apoyo), y dos
+                    rellenos primarios competirian entre si. El demo va primero porque es la
+                    prueba de que funciona; si no hay demo, el codigo toma el rol primario. */}
+                <div className="mt-auto flex gap-3 border-t border-white/5 pt-4">
                     <a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-medium text-text hover:text-primary transition-colors"
+                        className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                            project.streamlit
+                                ? 'border border-white/10 bg-white/5 text-text hover:bg-white/10'
+                                : 'bg-primary text-white hover:bg-primary/90'
+                        }`}
                     >
                         <Github size={16} />
                         {t.projects.viewRepo}
@@ -97,7 +103,7 @@ const ProjectCard = ({ project, index }) => {
                             href={project.streamlit}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm font-medium text-text hover:text-primary transition-colors"
+                            className="flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors bg-primary text-white hover:bg-primary/90"
                         >
                             <ExternalLink size={16} />
                             {t.projects.viewDemo}

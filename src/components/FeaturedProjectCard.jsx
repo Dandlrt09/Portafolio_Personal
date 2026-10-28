@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink, Target, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { cn } from '../lib/utils';
+import { useReveal } from '../lib/motion';
+import { ProjectRole, ComplexityRating } from './ProjectBlocks';
 
 const LabeledBlock = ({ label, text, icon: Icon, iconClass }) => (
     <div>
@@ -23,19 +25,30 @@ const FeaturedProjectCard = ({ project, index }) => {
     const tagline = project.tagline[language] || project.tagline.es;
     const status = project.status ? project.status[language] || project.status.es : null;
     const alt = project.imageAlt ? project.imageAlt[language] || project.imageAlt.es : title;
+    /* `margin: '-60px'` mantiene el margen negativo que ya tenía: la ficha entra un poco más
+       tarde, cuando de verdad está en pantalla y no asomando por el borde. */
+    const reveal = useReveal({ duration: 0.5, from: 24, margin: '-60px' });
 
     return (
         <motion.article
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5 }}
+            {...reveal}
             className="grid overflow-hidden rounded-2xl border border-white/10 bg-surface lg:grid-cols-2"
         >
             {/* Media */}
             <div className={cn('relative min-h-[240px]', reversed && 'lg:order-2')}>
                 {project.image ? (
                     <img src={project.image} alt={alt} className="h-full w-full object-cover" />
+                ) : project.logo ? (
+                    /* Lockup: símbolo + nombre, dibujado en HTML y no como una sola imagen. El
+                       nombre tiene que salir en la Inter del sitio, y un SVG cargado como <img>
+                       no puede usar los @font-face de la página (un PNG directamente trae los
+                       píxeles cocidos). El símbolo sí es un SVG, y adentro no tiene texto. */
+                    <div className="flex h-full w-full flex-col items-center justify-center gap-5 bg-surface px-8 py-12 text-center">
+                        {/* 46% del ancho del panel: es lo que especifica el artboard aprobado, y
+                            el contenedor está topado en ~615px, así que no crece sin control. */}
+                        <img src={project.logo} alt="" className="w-[46%]" />
+                        <span className="text-xl font-semibold tracking-tight text-white/90">{title}</span>
+                    </div>
                 ) : (
                     <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-background px-8 py-12 text-center">
                         <span className="text-2xl font-bold tracking-tight text-white/85">{title}</span>
@@ -59,18 +72,23 @@ const FeaturedProjectCard = ({ project, index }) => {
                     <p className="mt-1 text-sm font-medium text-primary">{tagline}</p>
                 </div>
 
-                <LabeledBlock
-                    label={labels.problem}
-                    text={project.problem[language] || project.problem.es}
-                    icon={Target}
-                    iconClass="text-amber-400"
-                />
+                {/* El orden manda: primero quien lo hizo, despues que hizo, y recien
+                    despues el problema. Antes el problema iba primero y la persona
+                    aparecia recien en la mitad de la decision tecnica. */}
+                <ProjectRole role={project.role} timeline={project.timeline} />
 
                 <LabeledBlock
                     label={labels.decision}
                     text={project.decision[language] || project.decision.es}
                     icon={Lightbulb}
                     iconClass="text-emerald-400"
+                />
+
+                <LabeledBlock
+                    label={labels.problem}
+                    text={project.problem[language] || project.problem.es}
+                    icon={Target}
+                    iconClass="text-amber-400"
                 />
 
                 <div>
@@ -88,6 +106,8 @@ const FeaturedProjectCard = ({ project, index }) => {
                         ))}
                     </div>
                 </div>
+
+                <ComplexityRating complexity={project.complexity} />
 
                 <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-1">
                     <a

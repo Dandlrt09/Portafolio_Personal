@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Habilidades — Constelación con hubs de proyecto</title>
+<style>
+  :root{
+    --background:#0f172a; --surface:#1e293b; --primary:#8b5cf6; --secondary:#06b6d4;
+    --accent:#f43f5e; --text:#f8fafc; --text-muted:#94a3b8;
+    --hairline:rgba(255,255,255,.10);
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--background);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
+
+  header{position:sticky;top:0;z-index:50;height:64px;display:flex;align-items:center;
+    background:rgba(15,23,42,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--hairline)}
+  .header-inner{width:100%;max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+  .wordmark{font-weight:700;font-size:16px;background:linear-gradient(90deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--text-muted)}
+  nav span[data-current]{color:var(--text)}
+
+  section{max-width:1280px;margin:0 auto;padding:56px 24px 64px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin:0 0 10px}
+  h2{margin:0;font-size:30px;font-weight:700;letter-spacing:-.02em}
+  .lead{margin:12px 0 0;max-width:640px;font-size:16px;line-height:1.7;color:var(--text-muted)}
+
+  .field{position:relative;width:100%;aspect-ratio:1180/700;margin-top:26px}
+  .field svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .edge{stroke:var(--secondary);stroke-width:1;opacity:.10;transition:opacity .18s ease,stroke-width .18s ease}
+  .edge.is-live{opacity:.42;stroke-width:1.4}
+  .edge.is-dim{opacity:.03}
+  .ring{fill:none;stroke:rgba(255,255,255,.05);stroke-dasharray:3 6}
+
+  .node{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:7px;
+    background:none;border:0;font:inherit;cursor:pointer;border-radius:8px;padding:5px 8px;
+    transition:opacity .18s ease,background-color .16s ease}
+  .node .dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--surface);
+    border:1.5px solid rgba(148,163,184,.5);transition:border-color .16s ease,background-color .16s ease,box-shadow .16s ease}
+  .node .name{font-size:12px;font-weight:500;color:var(--text-muted);white-space:nowrap;transition:color .16s ease}
+  .node.to-left{flex-direction:row-reverse}
+  .node:hover{background:rgba(255,255,255,.05)}
+  .node:hover .name,.node:focus-visible .name{color:var(--text)}
+  .node:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+  .hub{position:absolute;transform:translate(-50%,-50%);padding:6px 13px;border-radius:999px;
+    background:rgba(30,41,59,.9);border:1px solid var(--hairline);cursor:pointer;font:inherit;
+    font-size:12.5px;font-weight:600;color:var(--text);white-space:nowrap;
+    transition:opacity .18s ease,border-color .16s ease,background-color .16s ease}
+  .hub:hover,.hub:focus-visible{border-color:var(--primary);background:rgba(139,92,246,.14)}
+  .hub:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+  .hub.is-focus{border-color:var(--primary);background:rgba(139,92,246,.2)}
+  .hub.is-neighbor{border-color:rgba(6,182,212,.45)}
+  .hub.is-dim,.node.is-dim{opacity:.18}
+  .node.is-focus .dot{background:var(--primary);border-color:var(--primary);box-shadow:0 0 0 4px rgba(139,92,246,.22)}
+  .node.is-focus .name{color:var(--text);font-weight:600}
+  .node.is-neighbor .dot{border-color:var(--secondary)}
+  .node.is-neighbor .name{color:var(--text)}
+
+  .detail{position:absolute;left:0;bottom:0;width:300px;background:rgba(30,41,59,.94);
+    backdrop-filter:blur(10px);border:1px solid var(--hairline);border-radius:14px;padding:18px}
+  .detail .cat{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--secondary);margin:0 0 6px}
+  .detail h3{margin:0;font-size:17px;font-weight:600}
+  .detail .hint{margin:0;font-size:13px;line-height:1.6;color:var(--text-muted)}
+  .detail .block{margin-top:13px}
+  .detail .block-label{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin:0 0 7px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:12px;font-weight:500;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--hairline);border-radius:6px;padding:3px 8px}
+  .chip.link{color:var(--secondary);border-color:rgba(6,182,212,.25);background:rgba(6,182,212,.06)}
+  .chip.bridge{color:var(--primary);border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.09)}
+  .empty{font-size:12px;color:var(--text-muted);font-style:italic}
+  .foot{display:flex;justify-content:space-between;gap:24px;margin-top:10px;font-size:12px;color:var(--text-muted)}
+  .foot kbd{font-family:var(--font);font-size:11px;border:1px solid var(--hairline);border-radius:4px;padding:1px 5px}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <span class="wordmark">Daniel DLRT</span>
+    <nav aria-label="Secciones">
+      <span>Proyectos</span><span data-current>Sobre mí</span><span>Contacto</span><span>CV</span>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section aria-labelledby="skills-title">
+  <p class="eyebrow">Sobre mí</p>
+  <h2 id="skills-title">Habilidades</h2>
+  <p class="lead">Cada círculo grande es un proyecto. Las habilidades que cuelgan entre dos o más
+    proyectos son las que más cargan: aparecen una y otra vez porque el trabajo las vuelve a pedir.</p>
+
+  <div class="field" id="field">
+    <svg id="edges" aria-hidden="true"></svg>
+    <div class="detail" id="detail" role="status" aria-live="polite"></div>
+  </div>
+
+  <p class="foot">
+    <span id="bridge-note"></span>
+    <span><kbd>Tab</kbd> recorre · <kbd>Enter</kbd> fija el foco</span>
+  </p>
+</section>
+</main>
+
+<script>
+/* Datos reales: src/data/projects.js + grupos de LanguageContext.jsx (rama es). */
+const CLUSTER_OF = {
+  'Python':'Desarrollo','FastAPI':'Desarrollo','React':'Desarrollo','TypeScript':'Desarrollo',
+  'Tailwind CSS':'Desarrollo','SQL':'Desarrollo','Postgres':'Desarrollo','SQLite':'Desarrollo',
+  'Supabase':'Desarrollo','Git':'Desarrollo','pytest':'Desarrollo','GitHub Actions':'Desarrollo',
+  'Pandas':'Datos & ML','NumPy':'Datos & ML','Scikit-learn':'Datos & ML','PyCaret':'Datos & ML',
+  'EDA':'Datos & ML','Feature engineering':'Datos & ML','Predictive modeling':'Datos & ML',
+  'Time series':'Datos & ML','Jupyter':'Datos & ML',
+  'Gemini API':'IA aplicada','LLM integration':'IA aplicada','Streamlit':'IA aplicada',
+  'Agent-assisted development':'IA aplicada',
+  'Power BI':'BI & visualización','Matplotlib':'BI & visualización','Seaborn':'BI & visualización',
+  'Data storytelling':'BI & visualización',
+  'Adobe Creative Suite':'Diseño','UX/UI':'Diseño',
+};
+
+const PROJECTS = [
+  { name:'Datara',               stack:['Python','FastAPI','React','TypeScript','SQLite','Gemini API'] },
+  { name:'ANV·BAR Web',          stack:['React','TypeScript','Tailwind CSS','Supabase','Postgres','SQL'] },
+  { name:'AI PDF Generator',     stack:['Python','Streamlit','Gemini API','pytest','LLM integration'] },
+  { name:'Churn',                stack:['Python','Pandas','PyCaret','Scikit-learn','EDA','Feature engineering','Predictive modeling'] },
+  { name:'Olist',                stack:['Python','Pandas','NumPy','Matplotlib','EDA','Jupyter'] },
+  { name:'Global Superstore',    stack:['Power BI','Data storytelling'] },
+  { name:'RRHH Dashboard',       stack:['Power BI','Data storytelling'] },
+  { name:'Videojuegos 1985–2016',stack:['Python','Pandas','Seaborn','Matplotlib','Jupyter'] },
+  { name:'Portafolio',           stack:['React','TypeScript','Tailwind CSS','Git','GitHub Actions','UX/UI'] },
+];
+
+const VIEW = { w:1180, h:700 };
+const CENTER = { x:590, y:352 };
+const HUB_RADIUS = 205;
+const SAT_OFFSET = 82;
+
+/* Hash estable: el mismo nombre siempre cae en el mismo lugar. */
+const hash = (s) => { let h = 0; for (let i = 0; i < s.length; i += 1) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); };
+
+/* Hubs = proyectos, repartidos en círculo. */
+const hubs = PROJECTS.map((project, i) => {
+  const angle = -Math.PI / 2 + (i * 2 * Math.PI) / PROJECTS.length;
+  return {
+    ...project,
+    x: CENTER.x + HUB_RADIUS * Math.cos(angle),
+    y: CENTER.y + HUB_RADIUS * Math.sin(angle),
+  };
+});
+const hubByName = Object.fromEntries(hubs.map((h) => [h.name, h]));
+
+/* Habilidades: satélite de su proyecto, o punto medio si varios la comparten. */
+const skills = Object.keys(CLUSTER_OF).map((id) => {
+  const owners = hubs.filter((h) => h.stack.includes(id));
+  if (owners.length === 0) {
+    const a = (hash(id) % 360) * (Math.PI / 180);
+    return { id, owners: [], x: CENTER.x + Math.cos(a) * 330, y: CENTER.y + Math.sin(a) * 275 };
+  }
+  const mean = owners.reduce((acc, o) => ({ x: acc.x + o.x, y: acc.y + o.y }), { x: 0, y: 0 });
+  mean.x /= owners.length; mean.y /= owners.length;
+  let dx = mean.x - CENTER.x;
+  let dy = mean.y - CENTER.y;
+  const dist = Math.hypot(dx, dy) || 1;
+  if (owners.length === 1) {
+    dx = (dx / dist) * (dist + SAT_OFFSET);
+    dy = (dy / dist) * (dist + SAT_OFFSET);
+  } else {
+    /* Compartida: se empuja hacia afuera para que no caiga sobre el centro. */
+    const push = Math.max(dist, 120);
+    dx = (dx / dist) * push;
+    dy = (dy / dist) * push;
+  }
+  const jx = ((hash(id) % 21) - 10);
+  const jy = (((hash(id + 'y') % 21) - 10));
+  return { id, owners: owners.map((o) => o.name), x: CENTER.x + dx + jx, y: CENTER.y + dy + jy };
+});
+const skillById = Object.fromEntries(skills.map((s) => [s.id, s]));
+
+/* Aristas hub → habilidad. */
+const edges = [];
+hubs.forEach((hub) => hub.stack.forEach((s) => {
+  if (skillById[s]) edges.push({ hub, skill: skillById[s] });
+}));
+
+const bridges = skills.filter((s) => s.owners.length > 1).sort((a, b) => b.owners.length - a.owners.length);
+
+/* ---------------------------- Render ---------------------------- */
+const NS = 'http://www.w3.org/2000/svg';
+const svg = document.getElementById('edges');
+svg.setAttribute('viewBox', `0 0 ${VIEW.w} ${VIEW.h}`);
+
+[HUB_RADIUS - 96, HUB_RADIUS, HUB_RADIUS + 96].forEach((r) => {
+  const c = document.createElementNS(NS, 'ellipse');
+  c.setAttribute('cx', CENTER.x); c.setAttribute('cy', CENTER.y);
+  c.setAttribute('rx', r); c.setAttribute('ry', r * 0.92);
+  c.setAttribute('class', 'ring');
+  svg.appendChild(c);
+});
+
+const edgeEls = edges.map((edge) => {
+  const line = document.createElementNS(NS, 'line');
+  line.setAttribute('x1', edge.hub.x); line.setAttribute('y1', edge.hub.y);
+  line.setAttribute('x2', edge.skill.x); line.setAttribute('y2', edge.skill.y);
+  line.setAttribute('class', 'edge');
+  svg.appendChild(line);
+  return { edge, line };
+});
+
+const field = document.getElementById('field');
+const hubEls = new Map();
+const nodeEls = new Map();
+
+function makeButton(node, cls, html, interactive) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = cls + (node.x > VIEW.w * 0.72 ? ' to-left' : '');
+  b.style.left = `${(node.x / VIEW.w) * 100}%`;
+  b.style.top = `${(node.y / VIEW.h) * 100}%`;
+  b.innerHTML = html;
+  b.addEventListener('pointerenter', () => interactive.enter());
+  b.addEventListener('focus', () => interactive.enter());
+  b.addEventListener('pointerleave', () => interactive.leave());
+  b.addEventListener('blur', () => interactive.leave());
+  b.addEventListener('click', () => interactive.click());
+  field.appendChild(b);
+  return b;
+}
+
+hubs.forEach((hub) => {
+  const b = makeButton(hub, 'hub', hub.name, {
+    enter: () => focusHub(hub.name),
+    leave: () => release(hub.name),
+    click: () => togglePin(hub.name, focusHub),
+  });
+  b.setAttribute('aria-label', `Proyecto ${hub.name}, ${hub.stack.length} tecnologías`);
+  hubEls.set(hub.name, b);
+});
+
+skills.forEach((skill) => {
+  const b = makeButton(skill, 'node',
+    `<span class="dot"></span><span class="name">${skill.id}</span>`, {
+      enter: () => focusSkill(skill.id),
+      leave: () => release(skill.id),
+      click: () => togglePin(skill.id, focusSkill),
+    });
+  b.setAttribute('aria-label', `${skill.id}, ${CLUSTER_OF[skill.id]}${skill.owners.length ? `, en ${skill.owners.join(', ')}` : ', sin proyecto vinculado'}`);
+  nodeEls.set(skill.id, b);
+});
+
+/* -------------------------- Interacción ------------------------- */
+const detail = document.getElementById('detail');
+let focused = null;
+let pinned = null;
+let mode = 'hub';
+
+const HINT = `<p class="cat">Explorá el grafo</p>
+  <p class="hint">Pasá el mouse por un proyecto para ver su stack completo, o por una
+  habilidad para ver en cuántos proyectos aparece.</p>`;
+
+const htmlProjects = (names) => (names.length
+  ? `<div class="chips">${names.map((n) => `<span class="chip">${n}</span>`).join('')}</div>`
+  : '<p class="empty">Todavía sin proyecto que la respalde.</p>');
+
+function paint(activeSkills, activeHubs, liveEdges) {
+  nodeEls.forEach((el, id) => {
+    el.classList.remove('is-focus', 'is-neighbor', 'is-dim');
+    if (focused === id) el.classList.add('is-focus');
+    else if (activeSkills && activeSkills.has(id)) el.classList.add('is-neighbor');
+    else if (activeSkills) el.classList.add('is-dim');
+  });
+  hubEls.forEach((el, name) => {
+    el.classList.remove('is-focus', 'is-neighbor', 'is-dim');
+    if (focused === name) el.classList.add('is-focus');
+    else if (activeHubs && activeHubs.has(name)) el.classList.add('is-neighbor');
+    else if (activeHubs) el.classList.add('is-dim');
+  });
+  edgeEls.forEach(({ edge, line }) => {
+    line.classList.remove('is-live', 'is-dim');
+    if (liveEdges) line.classList.add(liveEdges.has(edge.hub.name) ? 'is-live' : 'is-dim');
+  });
+}
+
+function focusHub(name) {
+  if (pinned && pinned !== name) return;
+  mode = 'hub'; focused = name;
+  const hub = hubByName[name];
+  paint(new Set(hub.stack), new Set([name]), new Set([name]));
+  const crossed = hub.stack.filter((s) => (skillById[s]?.owners.length || 0) > 1);
+  detail.innerHTML = `
+    <p class="cat">Proyecto</p><h3>${hub.name}</h3>
+    <div class="block"><p class="block-label">Stack · ${hub.stack.length}</p>
+      <div class="chips">${hub.stack.map((s) => `<span class="chip">${s}</span>`).join('')}</div></div>
+    <div class="block"><p class="block-label">Compartidas con otros proyectos · ${crossed.length}</p>
+      ${crossed.length
+        ? `<div class="chips">${crossed.map((s) => `<span class="chip bridge">${s}</span>`).join('')}</div>`
+        : '<p class="empty">Este proyecto no comparte stack con otro.</p>'}</div>`;
+}
+
+function focusSkill(id) {
+  if (pinned && pinned !== id) return;
+  mode = 'skill'; focused = id;
+  const skill = skillById[id];
+  const owners = new Set(skill.owners);
+  paint(new Set(skill.owners.flatMap((n) => hubByName[n].stack)), owners, new Set(skill.owners));
+  detail.innerHTML = `
+    <p class="cat">${CLUSTER_OF[id]}</p><h3>${id}</h3>
+    <div class="block"><p class="block-label">Usada en · ${skill.owners.length}</p>
+      ${htmlProjects(skill.owners)}</div>
+    ${skill.owners.length > 1
+      ? `<div class="block"><p class="block-label">Habilidad de carga</p>
+         <p class="hint">Aparece en ${skill.owners.length} proyectos: por eso conviene mostrarla como eje.</p></div>`
+      : ''}`;
+}
+
+function release(id) {
+  if (pinned) return;
+  if (!id) { focused = null; paint(null, null, null); detail.innerHTML = HINT; return; }
+  if (mode === 'hub' && focused !== id) return;
+  if (mode === 'skill' && focused !== id) return;
+  focused = null; paint(null, null, null); detail.innerHTML = HINT;
+}
+
+function togglePin(id, focusFn) {
+  if (pinned === id) { pinned = null; focused = null; paint(null, null, null); detail.innerHTML = HINT; return; }
+  pinned = id; focusFn(id);
+}
+
+document.getElementById('bridge-note').textContent =
+  `${bridges.length} habilidades cruzan más de un proyecto · ${hubs.length} proyectos · ${skills.length} habilidades`;
+
+paint(null, null, null);
+detail.innerHTML = HINT;
+</script>
+</body>
+</html>

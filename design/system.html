@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ds-portfolio — Sistema de diseño</title>
+<style>
+  :root{
+    --background:#0f172a; --surface:#1e293b; --primary:#8b5cf6; --secondary:#06b6d4;
+    --accent:#f43f5e; --text:#f8fafc; --text-muted:#94a3b8;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Inter, sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--background);color:var(--text);font-family:var(--sans);padding:48px 56px 72px}
+  h1{font-size:34px;margin:0 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--text-muted);font-size:15px;margin:0 0 40px;max-width:70ch;line-height:1.6}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--secondary);margin:44px 0 16px;font-weight:600}
+  .grid{display:grid;gap:14px}
+  .swatches{grid-template-columns:repeat(4,1fr)}
+  .sw{border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;background:var(--surface)}
+  .sw .chip{height:74px}
+  .sw .meta{padding:10px 12px;font-size:12px;line-height:1.5}
+  .sw .meta b{display:block;font-size:13px}
+  .sw .meta code{color:var(--text-muted)}
+  .cols{grid-template-columns:1fr 1fr;align-items:start}
+  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .card{border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:18px 20px;background:var(--surface)}
+  table{border-collapse:collapse;font-size:13px;width:100%}
+  td,th{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top}
+  th{color:var(--text-muted);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+  .badge{display:inline-block;padding:4px 12px;font-size:12px;font-weight:500;letter-spacing:.05em;color:var(--secondary);border:1px solid rgba(6,182,212,.2);background:rgba(6,182,212,.05);border-radius:999px}
+  .btn-primary{display:inline-flex;gap:8px;align-items:center;padding:12px 32px;border-radius:8px;background:var(--primary);color:#fff;font-weight:500;font-size:15px;border:0;cursor:pointer;font-family:inherit}
+  .btn-secondary{display:inline-flex;gap:8px;align-items:center;padding:12px 32px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-weight:500;font-size:15px;cursor:pointer;font-family:inherit}
+  .icon{width:38px;height:38px;border-radius:999px;border:1px solid rgba(255,255,255,.05);color:var(--text-muted);display:grid;place-items:center}
+  .wordmark{font-size:20px;font-weight:700;background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav{display:flex;gap:28px;font-size:14px;color:var(--text-muted)}
+  :focus-visible{outline:2px solid var(--secondary);outline-offset:3px;border-radius:4px}
+  .type div{border-bottom:1px solid rgba(255,255,255,.08);padding:10px 0}
+  .note{color:var(--text-muted);font-size:12.5px;line-height:1.6;margin-top:10px}
+  .swatch-blob{height:120px;border-radius:10px;background:var(--background);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+  .swatch-blob i{position:absolute;width:220px;height:220px;border-radius:50%;filter:blur(60px);display:block}
+</style>
+</head>
+<body>
+  <h1>ds-portfolio — Sistema de diseño</h1>
+  <p class="sub">Tokens leídos del proyecto, no inventados. Fuentes: <code>tailwind.config.js</code>, <code>src/index.css</code>, <code>index.html</code>, <code>Header.jsx</code>, <code>Hero.jsx</code>.</p>
+
+  <h2>Color</h2>
+  <div class="grid swatches">
+    <div class="sw"><div class="chip" style="background:#0f172a"></div><div class="meta"><b>background</b><code>#0f172a</code></div></div>
+    <div class="sw"><div class="chip" style="background:#1e293b"></div><div class="meta"><b>surface</b><code>#1e293b</code></div></div>
+    <div class="sw"><div class="chip" style="background:#8b5cf6"></div><div class="meta"><b>primary</b><code>#8b5cf6</code></div></div>
+    <div class="sw"><div class="chip" style="background:#06b6d4"></div><div class="meta"><b>secondary</b><code>#06b6d4</code></div></div>
+    <div class="sw"><div class="chip" style="background:#f43f5e"></div><div class="meta"><b>accent</b><code>#f43f5e</code></div></div>
+    <div class="sw"><div class="chip" style="background:#f8fafc"></div><div class="meta"><b>text</b><code>#f8fafc</code></div></div>
+    <div class="sw"><div class="chip" style="background:#94a3b8"></div><div class="meta"><b>text-muted</b><code>#94a3b8</code></div></div>
+    <div class="sw"><div class="chip" style="background:#334155"></div><div class="meta"><b>scrollbar</b><code>#334155</code></div></div>
+  </div>
+
+  <h2>Profundidad</h2>
+  <div class="grid cols">
+    <div class="card">
+      <div class="swatch-blob">
+        <i style="background:rgba(139,92,246,.2);filter:blur(60px);top:-60px;left:40px"></i>
+        <i style="background:rgba(6,182,212,.1);filter:blur(50px);bottom:-60px;right:30px"></i>
+      </div>
+      <p class="note">Sin sombras declaradas. La profundidad sale de blobs con blur (<code>blur-[120px]</code>) y bordes translúcidos.</p>
+    </div>
+    <div class="card">
+      <table>
+        <tr><th>Radius</th><th>Uso</th></tr>
+        <tr><td><code>rounded-lg</code></td><td>Botones y CTA</td></tr>
+        <tr><td><code>rounded-full</code></td><td>Badge, iconos sociales, toggle</td></tr>
+        <tr><td><code>rounded-4px</code></td><td>Thumb del scrollbar</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>Tipografía</h2>
+  <div class="grid cols">
+    <div class="card type">
+      <div style="font-size:72px;font-weight:700;letter-spacing:-.02em;line-height:1.05">text-7xl</div>
+      <div style="font-size:48px;font-weight:700;letter-spacing:-.02em">text-5xl</div>
+      <div style="font-size:18px">text-lg · cuerpo hero</div>
+      <div style="font-size:14px">text-sm · navegación</div>
+      <div style="font-size:12px;letter-spacing:.05em">text-xs · badge</div>
+    </div>
+    <div class="card">
+      <p class="note"><b style="color:var(--text)">Familia declarada:</b> <code>Inter</code> → <code>sans-serif</code> (tailwind.config.js).</p>
+      <p class="note"><b style="color:var(--text)">Hallazgo:</b> <code>index.html</code> no carga ninguna webfont, así que hoy el sitio renderiza con la sans del sistema. Inter es intención, no activo.</p>
+      <p class="note"><b style="color:var(--text)">Pesos en uso:</b> 700 títulos · 500 CTA · 600 toggle.</p>
+      <p class="note"><b style="color:var(--text)">Tracking:</b> <code>tight</code> en títulos, <code>wider</code> en badge.</p>
+    </div>
+  </div>
+
+  <h2>Espaciado</h2>
+  <div class="card">
+    <table>
+      <tr><th>Token</th><th>Valor</th><th>Dónde</th></tr>
+      <tr><td>px-6</td><td>24px</td><td>Gutter de página</td></tr>
+      <tr><td>max-w-4xl / max-w-7xl</td><td>896 / 1280px</td><td>Hero / Header y grillas</td></tr>
+      <tr><td>h-16</td><td>64px</td><td>Alto del header</td></tr>
+      <tr><td>min-h-[90vh]</td><td>90vh</td><td>Alto mínimo del hero</td></tr>
+      <tr><td>px-8 py-3</td><td>32 / 12px</td><td>Padding de botones</td></tr>
+      <tr><td>px-3 py-1</td><td>12 / 4px</td><td>Padding de badge</td></tr>
+    </table>
+  </div>
+
+  <h2>Componentes</h2>
+  <div class="grid cols">
+    <div class="card">
+      <div class="row" style="justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:14px">
+        <span class="wordmark">Daniel DLRT</span>
+        <span class="nav"><span>Sobre mí</span><span>Proyectos</span><span>Contacto</span><span>CV</span><span>EN</span></span>
+      </div>
+      <p class="note">Header fijo, <code>bg-background/80</code>, <code>backdrop-blur-md</code>, borde inferior <code>white/10</code>, fila <code>h-16</code>.</p>
+    </div>
+    <div class="card">
+      <div class="row">
+        <button class="btn-primary">Ver proyectos →</button>
+        <button class="btn-secondary">Ver CV</button>
+        <span class="icon">◎</span>
+        <span class="icon">in</span>
+      </div>
+      <p class="note" style="margin-top:16px">CTA primario <code>bg-primary</code> · secundario <code>bg-white/5 + border white/10</code> · iconos circulares.</p>
+      <div style="margin-top:14px"><span class="badge">DESARROLLADOR DE SOLUCIONES DE DATOS E IA</span></div>
+    </div>
+  </div>
+
+  <h2>Escala tipográfica</h2>
+  <div class="card type">
+    <div style="display:flex;align-items:baseline;gap:18px"><b style="min-width:190px;font-size:12px;color:var(--text-muted);font-weight:500">Display · 700 · -0.03em</b><span style="font-size:56px;font-weight:700;letter-spacing:-.03em">Daniel De los Ríos</span></div>
+    <div style="display:flex;align-items:baseline;gap:18px"><b style="min-width:190px;font-size:12px;color:var(--text-muted);font-weight:500">H2 · 700 · -0.02em</b><span style="font-size:34px;font-weight:700;letter-spacing:-.02em">Proyectos</span></div>
+    <div style="display:flex;align-items:baseline;gap:18px"><b style="min-width:190px;font-size:12px;color:var(--text-muted);font-weight:500">H3 · 600</b><span style="font-size:18px;font-weight:600">Datara — sandbox de código</span></div>
+    <div style="display:flex;align-items:baseline;gap:18px"><b style="min-width:190px;font-size:12px;color:var(--text-muted);font-weight:500">Bajada · 400 · muted</b><span style="font-size:18px;color:var(--text-muted)">Ingeniero Multimedia que construye aplicaciones de datos e IA.</span></div>
+    <div style="display:flex;align-items:baseline;gap:18px"><b style="min-width:190px;font-size:12px;color:var(--text-muted);font-weight:500">Nav · 500 · muted</b><span style="font-size:14px;font-weight:500;color:var(--text-muted)">Proyectos · Sobre mí · Contacto</span></div>
+    <div style="display:flex;align-items:baseline;gap:18px"><b style="min-width:190px;font-size:12px;color:var(--text-muted);font-weight:500">Micro · 500 · 0.05em</b><span style="font-size:12px;font-weight:500;letter-spacing:.05em;color:var(--secondary)">DESARROLLADOR DE SOLUCIONES DE DATOS E IA</span></div>
+  </div>
+
+  <h2>Tono — un elemento, un tratamiento</h2>
+  <div class="card">
+    <p class="note" style="margin:0 0 18px">El gradiente de marca es uno solo: <code>linear-gradient(90deg, #8b5cf6, #06b6d4)</code>. Es propiedad exclusiva de la identidad: va en el wordmark y en el nombre del hero, nunca en un tercer elemento, y nunca sobre una parte de una frase.</p>
+    <table>
+      <tr><th>Esquema</th><th>Wordmark</th><th>Nombre del hero</th><th>Badge / estado</th><th>CTA</th></tr>
+      <tr>
+        <td><b>A · Marca primero</b><br /><span style="color:var(--text-muted)">recomendado</span></td>
+        <td><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700">Daniel DLRT</span></td>
+        <td><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;font-size:20px">Daniel De los Ríos</span></td>
+        <td><span style="color:var(--secondary)">Desarrollador de Soluciones de Datos e IA</span></td>
+        <td><span style="color:var(--primary)">Ver proyectos</span></td>
+      </tr>
+      <tr>
+        <td><b>B · Todo degradado</b></td>
+        <td><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700">Daniel DLRT</span></td>
+        <td><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;font-size:20px">Daniel De los Ríos</span></td>
+        <td><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent">Desarrollador de Soluciones de Datos e IA</span></td>
+        <td><span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent">Ver proyectos</span></td>
+      </tr>
+      <tr>
+        <td><b>C · Plano total</b></td>
+        <td><span style="color:var(--primary);font-weight:700">Daniel DLRT</span></td>
+        <td><span style="font-weight:700;font-size:20px">Daniel <span style="color:var(--primary)">De los Ríos</span></span></td>
+        <td><span style="color:var(--secondary)">Desarrollador de Soluciones de Datos e IA</span></td>
+        <td><span style="color:var(--primary)">Ver proyectos</span></td>
+      </tr>
+    </table>
+    <p class="note"><b style="color:var(--text)">Lo que nunca se hace:</b> gradiente sobre media frase. "Daniel" plano y "De los Ríos" degradado parte el nombre en dos objetos visuales y es la causa directa de la incoherencia reportada.</p>
+  </div>
+</body>
+</html>

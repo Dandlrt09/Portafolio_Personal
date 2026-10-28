@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI PDF — 04 · Hoja + chispa (2 variantes)</title>
+<style>
+  /* Tokens de design/system.md. Sin URLs externas: stack del sistema. */
+  :root{--background:#0f172a;--surface:#1e293b;--primary:#8b5cf6;--secondary:#06b6d4;--text:#f8fafc;--muted:#94a3b8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--background);color:var(--text);
+    font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1280px;margin:0 auto;padding:44px 24px 60px}
+  h2{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+  h2 span{border-bottom:4px solid var(--primary);padding-bottom:6px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 26px;max-width:82ch;line-height:1.6}
+  .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+
+  .card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px}
+  .tag{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;
+    color:var(--secondary);border:1px solid rgba(6,182,212,.3);background:rgba(6,182,212,.06);
+    border-radius:9999px;padding:3px 10px;margin-bottom:12px}
+  h3{font-size:15px;font-weight:600;margin:0 0 8px}
+
+  /* El marco real: 615x750 medido, con la etiqueta de estado en su esquina. */
+  .frame{position:relative;width:100%;aspect-ratio:615/750;border-radius:14px;background:var(--surface);
+    border:1px solid rgba(255,255,255,.1);overflow:hidden;display:grid;place-items:center}
+  .badge{position:absolute;left:14px;top:14px;border-radius:9999px;border:1px solid rgba(255,255,255,.15);
+    background:rgba(0,0,0,.6);padding:4px 11px;font-size:11px;font-weight:500;color:rgba(255,255,255,.85)}
+  .lockup{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
+  .lockup .mark{width:46%}
+  .mark svg{display:block;width:100%;height:auto}
+  .wordmark{font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--text)}
+
+  .sizes{display:flex;align-items:center;gap:18px;margin-top:16px;padding:14px 16px;border-radius:10px;
+    background:var(--surface);border:1px solid rgba(255,255,255,.08)}
+  .sizes svg{display:block;height:auto}
+  .sizes .s64{width:64px}
+  .sizes .s32{width:32px}
+  .sizes .cap{font-size:11px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin-left:auto}
+
+  .note{font-size:13px;line-height:1.6;color:var(--muted);margin:14px 0 0}
+  .note strong{color:var(--text)}
+  .anno{margin-top:26px;border:1px dashed rgba(251,191,36,.45);background:rgba(251,191,36,.06);
+    border-radius:10px;padding:13px 17px;font-size:12.5px;line-height:1.6;color:#fde68a}
+  .anno strong{color:#fef3c7}
+  @media (max-width:900px){.pair{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2><span>AI PDF — Hoja + chispa, 2 variantes</span></h2>
+  <p class="sub">El concepto que Claude propone como el más directo. Lo que cambia entre las dos variantes es <strong>cuántas formas tiene el mark</strong>: una sola idea con dos elementos, o el clásico completo. Debajo de cada una está el símbolo solo a 64 y 32 px, que es donde se decide si aguanta.</p>
+
+  <div class="pair">
+    <!-- VARIANTE A -->
+    <div class="card">
+      <span class="tag">A · trayectoria</span>
+      <h3>Documento + chispa que rompe la silueta</h3>
+      <p class="note" style="margin:0 0 16px">Dos formas: la hoja y una chispa de cuatro puntas <strong>montada sobre su esquina</strong>, sobresaliendo. La chispa es geometría de cuatro puntas, no un sol de rayitas — es lo que hacía que la primera versión pareciera un destello.</p>
+
+      <div class="frame">
+        <span class="badge">Iniciativa propia</span>
+        <div class="lockup">
+          <div class="mark">
+            <svg viewBox="0 0 64 64" fill="none" aria-label="Símbolo: documento con chispa en la esquina">
+              <path d="M13 8h22a9 9 0 0 1 9 9v30a9 9 0 0 1-9 9H13a9 9 0 0 1-9-9V17a9 9 0 0 1 9-9z" stroke="var(--primary)" stroke-width="3.6"/>
+              <path d="M46 3.5l3.4 6.1 6.1 3.4-6.1 3.4L46 22.5l-3.4-6.1L36.5 13l6.1-3.4z" fill="var(--secondary)"/>
+            </svg>
+          </div>
+          <span class="wordmark">AI PDF Generator</span>
+        </div>
+      </div>
+
+      <div class="sizes">
+        <svg class="s64" viewBox="0 0 64 64" fill="none"><path d="M13 8h22a9 9 0 0 1 9 9v30a9 9 0 0 1-9 9H13a9 9 0 0 1-9-9V17a9 9 0 0 1 9-9z" stroke="var(--primary)" stroke-width="3.6"/><path d="M46 3.5l3.4 6.1 6.1 3.4-6.1 3.4L46 22.5l-3.4-6.1L36.5 13l6.1-3.4z" fill="var(--secondary)"/></svg>
+        <svg class="s32" viewBox="0 0 64 64" fill="none"><path d="M13 8h22a9 9 0 0 1 9 9v30a9 9 0 0 1-9 9H13a9 9 0 0 1-9-9V17a9 9 0 0 1 9-9z" stroke="var(--primary)" stroke-width="3.6"/><path d="M46 3.5l3.4 6.1 6.1 3.4-6.1 3.4L46 22.5l-3.4-6.1L36.5 13l6.1-3.4z" fill="var(--secondary)"/></svg>
+        <span class="cap">símbolo solo · 64 / 32 px</span>
+      </div>
+    </div>
+
+    <!-- VARIANTE B -->
+    <div class="card">
+      <span class="tag">B · el clásico, limpio</span>
+      <h3>Hoja con esquina doblada + chispa adentro</h3>
+      <p class="note" style="margin:0 0 16px">El ícono de manual, pero <strong>sin líneas de texto</strong> y con solo <strong>dos acentos</strong>: el pliegue dibujado y una chispa chica. Al sacarle las rayitas de contenido deja de parecer el archivo genérico de cualquier sistema operativo.</p>
+
+      <div class="frame">
+        <span class="badge">Iniciativa propia</span>
+        <div class="lockup">
+          <div class="mark">
+            <svg viewBox="0 0 64 64" fill="none" aria-label="Símbolo: hoja con esquina doblada y chispa">
+              <path d="M14 7h21l21 21v22a7 7 0 0 1-7 7H14a7 7 0 0 1-7-7V14a7 7 0 0 1 7-7z" stroke="var(--primary)" stroke-width="3.6"/>
+              <path d="M35 7v15a6 6 0 0 0 6 6h15" stroke="var(--primary)" stroke-width="3.6"/>
+              <path d="M27 37l2.6 4.6 4.6 2.6-4.6 2.6L27 51.4l-2.6-4.6L19.8 44.2l4.6-2.6z" fill="var(--secondary)"/>
+            </svg>
+          </div>
+          <span class="wordmark">AI PDF Generator</span>
+        </div>
+      </div>
+
+      <div class="sizes">
+        <svg class="s64" viewBox="0 0 64 64" fill="none"><path d="M14 7h21l21 21v22a7 7 0 0 1-7 7H14a7 7 0 0 1-7-7V14a7 7 0 0 1 7-7z" stroke="var(--primary)" stroke-width="3.6"/><path d="M35 7v15a6 6 0 0 0 6 6h15" stroke="var(--primary)" stroke-width="3.6"/><path d="M27 37l2.6 4.6 4.6 2.6-4.6 2.6L27 51.4l-2.6-4.6L19.8 44.2l4.6-2.6z" fill="var(--secondary)"/></svg>
+        <svg class="s32" viewBox="0 0 64 64" fill="none"><path d="M14 7h21l21 21v22a7 7 0 0 1-7 7H14a7 7 0 0 1-7-7V14a7 7 0 0 1 7-7z" stroke="var(--primary)" stroke-width="3.6"/><path d="M35 7v15a6 6 0 0 0 6 6h15" stroke="var(--primary)" stroke-width="3.6"/><path d="M27 37l2.6 4.6 4.6 2.6-4.6 2.6L27 51.4l-2.6-4.6L19.8 44.2l4.6-2.6z" fill="var(--secondary)"/></svg>
+        <span class="cap">símbolo solo · 64 / 32 px</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="anno">
+    <strong>Anotación (no va a producción).</strong> A tiene <strong>dos formas</strong> y B tiene <strong>tres</strong>: por eso A sobrevive mejor el tamaño chico — comparalos en la fila de 32 px, no en el marco grande. Las dos son SVG reales, se pueden usar tal cual con los tokens del sitio.
+  </p>
+</div>
+</body>
+</html>

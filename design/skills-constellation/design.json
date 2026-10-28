@@ -1,0 +1,34 @@
+{
+  "title": "Habilidades como constelación",
+  "brief": "Sección de Habilidades interactiva. Reemplazar las tarjetas con chips estáticas por una vista que muestre relaciones reales: qué tecnologías convivieron en el mismo proyecto, más el nivel declarado por Daniel (1 a 5). Las aristas se derivan de los stacks de src/data/projects.js, no son inventadas. Dirección elegida por el usuario: hubs de proyecto. Requisito transversal: el lenguaje de grafo se conserva como sistema, no como skin; el gradiente de marca sigue siendo exclusivo del wordmark y del nombre del hero (design/system.md, Tono y color). El nivel se codifica con forma (5 segmentos), nunca con un color nuevo.",
+  "artboards": [
+    {
+      "file": "04-hubs-ordenado.html",
+      "title": "Hubs ordenado, con nivel (elegido)",
+      "tradeoff": "La versión ordenada del 02. Franja de proyectos alineada arriba, habilidades en grilla por grupo con el nivel como barra de 5 segmentos, y ninguna conexión dibujada en reposo: las líneas aparecen sólo al enfocar una habilidad o un proyecto. Cero posiciones libres, cero superposición. Debajo de 820px la franja y las conexiones desaparecen y queda la lista — que es exactamente el artboard 03.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "03-lista-grafo.html",
+      "title": "Lista con grafo vivo (versión mobile)",
+      "tradeoff": "Lista escaneable más un grafo pequeño que aparece al enfocar una fila. Es el comportamiento mobile del 04 y además una vista de escritorio válida y más conservadora. La mejor para teclado y lectores de pantalla; a cambio, el grafo es un detalle y no una sección.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "01-foco-vecindad.html",
+      "title": "Foco de vecindad (descartado)",
+      "tradeoff": "Primera exploración: grafo libre agrupado por categoría, foco por habilidad. Máxima información por nodo, pero el layout libre se lee desordenado a esa densidad de 31 nodos y 40 aristas. Se conserva como registro de la comparación.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "02-hubs-proyecto.html",
+      "title": "Hubs de proyecto (descartado)",
+      "tradeoff": "Segunda exploración: proyectos como hubs en un círculo y habilidades colgando entre ellos. La idea de fondo es la que quedó, pero el layout radial con todas las aristas visibles a la vez se lee como un plato de fideos y produce cansancio visual. El 04 conserva el concepto y descarta el caos.",
+      "width": 1440,
+      "height": 1000
+    }
+  ]
+}

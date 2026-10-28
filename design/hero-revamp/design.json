@@ -1,0 +1,27 @@
+{
+  "title": "Hero revamp — less empty, more alive",
+  "brief": "Rediseñar el hero del portafolio de Daniel De los Ríos: hoy se siente vacío y soso. Sumar foto real, animación y un fondo con movimiento, sin copiar la referencia que mandó el usuario. Dirección elegida: 02-data-canvas. Requisito transversal: una sola tipografía (Inter, hoy declarada pero no cargada) y una sola regla tonal — un elemento, un tratamiento; el gradiente es exclusivo de la identidad (wordmark + nombre del hero, ambos completos) y nunca se aplica sobre media frase.",
+  "artboards": [
+    {
+      "file": "01-portrait-aurora.html",
+      "title": "Portrait aurora",
+      "tradeoff": "Presencia personal fuerte y jerarquía clara; exige una foto buena y es la dirección más alta en pantalla.",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "02-data-canvas.html",
+      "title": "Data canvas",
+      "tradeoff": "Comunica datos e IA con estructura y movimiento en vez de retrato; la foto pasa a avatar chico y pierde calidez.",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "03-spotlight-editorial.html",
+      "title": "Spotlight editorial",
+      "tradeoff": "Máximo impacto de primer pantallazo y la que mejor degrada a mobile; es la más decorativa y la que más pesa si la foto trae fondo cargado.",
+      "width": 1440,
+      "height": 900
+    }
+  ]
+}

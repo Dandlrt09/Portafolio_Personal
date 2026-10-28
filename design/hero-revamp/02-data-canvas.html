@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="es" data-tone="a">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>02 · Data canvas — Hero</title>
+<style>
+  :root{
+    --background:#0f172a; --surface:#1e293b; --primary:#8b5cf6; --secondary:#06b6d4;
+    --accent:#f43f5e; --text:#f8fafc; --text-muted:#94a3b8;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Inter, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--background);color:var(--text);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--secondary);outline-offset:3px;border-radius:6px}
+
+  .site-header{
+    position:fixed;inset:0 0 auto 0;height:64px;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    background:rgba(15,23,42,.8);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .wordmark{
+    font-size:20px;font-weight:700;
+    background:linear-gradient(90deg,var(--primary),var(--secondary));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .site-header nav{display:flex;align-items:center;gap:32px;font-size:14px;font-weight:500}
+  .site-header nav a{color:var(--text-muted);transition:color .2s}
+  .site-header nav a:hover{color:var(--primary)}
+  .divider{width:1px;height:16px;background:rgba(255,255,255,.2)}
+  .lang{
+    font:inherit;font-size:12px;font-weight:600;color:var(--text);cursor:pointer;
+    padding:4px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.1);
+    background:transparent;transition:background .2s;
+  }
+  .lang:hover{background:rgba(255,255,255,.05)}
+
+  /* ---------- Shell ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(148,163,184,.16) 1px,transparent 1px);
+    background-size:28px 28px;
+    -webkit-mask-image:radial-gradient(circle at 22% 50%,#000 10%,transparent 72%);
+    mask-image:radial-gradient(circle at 22% 50%,#000 10%,transparent 72%);
+  }
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;height:1px;top:0;
+    background:linear-gradient(90deg,transparent,rgba(6,182,212,.55),transparent);
+    animation:scan 9s ease-in-out infinite;
+  }
+  @keyframes scan{0%,100%{transform:translateY(10vh);opacity:0}25%{opacity:.9}50%{transform:translateY(80vh);opacity:.35}75%{opacity:.6}}
+
+  .inner{
+    position:relative;z-index:10;width:100%;max-width:1280px;margin:0 auto;
+    padding:104px 24px 64px;display:grid;grid-template-columns:.92fr 1.08fr;
+    gap:64px;align-items:center;
+  }
+
+  /* ---------- Copy ---------- */
+  .eyebrow{
+    display:flex;align-items:center;gap:10px;margin:0 0 18px;
+    font-size:12px;font-weight:500;letter-spacing:.05em;color:var(--secondary);
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--secondary);animation:blink 2.4s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(6,182,212,.5)}50%{opacity:.45;box-shadow:0 0 0 6px rgba(6,182,212,0)}}
+  h1{margin:0 0 20px;font-size:58px;line-height:1.06;letter-spacing:-.03em;font-weight:700}
+  /* Tono A/B: un solo gradiente, sobre el nombre completo — nunca sobre media frase. */
+  h1 .grad{
+    background-image:linear-gradient(90deg,var(--primary),var(--secondary));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lead{margin:0 0 30px;max-width:48ch;font-size:17px;line-height:1.7;color:var(--text-muted)}
+  .actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn-primary,.btn-secondary{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 30px;border-radius:8px;
+    font-size:15px;font-weight:500;transition:transform .18s ease,background .2s ease;
+  }
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:rgba(139,92,246,.9);transform:translateY(-2px)}
+  .btn-secondary{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff}
+  .btn-secondary:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+  .stack{margin:34px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+  .stack li{
+    font-size:12.5px;font-weight:500;color:var(--text-muted);
+    padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.02);
+  }
+  .stack li:first-child{color:var(--text);border-color:rgba(139,92,246,.35);background:rgba(139,92,246,.08)}
+
+  /* ---------- Network panel ---------- */
+  .panel{
+    position:relative;aspect-ratio:1/1;max-width:640px;width:100%;justify-self:end;
+    /* A disc, matching the implementation: the orbit system reads as a planet. */
+    border-radius:50%;border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(160deg,rgba(30,41,59,.75),rgba(15,23,42,.9));
+    overflow:hidden;box-shadow:0 40px 90px -50px rgba(139,92,246,.6);
+  }
+  .panel canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .halo{
+    position:absolute;left:50%;top:50%;width:480px;height:480px;transform:translate(-50%,-50%);
+    border-radius:50%;background:rgba(139,92,246,.22);filter:blur(70px);
+    animation:breathe 6.5s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(.94)}50%{opacity:.9;transform:translate(-50%,-50%) scale(1.06)}}
+  .avatar{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:282px;height:282px;border-radius:50%;overflow:hidden;
+    border:1px solid rgba(255,255,255,.14);
+    background:radial-gradient(120% 100% at 50% 0%,rgba(139,92,246,.4),rgba(30,41,59,.95));
+    display:grid;place-items:end center;
+  }
+  .avatar svg{width:72%;opacity:.6}
+  .planet{
+    position:absolute;transform:translate(-50%,-50%) scale(var(--s,1));opacity:var(--o,1);
+    /* Planet, not chip: a circle. Diameter is 0.125 of the 640px panel. */
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    width:69px;height:69px;padding:0 6px;
+    font-size:9.3px;line-height:1.15;font-weight:500;color:var(--text);
+    border-radius:50%;background:rgba(15,23,42,.9);
+    border:1px solid rgba(255,255,255,.1);pointer-events:none;user-select:none;
+  }
+  .panel-caption{
+    position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+    white-space:nowrap;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--text-muted);
+  }
+
+  /* ---------- Tono C: cero gradientes ---------- */
+  html[data-tone="c"] h1 .grad{background-image:none;color:var(--text)}
+  html[data-tone="c"] h1 .key{color:var(--primary)}
+  html[data-tone="c"] .wordmark{background:none;color:var(--primary)}
+
+  /* ---------- Tono B: el gradiente tambien en badge y CTA ---------- */
+  html[data-tone="b"] .btn-primary{background-image:linear-gradient(90deg,var(--primary),var(--secondary))}
+  html[data-tone="b"] .eyebrow{
+    background-image:linear-gradient(90deg,var(--primary),var(--secondary));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  /* ---------- Control de tono (anotacion, no parte del diseno) ---------- */
+  .tone-panel{
+    position:fixed;left:16px;bottom:16px;z-index:80;max-width:calc(100vw - 32px);
+    display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:9px 11px;
+    border-radius:12px;background:rgba(15,23,42,.94);border:1px solid rgba(255,255,255,.12);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  }
+  .tone-panel .lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+  .tone-btn{
+    font:inherit;font-size:11.5px;font-weight:500;color:var(--text-muted);cursor:pointer;
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+    border-radius:999px;padding:5px 11px;transition:color .2s,background .2s;
+  }
+  .tone-btn:hover{color:var(--text)}
+  .tone-btn[aria-pressed="true"]{color:#fff;background:var(--primary);border-color:transparent}
+  .tone-panel .hint{flex-basis:100%;margin:2px 0 0;font-size:10.5px;line-height:1.5;color:var(--text-muted)}
+
+  .reveal{opacity:0;animation:rise .85s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:var(--d,0ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+  @media (max-width:900px){
+    .inner{grid-template-columns:1fr;gap:40px;text-align:center;padding-top:96px}
+    .lead{margin-inline:auto}
+    .actions,.stack,.eyebrow{justify-content:center}
+    h1{font-size:42px}
+    .panel{max-width:420px;justify-self:center}
+    .avatar{width:220px;height:220px}
+    .planet{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal{opacity:1}
+    .hero::after{display:none}
+  }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#hero">Daniel DLRT</a>
+    <nav aria-label="Navegación principal">
+      <a href="#about">Sobre mí</a>
+      <a href="#projects">Proyectos</a>
+      <a href="#contact">Contacto</a>
+      <a href="#cv">CV</a>
+      <span class="divider" aria-hidden="true"></span>
+      <button class="lang" type="button" aria-label="Cambiar idioma a English">EN</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="inner">
+        <div class="copy">
+          <p class="eyebrow reveal" style="--d:0ms"><span class="dot" aria-hidden="true"></span>Desarrollador de Soluciones de Datos e IA</p>
+          <h1 id="hero-title" class="reveal" style="--d:110ms"><span class="grad">Daniel <span class="key">De los Ríos</span></span></h1>
+          <p class="lead reveal" style="--d:220ms">
+            Ingeniero Multimedia que construye aplicaciones de datos e IA de punta a punta —
+            backend, frontend y el modelo en el medio. Del problema a la app que lo resuelve.
+          </p>
+          <div class="actions reveal" style="--d:330ms">
+            <a class="btn-primary" href="#projects">Ver proyectos <span aria-hidden="true">→</span></a>
+            <a class="btn-secondary" href="#cv">Ver CV</a>
+          </div>
+          <ul class="stack reveal" style="--d:440ms" aria-label="Tecnologías principales">
+            <li>Python</li><li>FastAPI</li><li>React</li><li>SQL</li><li>Pandas</li><li>Scikit-learn</li>
+            <li>TypeScript</li><li>Postgres</li><li>Gemini API</li><li>Streamlit</li><li>Power BI</li><li>UX/UI</li>
+          </ul>
+        </div>
+
+        <div class="panel reveal" style="--d:200ms">
+          <canvas id="net" aria-hidden="true"></canvas>
+          <div class="halo" aria-hidden="true"></div>
+          <div aria-hidden="true" style="position:absolute;left:50%;top:50%;width:63.0%;height:46.6%;transform:translate(-50%,-50%);border-radius:50%;border:1px dashed rgba(6,182,212,.2)"></div>
+          <div aria-hidden="true" style="position:absolute;left:50%;top:50%;width:86.0%;height:67.1%;transform:translate(-50%,-50%);border-radius:50%;border:1px dashed rgba(6,182,212,.2)"></div>
+          <div class="avatar" role="img" aria-label="Retrato de Daniel De los Ríos — pendiente reemplazar por la foto real">
+            <svg viewBox="0 0 200 220" aria-hidden="true">
+              <circle cx="100" cy="74" r="42" fill="rgba(248,250,252,.35)" />
+              <path d="M100 126c-46 0-78 30-84 68h168c-6-38-38-68-84-68Z" fill="rgba(248,250,252,.25)" />
+            </svg>
+          </div>
+          <span class="planet" style="left:81.5%;top:50.0%;--s:0.890;--o:0.675">Python</span>
+          <span class="planet" style="left:65.8%;top:70.2%;--s:0.985;--o:0.956">FastAPI</span>
+          <span class="planet" style="left:34.3%;top:70.2%;--s:0.985;--o:0.956">React</span>
+          <span class="planet" style="left:18.5%;top:50.0%;--s:0.890;--o:0.675">SQL</span>
+          <span class="planet" style="left:34.3%;top:29.8%;--s:0.795;--o:0.394">Pandas</span>
+          <span class="planet" style="left:65.8%;top:29.8%;--s:0.795;--o:0.394">Scikit-learn</span>
+          <span class="planet" style="left:87.2%;top:66.8%;--s:0.945;--o:0.838">TypeScript</span>
+          <span class="planet" style="left:50.0%;top:83.5%;--s:1.000;--o:1.000">Postgres</span>
+          <span class="planet" style="left:12.8%;top:66.8%;--s:0.945;--o:0.838">Gemini API</span>
+          <span class="planet" style="left:12.8%;top:33.2%;--s:0.835;--o:0.513">Streamlit</span>
+          <span class="planet" style="left:50.0%;top:16.5%;--s:0.780;--o:0.350">Power BI</span>
+          <span class="planet" style="left:87.2%;top:33.2%;--s:0.835;--o:0.513">UX/UI</span>
+          <p class="panel-caption">Foto real → src/assets/profile/</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById('net');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var dpr = Math.min(2, window.devicePixelRatio || 1);
+      var W = 0, H = 0, pts = [], raf = null, running = false;
+
+      function build() {
+        var rect = canvas.getBoundingClientRect();
+        W = rect.width; H = rect.height;
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var count = Math.max(14, Math.round((W * H) / 14000));
+        pts = [];
+        for (var i = 0; i < count; i++) {
+          pts.push({
+            x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
+            r: Math.random() * 1.5 + 0.6
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        var i, j, a, b, dx, dy, d2, alpha;
+        for (i = 0; i < pts.length; i++) {
+          a = pts[i];
+          a.x += a.vx; a.y += a.vy;
+          if (a.x < 0 || a.x > W) a.vx *= -1;
+          if (a.y < 0 || a.y > H) a.vy *= -1;
+        }
+        for (i = 0; i < pts.length; i++) {
+          for (j = i + 1; j < pts.length; j++) {
+            a = pts[i]; b = pts[j];
+            dx = a.x - b.x; dy = a.y - b.y; d2 = dx * dx + dy * dy;
+            if (d2 < 20000) {
+              alpha = (1 - d2 / 20000) * 0.34;
+              ctx.strokeStyle = 'rgba(139,92,246,' + alpha.toFixed(3) + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+            }
+          }
+        }
+        for (i = 0; i < pts.length; i++) {
+          a = pts[i];
+          ctx.beginPath();
+          ctx.arc(a.x, a.y, a.r, 0, 6.2832);
+          ctx.fillStyle = 'rgba(148,163,184,.6)';
+          ctx.fill();
+        }
+      }
+
+      function loop() {
+        draw();
+        raf = window.requestAnimationFrame(loop);
+      }
+
+      function start() {
+        if (running || reduce) return;
+        running = true;
+        loop();
+      }
+      function stop() {
+        running = false;
+        if (raf) window.cancelAnimationFrame(raf);
+        raf = null;
+      }
+
+      build();
+      draw();
+      if (!reduce && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries[0].isIntersecting ? start() : stop();
+        }, { threshold: 0.15 }).observe(canvas);
+      } else if (!reduce) {
+        start();
+      }
+      window.addEventListener('resize', function () {
+        stop(); build(); draw(); start();
+      });
+    })();
+  </script>
+
+  <div class="tone-panel" role="group" aria-label="Esquema tonal del portafolio">
+    <span class="lbl">Tono</span>
+    <button type="button" class="tone-btn" data-tone="a" aria-pressed="true">A · Marca primero</button>
+    <button type="button" class="tone-btn" data-tone="b" aria-pressed="false">B · Todo degradado</button>
+    <button type="button" class="tone-btn" data-tone="c" aria-pressed="false">C · Plano total</button>
+    <button type="button" class="tone-btn" id="copyPrompt">Copiar como prompt</button>
+    <p class="hint" id="toneHint">A · El gradiente es solo identidad: wordmark y nombre, completos. Nada más.</p>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var hint = document.getElementById('toneHint');
+      var copyBtn = document.getElementById('copyPrompt');
+      var hintText = {
+        a: 'A · El gradiente es solo identidad: wordmark y nombre, completos. Nada más.',
+        b: 'B · El mismo gradiente en identidad, badge, CTA y todos los títulos de sección.',
+        c: 'C · Cero gradientes. Wordmark en primary sólido, nombre plano, palabra clave en primary.'
+      };
+      var prompts = {
+        a: 'Aplicá el esquema tonal "Marca primero" del sistema de diseño: el gradiente linear-gradient(90deg, #8b5cf6, #06b6d4) es propiedad exclusiva de la identidad y va en exactamente dos elementos, el wordmark del header y el nombre del hero, ambos completos. Nunca gradiente sobre una parte de una frase: el elemento entero o nada. Ningún tercer elemento con gradiente. El resto de la titulación en #f8fafc plano. Palabras clave en #8b5cf6 sólido. Cuerpo y subtítulos en #94a3b8. Badges y estados en #06b6d4. El rosa #f43f5e queda reservado a alertas.',
+        b: 'Aplicá el esquema tonal "Todo degradado": el mismo linear-gradient(90deg, #8b5cf6, #06b6d4) en la identidad, el badge, el CTA primario y todos los títulos de sección (h1 y h2). Cuerpo y subtítulos planos en #94a3b8. Mismo ángulo y misma dirección en todos los casos.',
+        c: 'Aplicá el esquema tonal "Plano total": cero gradientes en todo el sitio. Wordmark en #8b5cf6 sólido, nombre del hero en #f8fafc plano con la palabra clave en #8b5cf6, cuerpo y subtítulos en #94a3b8, badges y estados en #06b6d4.'
+      };
+
+      document.querySelectorAll('.tone-btn[data-tone]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var tone = btn.dataset.tone;
+          root.dataset.tone = tone;
+          hint.textContent = hintText[tone];
+          document.querySelectorAll('.tone-btn[data-tone]').forEach(function (b) {
+            b.setAttribute('aria-pressed', String(b === btn));
+          });
+        });
+      });
+
+      copyBtn.addEventListener('click', function () {
+        var text = prompts[root.dataset.tone];
+        function done(ok) {
+          copyBtn.textContent = ok ? 'Copiado ✓' : 'No se pudo copiar';
+          window.setTimeout(function () { copyBtn.textContent = 'Copiar como prompt'; }, 1800);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+          return;
+        }
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        done(ok);
+      });
+    })();
+  </script>
+</body>
+</html>
