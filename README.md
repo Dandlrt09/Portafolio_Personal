@@ -49,7 +49,7 @@ npm install
 npm run dev
 ```
 
-Abrí [http://localhost:5173](http://localhost:5173) en el navegador.
+Abre [http://localhost:5173](http://localhost:5173) en el navegador.
 
 ### Build para producción
 

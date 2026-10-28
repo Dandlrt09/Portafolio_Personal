@@ -21,7 +21,7 @@ export const CONTACT_EMAIL = 'danieldlrt.jobs@gmail.com';
  * ese lugar.
  *
  * La access key es PUBLICA POR DISEÑO: viaja en el JavaScript del sitio, como en
- * cualquier sitio estático. Solo autoriza "mandá un mensaje al inbox de Daniel", no da
+ * cualquier sitio estático. Solo autoriza "manda un mensaje al inbox de Daniel", no da
  * acceso a leer el correo. No es un secreto y no hay nada que filtrar acá.
  *
  * Se crea en https://web3forms.com con el Gmail de Daniel: la clave tiene que estar
