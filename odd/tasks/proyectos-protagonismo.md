@@ -276,7 +276,9 @@ L16 (respuesta de Daniel a las 3 preguntas abiertas, literal):
 > 4 y hospital pones 2.    3) No me molesta las 4 lineas, esta bien"
 
 Aplicado (commit `fda6881`):
-- **Dirección 02** (tarjetas horizontales) implementada en `ArchiveSection.jsx`: grilla 2×2
+- **Dirección 02** (tarjetas horizontales) implementada en `ArchiveSection.jsx`. Es el artboard
+**elegido**; `01-lista-compacta.html` y `03-grilla-minima.html` quedan como **alternativas** y no
+se implementan. Grilla 2×2
 dentro del mismo desplegable, tile con ícono de gráfico ascendente, stack, estrellas con su
 línea, y botones más livianos que los de las fichas destacadas. Se **reusa `ComplexityRating`**
 en vez de rearmar el bloque, así la escala y la regla del ancla viven en un solo lugar.
