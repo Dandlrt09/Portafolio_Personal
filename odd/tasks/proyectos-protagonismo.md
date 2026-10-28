@@ -270,3 +270,33 @@ proyecto lleva **un símbolo simple** (gráfico ascendente), **estrellas de comp
 Abierto: los **valores de complejidad** de los 4 (propuse 3/2/2/3, sin confirmar) y las
 **líneas de justificación** si la dirección elegida las lleva — las de la dirección 02 las
 escribí yo a partir del `detail` real, así que son propuestas, no hechos suyos.
+
+L16 (respuesta de Daniel a las 3 preguntas abiertas, literal):
+> "1) Me gusta la opción 2.  2) En videojuegos pon 5 estrellas, diamantes pones 4, titanic pones
+> 4 y hospital pones 2.    3) No me molesta las 4 lineas, esta bien"
+
+Aplicado (commit `fda6881`):
+- **Dirección 02** (tarjetas horizontales) implementada en `ArchiveSection.jsx`: grilla 2×2
+dentro del mismo desplegable, tile con ícono de gráfico ascendente, stack, estrellas con su
+línea, y botones más livianos que los de las fichas destacadas. Se **reusa `ComplexityRating`**
+en vez de rearmar el bloque, así la escala y la regla del ancla viven en un solo lugar.
+- **Complejidades 5/4/4/2**, los números de Daniel. El hospital queda con **un solo botón**
+("Ver dashboard"): su tablero vive local y no hay repo, así que no se repite el mismo link.
+- **Las 4 líneas se reescribieron.** Las aprobadas en el artboard estaban calibradas para
+3/2/2/3: con un 5, "un solo dataset pero grande" desancla el puntaje, y para Titanic un 4 no se
+sostiene diciendo que es "el ejercicio más documentado que existe". Las nuevas siguen siendo
+**palabras mías** leídas del `detail` real: si el tono no es el suyo, se cambian.
+
+Renombre y copy: `archiveTitle` → "Análisis y resultados de proyectos" / "Project analysis and
+results"; `archiveNote` reescrita (la vieja abría hablando mal del trabajo: "no porque sean mi
+mejor trabajo"); `archiveShow`/`archiveHide` → "Mostrar"/"Ocultar", porque con el nombre nuevo
+la palabra "archivo" sobraba.
+
+También se arreglaron dos cosas que ya estaban mal en ese componente: un `<div>` dentro del
+`<button>` (markup inválido) y el título en mayúsculas sostenidas, que con el nombre largo
+obliga a leer letra por letra. Y se sumó `aria-controls` al botón del desplegable.
+
+Verificado en el navegador: arranca cerrado, abre con 4 tarjetas de niveles 5/4/4/2 y
+2/2/2/1 botones, se desmonta al cerrar, y en inglés lee "Complexity 5/5". `lint` exit 0,
+`npm run verify:contact` 30/30 (regresión: se tocó `LanguageContext`, que es compartido) y
+`build` exit 0.
