@@ -322,6 +322,13 @@ export const archivedProjects = [
         id: 'games',
         title: { es: 'Análisis de ventas globales — Videojuegos (1985-2016)', en: 'Global Sales Analysis — Video Games (1985-2016)' },
         detail: { es: 'Dataset de +16.000 lanzamientos · Python, Seaborn', en: 'Dataset of +16,000 releases · Python, Seaborn' },
+        complexity: {
+            level: 5,
+            reason: {
+                es: 'Ninguna variable alcanza sola para explicar el mercado: el trabajo está en decidir qué cruzar, cómo agrupar y hasta dónde se puede afirmar algo con estos datos.',
+                en: 'No single variable explains the market on its own: the work is deciding what to cross, how to group, and how far a claim can honestly go with this data.'
+            }
+        },
         link: 'https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%202/Main.ipynb',
         demo: 'https://videogames-analysis.streamlit.app'
     },
@@ -329,6 +336,13 @@ export const archivedProjects = [
         id: 'diamonds',
         title: { es: 'Predicción de precios de diamantes', en: 'Diamond Price Prediction' },
         detail: { es: 'Dataset de práctica · PyCaret', en: 'Practice dataset · PyCaret' },
+        complexity: {
+            level: 4,
+            reason: {
+                es: 'El precio depende de varias variables a la vez y de cómo se relacionan entre ellas: meterlas al modelo y mirar el error no alcanza.',
+                en: 'Price depends on several variables at once and on how they relate to each other: feeding them to the model and reading the error is not enough.'
+            }
+        },
         link: 'https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%203/Pycaret%20y%20Entrenamiento.ipynb',
         demo: 'https://diamond-price-app.streamlit.app'
     },
@@ -336,6 +350,13 @@ export const archivedProjects = [
         id: 'titanic',
         title: { es: 'Predicción de supervivencia Titanic', en: 'Titanic Survival Prediction' },
         detail: { es: 'Dataset de práctica · PyCaret', en: 'Practice dataset · PyCaret' },
+        complexity: {
+            level: 4,
+            reason: {
+                es: 'El dataset es chico y conocido, y eso es lo que lo vuelve exigente: cada decisión hay que justificarla contra lo que ya está escrito, en vez de copiar el camino conocido.',
+                en: 'The dataset is small and well known, and that is what makes it demanding: every decision has to be justified against what is already written instead of copying the known path.'
+            }
+        },
         link: 'https://github.com/Dandlrt09/DataScience_Proyects/blob/main/Proyecto%204/Main.ipynb',
         demo: 'https://supervivencia-titanic.streamlit.app'
     },
@@ -343,6 +364,13 @@ export const archivedProjects = [
         id: 'hospital',
         title: { es: 'Dashboard hospitalario', en: 'Hospital Dashboard' },
         detail: { es: 'Exploración con Chart.js fuera de Power BI', en: 'Exploration with Chart.js outside Power BI' },
+        complexity: {
+            level: 2,
+            reason: {
+                es: 'Los datos son ordenados y las preguntas claras: la dificultad está en el armado del tablero, no en los datos.',
+                en: 'The data is tidy and the questions are clear: the difficulty is in building the dashboard, not in the data.'
+            }
+        },
         link: '/hospital_dashboard.html',
         local: true
     }
