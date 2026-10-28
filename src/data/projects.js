@@ -170,6 +170,11 @@ export const featuredProjects = [
  * Analytics work — dashboards and predictive models on public datasets.
  * This is practice built on my studies, not client work, and every ficha says so.
  * `kind` selects the card component: 'bi' renders the report gallery, 'ds' links the notebook and demo.
+ *
+ * None of these declares `timeline`, on purpose: how long a study exercise took is not part of
+ * what these fichas are selling, and a bare duration invites a comparison that says nothing about
+ * the work. The criterion and the complexity score carry that weight instead. The real durations
+ * stay recorded in `odd/tasks/proyectos-protagonismo.md` (S14).
  */
 export const analyticsProjects = [
     {
@@ -180,10 +185,6 @@ export const analyticsProjects = [
         role: {
             es: 'Ejercicio individual de análisis sobre un dataset público, parte de mi formación. No es trabajo para cliente.',
             en: 'An individual analysis exercise on a public dataset, part of my studies. Not client work.'
-        },
-        timeline: {
-            es: '1 día',
-            en: '1 day'
         },
         description: {
             es: 'Pipeline en PyCaret que cubre EDA, ingeniería de características y balanceo de clases, con un clasificador AdaBoost que alcanza un Recall del 64% sobre clientes con alta probabilidad de cancelar. Lo publiqué como simulador interactivo para que el resultado se pueda usar, no solo leer.',
@@ -212,10 +213,6 @@ export const analyticsProjects = [
             es: 'Ejercicio individual de análisis sobre un dataset público, parte de mi formación. No es trabajo para cliente.',
             en: 'An individual analysis exercise on a public dataset, part of my studies. Not client work.'
         },
-        timeline: {
-            es: '1 día',
-            en: '1 day'
-        },
         description: {
             es: 'Analicé el dataset de Olist para encontrar las categorías realmente rentables, separando volumen de margen: vender mucho no es ganar mucho, y las categorías con más pedidos no eran las que dejaban plata. Cerré con un dashboard interactivo en Streamlit.',
             en: 'I analysed the Olist dataset to find the genuinely profitable categories, separating volume from margin: selling a lot is not earning a lot, and the categories with the most orders were not the ones leaving money. I closed it with an interactive Streamlit dashboard.'
@@ -242,10 +239,6 @@ export const analyticsProjects = [
         role: {
             es: 'Ejercicio individual de análisis sobre un dataset público, parte de mi formación. No es trabajo para cliente.',
             en: 'An individual analysis exercise on a public dataset, part of my studies. Not client work.'
-        },
-        timeline: {
-            es: '1 día',
-            en: '1 day'
         },
         description: {
             es: 'Cuadro de mando en Power BI con KPIs de ingresos, márgenes y distribución por categorías, aplicando data storytelling para una audiencia no técnica.',
@@ -286,10 +279,6 @@ export const analyticsProjects = [
         role: {
             es: 'Ejercicio individual de análisis sobre un dataset público, parte de mi formación. No es trabajo para cliente.',
             en: 'An individual analysis exercise on a public dataset, part of my studies. Not client work.'
-        },
-        timeline: {
-            es: '1 día',
-            en: '1 day'
         },
         description: {
             es: 'Dashboard en Power BI con tres vistas jerárquicas: resumen ejecutivo para una lectura de 30 segundos, análisis de empleados y rotación. Parte de 311 empleados, $69K de salario promedio y 33% de rotación.',
