@@ -2,7 +2,7 @@
 
 Portafolio profesional de Data Science & Business Intelligence. Construido con React + Vite, muestra proyectos de análisis de datos, machine learning y dashboards interactivos.
 
-🔗 **Demo en vivo:** [dandlrt09.github.io/Portafolio_Personal](https://dandlrt09.github.io/Portafolio_Personal)
+🔗 **Demo en vivo:** [portafolio-personal-sage.vercel.app](https://portafolio-personal-sage.vercel.app/)
 
 ---
 
@@ -60,4 +60,6 @@ npm run preview
 
 ## Despliegue
 
-El proyecto se deploya automáticamente a **Vercel** con cada push a `main`. También incluye un workflow de **GitHub Actions** para GitHub Pages como respaldo.
+El proyecto se deploya automáticamente a **Vercel** con cada push a `main`. Cada pull request genera además un deploy preview con su propia URL.
+
+La publicación anterior en **GitHub Pages** quedó retirada junto con su workflow. La rama `gh-pages` todavía existe pero ya no se actualiza: la URL que sirve corresponde a una versión vieja del portafolio.
