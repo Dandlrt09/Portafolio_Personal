@@ -62,4 +62,4 @@ npm run preview
 
 El proyecto se deploya automáticamente a **Vercel** con cada push a `main`. Cada pull request genera además un deploy preview con su propia URL.
 
-La publicación anterior en **GitHub Pages** quedó retirada junto con su workflow. La rama `gh-pages` todavía existe pero ya no se actualiza: la URL que sirve corresponde a una versión vieja del portafolio.
+La publicación anterior en **GitHub Pages** quedó retirada junto con su workflow, y su URL ya no sirve el portafolio. **Vercel es el único destino.**
