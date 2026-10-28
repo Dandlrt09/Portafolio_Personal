@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI PDF — 05 · Texto que se ordena (2 variantes)</title>
+<style>
+  /* Tokens de design/system.md. Sin URLs externas: stack del sistema. */
+  :root{--background:#0f172a;--surface:#1e293b;--primary:#8b5cf6;--secondary:#06b6d4;--text:#f8fafc;--muted:#94a3b8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--background);color:var(--text);
+    font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1280px;margin:0 auto;padding:44px 24px 60px}
+  h2{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+  h2 span{border-bottom:4px solid var(--primary);padding-bottom:6px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 26px;max-width:82ch;line-height:1.6}
+  .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+  .card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px}
+  .tag{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;
+    color:var(--secondary);border:1px solid rgba(6,182,212,.3);background:rgba(6,182,212,.06);
+    border-radius:9999px;padding:3px 10px;margin-bottom:12px}
+  h3{font-size:15px;font-weight:600;margin:0 0 8px}
+  .frame{position:relative;width:100%;aspect-ratio:615/750;border-radius:14px;background:var(--surface);
+    border:1px solid rgba(255,255,255,.1);overflow:hidden;display:grid;place-items:center}
+  .badge{position:absolute;left:14px;top:14px;border-radius:9999px;border:1px solid rgba(255,255,255,.15);
+    background:rgba(0,0,0,.6);padding:4px 11px;font-size:11px;font-weight:500;color:rgba(255,255,255,.85)}
+  .lockup{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
+  .lockup .mark{width:48%}
+  .mark svg{display:block;width:100%;height:auto}
+  .wordmark{font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--text)}
+  .sizes{display:flex;align-items:center;gap:18px;margin-top:16px;padding:14px 16px;border-radius:10px;
+    background:var(--surface);border:1px solid rgba(255,255,255,.08)}
+  .sizes svg{display:block;height:auto}
+  .sizes .s64{width:64px}
+  .sizes .s32{width:32px}
+  .sizes .cap{font-size:11px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin-left:auto}
+  .note{font-size:13px;line-height:1.6;color:var(--muted);margin:14px 0 0}
+  .note strong{color:var(--text)}
+  .anno{margin-top:26px;border:1px dashed rgba(251,191,36,.45);background:rgba(251,191,36,.06);
+    border-radius:10px;padding:13px 17px;font-size:12.5px;line-height:1.6;color:#fde68a}
+  .anno strong{color:#fef3c7}
+  @media (max-width:900px){.pair{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2><span>AI PDF — Texto que se ordena, 2 variantes</span></h2>
+  <p class="sub">El concepto propio del proyecto: una descripción en lenguaje natural que sale como un PDF ordenado. Las dos variantes dicen lo mismo <strong>sobre ejes distintos</strong>: una de arriba hacia abajo, otra de izquierda a derecha, que es como se lee una línea de texto.</p>
+
+  <div class="pair">
+    <!-- VARIANTE A -->
+    <div class="card">
+      <span class="tag">A · de arriba hacia abajo</span>
+      <h3>Entra desordenado, sale ordenado</h3>
+      <p class="note" style="margin:0 0 16px">Dentro de un marco: <strong>arriba dos líneas onduladas y tenues</strong>, abajo dos rectas y alineadas al mismo margen, la última encendida. Es el más literal de los dos ejes y el que mejor aguanta el tamaño chico, porque el contraste es <strong>de forma y de opacidad a la vez</strong>.</p>
+
+      <div class="frame">
+        <span class="badge">Iniciativa propia</span>
+        <div class="lockup">
+          <div class="mark">
+            <svg viewBox="0 0 64 64" fill="none" aria-label="Símbolo: líneas que pasan de onduladas a rectas">
+              <rect x="7" y="7" width="50" height="50" rx="11" stroke="var(--primary)" stroke-width="3.6"/>
+              <path d="M15 23c2.9-3.8 5.8 3.8 8.7 0s5.8 3.8 8.7 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".45"/>
+              <path d="M15 32c2.9-3.8 5.8 3.8 8.7 0s5.8 3.8 8.7 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".45"/>
+              <path d="M15 42h21" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/>
+              <path d="M15 51h21" stroke="var(--secondary)" stroke-width="3.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="wordmark">AI PDF Generator</span>
+        </div>
+      </div>
+
+      <div class="sizes">
+        <svg class="s64" viewBox="0 0 64 64" fill="none"><rect x="7" y="7" width="50" height="50" rx="11" stroke="var(--primary)" stroke-width="3.6"/><path d="M15 23c2.9-3.8 5.8 3.8 8.7 0s5.8 3.8 8.7 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".45"/><path d="M15 32c2.9-3.8 5.8 3.8 8.7 0s5.8 3.8 8.7 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".45"/><path d="M15 42h21" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/><path d="M15 51h21" stroke="var(--secondary)" stroke-width="3.6" stroke-linecap="round"/></svg>
+        <svg class="s32" viewBox="0 0 64 64" fill="none"><rect x="7" y="7" width="50" height="50" rx="11" stroke="var(--primary)" stroke-width="3.6"/><path d="M15 23c2.9-3.8 5.8 3.8 8.7 0s5.8 3.8 8.7 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".45"/><path d="M15 32c2.9-3.8 5.8 3.8 8.7 0s5.8 3.8 8.7 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".45"/><path d="M15 42h21" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/><path d="M15 51h21" stroke="var(--secondary)" stroke-width="3.6" stroke-linecap="round"/></svg>
+        <span class="cap">símbolo solo · 64 / 32 px</span>
+      </div>
+    </div>
+
+    <!-- VARIANTE B -->
+    <div class="card">
+      <span class="tag">B · de izquierda a derecha</span>
+      <h3>La ondulación se endereza en la misma línea</h3>
+      <p class="note" style="margin:0 0 16px">Sin marco: cada línea <strong>arranca ondulada y termina recta</strong>, y las tres comparten el mismo margen de arranque. Es el más original y el que dice la analogía completa (entrada desordenada → salida alineada), pero es también el que <strong>más sufre a 32 px</strong>: miralo abajo antes de enamorarte del marco grande.</p>
+
+      <div class="frame">
+        <span class="badge">Iniciativa propia</span>
+        <div class="lockup">
+          <div class="mark">
+            <svg viewBox="0 0 64 64" fill="none" aria-label="Símbolo: cada línea se endereza">
+              <path d="M5 21c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/>
+              <path d="M19 21h34" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/>
+              <path d="M5 32c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/>
+              <path d="M19 32h27" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/>
+              <path d="M5 43c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/>
+              <path d="M19 43h34" stroke="var(--secondary)" stroke-width="3.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="wordmark">AI PDF Generator</span>
+        </div>
+      </div>
+
+      <div class="sizes">
+        <svg class="s64" viewBox="0 0 64 64" fill="none"><path d="M5 21c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/><path d="M19 21h34" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/><path d="M5 32c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/><path d="M19 32h27" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/><path d="M5 43c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/><path d="M19 43h34" stroke="var(--secondary)" stroke-width="3.6" stroke-linecap="round"/></svg>
+        <svg class="s32" viewBox="0 0 64 64" fill="none"><path d="M5 21c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/><path d="M19 21h34" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/><path d="M5 32c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/><path d="M19 32h27" stroke="var(--primary)" stroke-width="3.6" stroke-linecap="round"/><path d="M5 43c3-4.2 6 4.2 9 0" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" opacity=".4"/><path d="M19 43h34" stroke="var(--secondary)" stroke-width="3.6" stroke-linecap="round"/></svg>
+        <span class="cap">símbolo solo · 64 / 32 px</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="anno">
+    <strong>Anotación (no va a producción).</strong> Las dos llevan la ondulación en trazo fino y opacidad al 40-45% a propósito: es lo que la vuelve "desorden" y no "ruido". Si a 32 px no se distingue, la solución es subir el grosor de la ondulación, no achicar la recta. SVG real con los tokens del sitio.
+  </p>
+</div>
+</body>
+</html>

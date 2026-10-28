@@ -1,6 +1,6 @@
 {
   "title": "AI PDF Generator — logo",
-  "brief": "Marcar la ficha de AI PDF Generator, que hoy no tiene imagen y cae al fallback de texto. El logo vive dentro del marco de la ficha destacada (615x750 medido, proporción variable porque la pone el texto), sobre bg-surface #1e293b, y no puede ocupar la esquina superior izquierda porque ahí va la etiqueta de estado.",
+  "brief": "Marcar la ficha de AI PDF Generator, que hoy no tiene imagen y cae al fallback de texto. El logo vive dentro del marco de la ficha destacada (615x750 medido, proporción variable porque la pone el texto), sobre bg-surface #1e293b, y no puede ocupar la esquina superior izquierda porque ahí va la etiqueta de estado. Va como lockup: símbolo con el nombre debajo, que se cae por debajo de ~48px.",
   "feature": "odd/tasks/proyectos-protagonismo.md",
   "artboards": [
     {
@@ -23,6 +23,20 @@
       "tradeoff": "El más legible a tamaño chico porque es masa sólida; también el que más se parece al ícono descartado, porque sigue siendo una página con un corte",
       "width": 1440,
       "height": 1000
+    },
+    {
+      "file": "04-hoja-chispa-variantes.html",
+      "title": "Hoja + chispa · 2 variantes",
+      "tradeoff": "A tiene dos formas (hoja + chispa que rompe la silueta) y sobrevive el tamaño chico; B es el ícono de manual hecho limpio, con tres formas y sin las rayitas de contenido, así que se parece más a un archivo genérico",
+      "width": 1440,
+      "height": 1100
+    },
+    {
+      "file": "05-lineas-orden-variantes.html",
+      "title": "Texto que se ordena · 2 variantes",
+      "tradeoff": "Es el concepto propio del proyecto y el más original; A ordena de arriba hacia abajo y aguanta mejor porque contrasta forma y opacidad a la vez, B ordena de izquierda a derecha y dice la analogía completa pero es el que más sufre a 32px",
+      "width": 1440,
+      "height": 1100
     }
   ]
 }
