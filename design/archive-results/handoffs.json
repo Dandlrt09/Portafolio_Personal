@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "chosen": "02-tarjetas-horizontales.html",
+  "handoffs": {
+    "02-tarjetas-horizontales.html": {
+      "status": "implemented",
+      "queued": false,
+      "sentAt": "2026-10-28T16:04:39.718Z",
+      "startedAt": null,
+      "implementedAt": "2026-10-28T16:04:48.896Z",
+      "feature": "odd/tasks/proyectos-protagonismo.md",
+      "note": "Implementado en ArchiveSection.jsx con los tokens de design/system.md: grilla 2x2 de tarjetas horizontales dentro del desplegable, tile con TrendingUp en primary, ComplexityRating reusado y botones mas chicos que los de las fichas destacadas. Verificado en navegador: arranca cerrado, niveles 5/4/4/2, botones 2/2/2/1, se desmonta al cerrar, lee bien en ingles. lint 0, build 0, verify:contact 30/30. Commit fda6881.",
+      "previewUrl": "http://localhost:5173/"
+    }
+  }
+}
