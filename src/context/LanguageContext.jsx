@@ -77,9 +77,29 @@ const translations = {
         contact: {
             title: "Contacto",
             description: "¿Tenés un proyecto en mente, o buscás a alguien que construya la aplicación y no solo el modelo? Escribime.",
-            cta: "Enviar correo",
-            email: "danieldlrt.jobs@gmail.com",
-            cv: "Descargar CV"
+            cv: "Descargar CV",
+            directTitle: "Escribime directo",
+            form: {
+                title: "Mandame un mensaje",
+                name: "Nombre",
+                namePlaceholder: "Tu nombre",
+                email: "Tu correo",
+                emailPlaceholder: "vos@ejemplo.com",
+                subject: "Asunto",
+                subjectPlaceholder: "¿De qué querés hablar?",
+                message: "Mensaje",
+                messagePlaceholder: "Contame en qué estás trabajando…",
+                submit: "Enviar mensaje",
+                sending: "Enviando…",
+                successTitle: "¡Mensaje enviado!",
+                successBody: "La respuesta te va a llegar a tu correo. Gracias por escribir.",
+                errorTitle: "No se pudo enviar",
+                errorBody: "Algo falló del otro lado. Probá de nuevo, o escribime directo a",
+                required: "Este campo es obligatorio.",
+                invalidEmail: "Escribí un correo válido.",
+                shortMessage: "Contame un poco más (mínimo 10 caracteres).",
+                captchaRequired: "Confirmá el captcha para enviar."
+            }
         },
         footer: {
             rights: "Todos los derechos reservados."
@@ -155,9 +175,29 @@ const translations = {
         contact: {
             title: "Get in touch",
             description: "Have a project in mind, or looking for someone who builds the application and not just the model? Get in touch.",
-            cta: "Send an email",
-            email: "danieldlrt.jobs@gmail.com",
-            cv: "Download CV"
+            cv: "Download CV",
+            directTitle: "Write me directly",
+            form: {
+                title: "Send me a message",
+                name: "Name",
+                namePlaceholder: "Your name",
+                email: "Your email",
+                emailPlaceholder: "you@example.com",
+                subject: "Subject",
+                subjectPlaceholder: "What is this about?",
+                message: "Message",
+                messagePlaceholder: "Tell me what you are working on…",
+                submit: "Send message",
+                sending: "Sending…",
+                successTitle: "Message sent!",
+                successBody: "The reply will land in your inbox. Thanks for reaching out.",
+                errorTitle: "Could not send it",
+                errorBody: "Something failed on the other end. Try again, or write me directly at",
+                required: "This field is required.",
+                invalidEmail: "Enter a valid email address.",
+                shortMessage: "Tell me a bit more (at least 10 characters).",
+                captchaRequired: "Complete the captcha to send."
+            }
         },
         footer: {
             rights: "All rights reserved."
@@ -165,8 +205,8 @@ const translations = {
     }
 };
 
-export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useState('es');
+export const LanguageProvider = ({ children, initialLanguage = 'es' }) => {
+    const [language, setLanguage] = useState(initialLanguage);
 
     const t = translations[language];
 

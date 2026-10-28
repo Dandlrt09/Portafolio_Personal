@@ -9,6 +9,35 @@ export const GITHUB_URL = 'https://github.com/Dandlrt09';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/danieldlrt09';
 
 /**
+ * Contacto. El correo vive acá y no en los textos de idioma: es el mismo número,
+ * dirección o identificador en los dos idiomas, así que duplicarlo es pedir que se
+ * desincronicen.
+ */
+export const CONTACT_EMAIL = 'danieldlrt.jobs@gmail.com';
+
+/**
+ * Relay del formulario de contacto. El sitio se publica en GitHub Pages, que solo
+ * sirve archivos: no hay backend que reciba el POST y mande el mail. Web3Forms ocupa
+ * ese lugar.
+ *
+ * La access key es PUBLICA POR DISEÑO: viaja en el JavaScript del sitio, como en
+ * cualquier sitio estático. Solo autoriza "mandá un mensaje al inbox de Daniel", no da
+ * acceso a leer el correo. No es un secreto y no hay nada que filtrar acá.
+ *
+ * Se crea en https://web3forms.com con el Gmail de Daniel: la clave tiene que estar
+ * asociada a SU casilla o los mensajes no llegan. Después hay que activar hCaptcha en
+ * el panel del formulario, o el token del captcha no se valida.
+ */
+export const CONTACT_FORM_ENDPOINT = 'https://api.web3forms.com/submit';
+export const WEB3FORMS_ACCESS_KEY = '298b5919-81cf-4381-8d6e-bdcfa33a1a59';
+
+/**
+ * hCaptcha con Web3Forms no requiere registrarse: el plan free usa esta sitekey
+ * pública. La documentación pide `reCaptchaCompat={false}` junto a ella.
+ */
+export const HCAPTCHA_FREE_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
+
+/**
  * Hero orbit rings. Language-neutral product names, so they live here instead of
  * being duplicated in both translation trees.
  *
