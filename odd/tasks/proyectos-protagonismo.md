@@ -248,3 +248,25 @@ L14 (decisiones de Daniel en la misma pasada):
 
 Aplicado: hCaptcha queda como barrera del navegador y no del servidor (los mensajes llegan
 igual, confirmado por él). Los 4 del Archivo quedan esperando su explicación: NO se tocan.
+
+L15 (pedido de Daniel, literal):
+> "Esa sección seguira siendo un desplegable, se llamara analisis y resultados de proyectos, la
+> idea es hacer tambien tarjetas de ellos quiza horizontales pero muy simplificados, estos son
+> proyectos simples de practica sin el nivel de seriedad que los demas así que podemos colocar
+> un simbolo como de grafico subiendo o algo sencillo, las estrellas de complejidad y botones,
+> será algo mas simple. Dame ideas"
+
+Aplicado: `design/archive-results/` con 3 direcciones y sus tradeoffs en `design.json`:
+`01-lista-compacta.html` (lista densa, un solo panel con separadores),
+`02-tarjetas-horizontales.html` (tarjetas horizontales en 2×2, con la línea que justifica el
+puntaje) y `03-grilla-minima.html` (grilla liviana, símbolo de barras ascendente y acciones de
+ícono). El artboard elegido se implementa sobre `ArchiveSection.jsx` y `archivedProjects`.
+
+Requisitos que quedan fijos de este pedido: el bloque **sigue siendo un desplegable**, se
+**renombra** a "Análisis y resultados de proyectos" (hoy `t.projects.archiveTitle`), y cada
+proyecto lleva **un símbolo simple** (gráfico ascendente), **estrellas de complejidad** y
+**botones más livianos** que los de las fichas destacadas.
+
+Abierto: los **valores de complejidad** de los 4 (propuse 3/2/2/3, sin confirmar) y las
+**líneas de justificación** si la dirección elegida las lleva — las de la dirección 02 las
+escribí yo a partir del `detail` real, así que son propuestas, no hechos suyos.

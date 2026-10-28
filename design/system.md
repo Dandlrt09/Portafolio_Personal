@@ -16,6 +16,7 @@ Sources read: `tailwind.config.js`, `src/index.css`, `index.html`,
 | `accent` | `#f43f5e` | Rose accent (declared; not used in Hero/Header) | `tailwind.config.js` |
 | `text` | `#f8fafc` | Body and heading text | `tailwind.config.js` |
 | `text-muted` | `#94a3b8` | Secondary text, nav links at rest | `tailwind.config.js` |
+| `amber-400` | `#fbbf24` | **Complexity stars only** — the one colour outside the core palette. Filled star; the empty one is `text-white/10` | `src/components/ProjectBlocks.jsx` |
 | `#334155` / `#475569` | — | Scrollbar thumb rest / hover | `src/index.css` |
 
 Derived alpha conventions already in use: `border-white/10`, `bg-white/5`,
@@ -23,9 +24,10 @@ Derived alpha conventions already in use: `border-white/10`, `bg-white/5`,
 
 ## Typography
 
-- Family: `Inter`, then `sans-serif` — declared in `tailwind.config.js` (`theme.extend.fontFamily.sans`).
-- **Finding:** `index.html` loads no webfont, so today the site actually renders in the
-  browser's default sans stack. Inter is a declared intent, not a loaded asset.
+- Family: `Inter`, then `sans-serif` — declared in `tailwind.config.js` (`theme.extend.fontFamily.sans`)
+  and **self-hosted**: `@font-face` in `src/index.css` over `src/assets/fonts/inter-latin-var.woff2`
+  (variable, latin subset, `font-display: swap`), referenced with a **relative** path because
+  `vite.config.js` sets `base: './'` for the GitHub Pages subpath.
 - Scale in use (`src/components/Hero.jsx`, `Header.jsx`): `text-7xl` / `text-5xl` hero
   title, `text-lg` / `text-base` body, `text-sm` nav, `text-xs` badge and language toggle.
 - Weights in use: `font-bold` headings, `font-medium` CTAs, `font-semibold` toggle.
@@ -41,6 +43,7 @@ Derived alpha conventions already in use: `border-white/10`, `bg-white/5`,
 ## Radius
 
 - `rounded-lg` — buttons and CTAs (`Hero.jsx`).
+- `rounded-xl` — cards and panels (`ProjectCard.jsx`, `BiProjectCard.jsx`, the archive toggle).
 - `rounded-full` — badge, social icons, language toggle.
 - `rounded-4px` — scrollbar thumb (`src/index.css`).
 
