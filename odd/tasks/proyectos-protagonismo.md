@@ -322,3 +322,27 @@ es vector, pesa cientos de bytes y usa los tokens exactos del sitio.
 
 Abierto: que elija concepto. Después: wireear `image`/`imageAlt` en los dos idiomas y pasar esa
 ficha a `object-contain`, porque con `object-cover` el logo se recortaría.
+
+L18 (elección de Daniel, literal, con la captura del artboard):
+> "vamonos con este"
+
+Elegido: la **variante B del artboard 04** — hoja con esquina doblada + chispa chica de cuatro
+puntas, con el nombre debajo. Las otras seis variantes quedan descartadas.
+
+Aplicado (commit `c572aff`):
+- `src/assets/projects/ai-pdf-mark.svg`: **solo el símbolo**, sin texto adentro, con los colores de
+marca literales (un SVG cargado como `<img>` no puede heredar los tokens del sitio).
+- `projects.js`: campo explícito `logo` en la ficha de AI PDF. **No** se reemplazó el fallback
+  genérico, que sigue sirviendo a cualquier proyecto sin imagen.
+- `FeaturedProjectCard.jsx`: rama nueva que dibuja el lockup en HTML — el símbolo como SVG y el
+  nombre como **texto real del sitio**. Esa es la razón de hacerlo así: un SVG cargado como `<img>`
+  no usa los `@font-face` de la página y un PNG trae los píxeles cocidos, así que el nombre habría
+  salido en otra fuente al lado del título.
+
+**Efecto colateral bueno**: al no haber imagen, desaparece el problema del recorte y **no hizo
+falta `object-contain`** — el símbolo nunca se recorta porque su tamaño es relativo al panel.
+
+Verificado en el navegador: Datara y ANV·BAR siguen con su foto (615x822 y 615x775), y el panel de
+AI PDF renderiza el símbolo a **253 px** con `alt=""` (el nombre está justo debajo como texto). El
+46% es del contenedor del lockup, que tiene su propio padding, no del panel: por eso el número es
+253 y no 283.
