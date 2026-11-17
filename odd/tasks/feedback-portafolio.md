@@ -20,8 +20,9 @@ de una pelicula".
 
 | ID | Specs | Ruta | Estado | Commit |
 | --- | --- | --- | --- | --- |
-| T1 | S1 | inline (padre) | hecho, sin commit | — |
-| T2 | S2 | diseño (artboards) → `Skills.jsx` (worker) | en curso: C1 elegida, handoff en implementación | — |
+| T1 | S1 | inline (padre) | hecho y verificado | `a4d7d6f` |
+| T2 | S2 | diseño (artboards) | hecho · C1 elegida | `9dcef71` |
+| T2 | S2 | `Skills.jsx` (worker gentle-ai-worker) | C1 implementada, verificación visual abierta | `9a1cd85` |
 
 ## Log
 
@@ -74,3 +75,31 @@ Evidencia: `node_modules/.bin/eslint src/components/Skills.jsx` exit 0; `npm run
 renderizado y el proyecto no tiene tests. Es el riesgo abierto de T2.
 Nota: el requerimiento 3 (sacar tags de proyecto dentro de la fila) resultó no aplicable — el código
 actual no los renderizaba; el marcador `◦` de habilidad sin proyecto se preservó.
+
+L10 (padre, cierre de sesión): el dueño eligió C1 ("Vamos con C1") y pidió guardar
+("Guarda por hoy y mañana seguimos").
+
+Commits de la sesión, en la rama nueva `feat/feedback-portafolio`:
+`a4d7d6f` S1 (identidad Fullstack: `LanguageContext.jsx` + `index.html`),
+`9dcef71` direcciones de diseño, `9a1cd85` C1 en `Skills.jsx` + este documento.
+
+Topología de ramas: `feat/feedback-portafolio` se creó **desde** `docs/readme-pages-claim`,
+que queda intacta con su commit `6858f31` (README) sin pushear. Por eso la nueva rama lo tiene
+como ancestro; si conviene rebasar sobre `main`, es una decisión de entrega del dueño.
+
+Identidad de git: el repositorio no la tenía configurada (`Author identity unknown`) y no se
+inventó ninguna; se reusó la de la propia historia (`Dandlrt09 <danieldelosriost@gmail.com>`) y
+sólo en el repo, no en la config global.
+
+Corte de slice: 4 commits, 1126 líneas autoradas según el harness. El número está inflado por los
+5 artboards (821 líneas) que son evidencia de diseño y no se despliegan; el código que sí se
+despliega son ~169 líneas cambiadas en 3 archivos, dentro del slice revisable de ~400.
+
+**Estado al cerrar:** `eslint` y `vite build` exit 0 en ambos cambios. Abierto y sin verificar:
+la geometría del layer SVG de conexiones tras el cambio de layout — nadie lo vio renderizado, el
+verificador independiente que el plan de revisión exigía falló con un error de harness
+(`invalid_request`) y por regla no se reintentó. El server de desarrollo se detuvo al cerrar.
+
+**Mañana:** (1) confirmar visualmente que las líneas del grafo siguen dibujándose al pasar el mouse
+por un tile; (2) decidir la estrategia de entrega (PR único del pase de feedback o por unidad, y si
+la rama se rebasa sobre `main`); (3) recibir y atacar el resto de la lista de feedback.
