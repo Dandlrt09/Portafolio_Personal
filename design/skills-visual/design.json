@@ -1,0 +1,42 @@
+{
+  "title": "Habilidades con peso visual",
+  "brief": "La sección de Habilidades del portafolio tiene mucho texto y poca parte visual: el dueño dice que parece 'los créditos finales de una película'. Hay que agregar peso visual con iconos. Restricción dura: design/system.md permite un solo gradiente (exclusivo del wordmark y del nombre del hero), reserva accent #f43f5e a error/alerta, y codifica el nivel con forma (5 segmentos), nunca con un color nuevo. Segundo hallazgo: lucide-react NO tiene iconos de marca (no hay Python, React ni Power BI), así que un icono por skill sería genérico y ambiguo; las direcciones usan iconos POR CATEGORÍA (5), que sí significan algo y ya tienen precedente en ProjectGrid.jsx (BrainCircuit, BarChart2). Datos reales en todas: 31 skills en 5 grupos (dev 12, data 9, ai 4, bi 4, design 2), 8 hubs de proyecto, orden dentro de cada grupo por nivel descendente. Todas conservan la franja de proyectos, la caption viva, la leyenda y el H2 de sección igual al del resto del sitio. El layer de conexiones SVG del artboard elegido anterior (design/skills-constellation/04-hubs-ordenado.html) no se redibuja porque lo que se compara es el peso visual.",
+  "feature": "odd/tasks/feedback-portafolio.md",
+  "artboards": [
+    {
+      "file": "03-tarjeta-skill.html",
+      "title": "C · Una tarjeta por habilidad, con sus proyectos (referencia, el dueño la encontró excesiva)",
+      "tradeoff": "La apuesta más fuerte contra el efecto créditos: 31 tarjetas con superficie propia, icono, medidor y los proyectos de cada habilidad dentro. Mata el efecto créditos pero el dueño la juzgó excesiva: 1560px de alto. Se conserva como referencia de cuánto era demasiado y para comparar contra las dos compresiones. El exceso no era la cantidad de skills sino el mobiliario por tarjeta: el icono de grupo repetido 31 veces, los tags de proyecto (que duplican el hover y hacen las alturas desparejas) y los dos renglones por tarjeta.",
+      "width": 1440,
+      "height": 1560
+    },
+    {
+      "file": "04-tarjeta-comprimida.html",
+      "title": "C1 · Tarjetas comprimidas, grupos en dos columnas (recomendada)",
+      "tradeoff": "Misma tarjeta por habilidad, sin el mobiliario: fuera el icono repetido (el encabezado del grupo ya lo dice) y fuera los tags de proyecto (vuelven al hover, como ya hacía el sitio). La tarjeta queda en nombre + medidor, y los 5 grupos pasan a dos columnas en vez de apilarse. Baja de 1560 a ~1050px, o sea más corta que la dirección A, conservando las 31 superficies. A cambio los proyectos dejan de verse de un vistazo: hay que pasar el mouse.",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "file": "05-nube-densa.html",
+      "title": "C2 · Nube densa, sin encabezados de grupo",
+      "tradeoff": "La compresión máxima: se van los 5 encabezados de grupo y las 31 tarjetas quedan en una sola nube de 4 columnas ordenada por nivel descendente, así que la sección se lee como un perfil de fortalezas. Acá el icono de categoría por tarjeta sí informa (no hay encabezado que lo diga) y una clave arriba de 5 items explica los iconos. ~950px, la más corta de todas. A cambio pierde el anclaje por categoría: agrupar Desarrollo con Diseño depende del ojo y del filtro, no de la estructura.",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "01-grupos-tarjeta.html",
+      "title": "A · Grupos en tarjeta, icono de categoría y medidor",
+      "tradeoff": "Evolución conservadora: una tarjeta por grupo (5), cada una con icono de categoría en tile y las habilidades como filas dentro. Se conserva el escaneo por nombre, que es lo mejor para un reclutador, y el peso visual llega del icono más el medidor más grande. A cambio sigue siendo, en el fondo, una lista: la sección mejora de presencia pero no cambia de naturaleza.",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "file": "02-matriz-nivel.html",
+      "title": "B · Matriz por nivel, en forma de pirámide",
+      "tradeoff": "El nivel pasa a ser la unidad visual: cinco bandas (5→1) con un numeral grande a la izquierda y las habilidades de ese nivel como celdas que fluyen. Se lee de un golpe dónde está fuerte y dónde no, y la sección gana una silueta. A cambio destruye el agrupamiento por categoría (los grupos dejan de ser columnas) y baja la legibilidad para el que busca una tecnología puntual.",
+      "width": 1440,
+      "height": 1080
+    }
+  ]
+}
