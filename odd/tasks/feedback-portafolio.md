@@ -103,3 +103,38 @@ verificador independiente que el plan de revisión exigía falló con un error d
 **Mañana:** (1) confirmar visualmente que las líneas del grafo siguen dibujándose al pasar el mouse
 por un tile; (2) decidir la estrategia de entrega (PR único del pase de feedback o por unidad, y si
 la rama se rebasa sobre `main`); (3) recibir y atacar el resto de la lista de feedback.
+
+L5 (sesión 2, 2026-11-23): la rama pasó a llevar **tres features**, no una.
+Daniel pidió darle vida a las fichas de Proyectos (como se hizo con Habilidades), eligió la
+dirección B de `design/projects-visual/`, y después pidió el bloque inferior en morado y
+contenido real para la columna vacía de Contacto (dirección A de `design/contact-info/`).
+
+Rodajas sobre `e672412`, cada una coherente y construible por separado:
+
+| Commit | Contenido | ~líneas |
+| --- | --- | --- |
+| `6854744` | `feat(projects)`: la ficha destacada abre con tres métricas | 426 |
+| `c7ad699` | `style(projects)`: el bloque inferior unificado en `primary` | 55 |
+| `7123438` | `feat(contact)`: la columna de información con contenido real | 233 |
+
+**Frontera de rodaja.** 674 inserciones y 119 borrados en 15 archivos de producto. Los
+artboards (`design/projects-visual/` y `design/contact-info/`, 1.260 líneas de HTML) quedan
+**fuera** de las rodajas de producto, por decisión de Daniel. La rama entera lleva 1.948
+líneas autoradas en 8 commits desde `origin/main`, así que la entrega va por rodajas y no de
+una sola vez.
+
+**Review nativo (2026-11-23).** `assess` sobre `e672412..HEAD` devolvió `risk: medium`,
+`reviewDue: false`, `reviewDueReason: under_budget`. Es la primera vez que un candidato de
+esta rama pasa el preflight del reviewer: el rechazo anterior había sido con 4.392
+inserciones, y este son 674. El plan del arnés deja `writerSelfVerification: true` y
+`independentVerifier: false` — sin ítem de alto riesgo escalado, la autoverificación alcanza.
+
+**Métricas aprobadas por Daniel** (2026-11-23), todas derivadas de copy ya aprobada y ninguna
+inventada para la ficha: Datara `3 capas` · `1 sandbox` · `0 archivos del dataset subidos al
+modelo`; ANV·BAR `4 semanas` · `4 módulos por dominio de negocio` · `0 permisos en el
+frontend`; AI PDF `5 tipos de documento` · `2 días` · `0 diferencias entre CLI y web`.
+
+**El medidor de complejidad se probó y se descartó.** `ComplexityRating` llegó a tener un
+`variant="meter"` para las destacadas; Daniel pidió volver a estrellas y el componente
+compartido volvió a su forma original, así que las 7 tarjetas de analítica y el archivo nunca
+cambiaron.
