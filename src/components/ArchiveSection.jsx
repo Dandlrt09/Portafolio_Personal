@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Github, ExternalLink, TrendingUp } from 'lucide-react';
+import { ChevronDown, FolderOpen, Github, ExternalLink, TrendingUp } from 'lucide-react';
 import { archivedProjects } from '../data/projects';
 import { useLanguage } from '../context/LanguageContext';
 import { ComplexityRating } from './ProjectBlocks';
@@ -32,15 +32,25 @@ const ArchiveSection = () => {
                 onClick={() => setIsOpen((prev) => !prev)}
                 aria-expanded={isOpen}
                 aria-controls="archive-panel"
-                className="flex w-full items-center justify-between gap-4 rounded-xl border border-white/10 bg-surface px-6 py-4 text-left transition-colors hover:border-white/20"
+                className="group flex w-full items-center gap-3 rounded-xl border border-white/10 bg-surface px-6 py-5 text-left transition-colors hover:border-primary/40"
             >
-                <span className="flex items-baseline gap-3">
-                    {/* Sin mayúsculas sostenidas: con el nombre largo, uppercase + tracking
-                        obliga a leer letra por letra. */}
-                    <span className="text-[15px] font-semibold text-text">{t.projects.archiveTitle}</span>
-                    <span className="font-mono text-xs text-text-muted/60">{archivedProjects.length}</span>
+                {/* Mismo tratamiento que `SectionHeader`: tile con el icono, título en color
+                    y regla que se desvanece. Antes esta cabecera era la única de las tres sin
+                    él — de ahí que se leyera plana al lado de sus hermanas. La caja se
+                    conserva a propósito: separa una región interactiva.
+
+                    El tono es `primary` (morado) por pedido del dueño, no el `accent` de la
+                    sección "Analítica y BI" que la contiene: el archivo se lee como bloque
+                    propio en vez de como una continuación de esa sección. */}
+                <span aria-hidden="true" className="rounded-lg border border-primary/20 bg-primary/10 p-2 text-primary">
+                    <FolderOpen size={20} />
                 </span>
-                <span className="flex items-center gap-2 text-sm text-text-muted">
+                {/* Sin mayúsculas sostenidas: con el nombre largo, uppercase + tracking
+                    obliga a leer letra por letra. */}
+                <span className="text-2xl font-bold text-primary">{t.projects.archiveTitle}</span>
+                <span className="font-mono text-xs text-text-muted/60">{archivedProjects.length}</span>
+                <span aria-hidden="true" className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
+                <span className="flex items-center gap-2 text-sm font-medium text-text-muted transition-colors group-hover:text-primary">
                     {isOpen ? t.projects.archiveHide : t.projects.archiveShow}
                     <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                         <ChevronDown size={18} />

@@ -84,7 +84,7 @@ const GalleryView = ({ pages, title, pageLabels, labels }) => {
                             aria-label={pageLabels?.[i] || `${labels.page} ${i + 1}`}
                             aria-current={i === current}
                             className={`h-2 rounded-full transition-all ${
-                                i === current ? 'bg-accent w-6' : 'bg-white/20 hover:bg-white/40 w-2'
+                                i === current ? 'bg-primary w-6' : 'bg-white/20 hover:bg-white/40 w-2'
                             }`}
                         />
                     ))}
@@ -161,7 +161,7 @@ const ReportModal = ({ project, isOpen, onClose }) => {
                         <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 flex-shrink-0">
                             <div className="flex items-center gap-3">
                                 <span className="text-sm font-semibold text-white/80">{title}</span>
-                                <span className="text-xs font-mono bg-accent/20 text-accent px-2 py-0.5 rounded-full border border-accent/30">
+                                <span className="text-xs font-mono bg-primary/20 text-primary px-2 py-0.5 rounded-full border border-primary/30">
                                     {project.tool}
                                 </span>
                             </div>
@@ -171,7 +171,7 @@ const ReportModal = ({ project, isOpen, onClose }) => {
                                         href={externalHref}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"
+                                        className="flex items-center gap-1.5 text-xs text-text-muted hover:text-primary transition-colors"
                                     >
                                         {project.pdfPath ? <Download size={13} /> : <ExternalLink size={13} />}
                                         {externalLabel}
