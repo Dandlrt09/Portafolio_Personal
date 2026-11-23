@@ -7,9 +7,9 @@ const LanguageContext = createContext();
 const translations = {
     es: {
         hero: {
-            badge: "Desarrollador de Soluciones de Datos e IA",
+            badge: "Desarrollador Fullstack — Datos e IA",
             title: "Daniel De los Ríos",
-            subtitle: "Ingeniero Multimedia que construye aplicaciones de datos e IA de punta a punta — backend, frontend y el modelo en el medio. Del problema a la app que lo resuelve.",
+            subtitle: "Construyo aplicaciones de datos e IA de punta a punta: backend, frontend y el modelo en el medio. Del problema a la app que lo resuelve.",
             stackLabel: "Tecnologías principales",
             cta: "Ver proyectos",
             resume: "Ver CV"
@@ -54,7 +54,7 @@ const translations = {
         },
         about: {
             title: "Sobre mí",
-            description: "Vengo de Ingeniería Multimedia y eso define cómo trabajo: no me quedo en el modelo ni en la query. Pienso la arquitectura, escribo el backend, armo el frontend y me aseguro de que alguien que no sabe de datos pueda decidir con lo que ve.\n\nHoy construyo aplicaciones de datos e IA de punta a punta. En Datara el reto no fue la IA — fue el sandbox donde corre el código que la IA genera. En ANV·BAR fue llevar un catálogo real a producción con autenticación y políticas de acceso. Lo técnico y lo visual no son dos sombreros: son la misma conversación."
+            description: "Soy desarrollador Fullstack. Trabajo en todo el producto: diseño la arquitectura, desarrollo el backend y el frontend. Vengo de Ingeniería Multimedia, donde estudié programación, diseño y comunicación. Por eso no me alcanza con que funcione: también me ocupo de que se entienda.\n\nHoy construyo aplicaciones de datos e IA de punta a punta. En Datara el reto no fue la IA — fue el sandbox donde corre el código que la IA genera. En ANV·BAR fue llevar un catálogo real a producción con autenticación y políticas de acceso. No separo lo técnico de lo visual: son parte del mismo trabajo."
         },
         // The skill list, its groups and its levels live in src/data/skills.js:
         // a level is not language, and the ids must not change with the language.
@@ -79,6 +79,21 @@ const translations = {
             description: "¿Tienes un proyecto en mente, o buscas a alguien que construya la aplicación y no solo el modelo? Escríbeme.",
             cv: "Descargar CV",
             directTitle: "Escríbeme directo",
+            availability: "Disponible para proyectos freelance",
+            responseTime: "Respondo en menos de 24 h",
+            helpTitle: "En qué te puedo ayudar",
+            help: [
+                "Aplicaciones de datos e IA de punta a punta",
+                "Cuadros de mando y modelos predictivos",
+                "Web fullstack: React y Python",
+                "Automatización con agentes de IA",
+            ],
+            copy: "Copiar",
+            copied: "Copiado",
+            channelsLabel: "Perfiles",
+            channelGithubNote: "código y proyectos",
+            channelLinkedinNote: "trayectoria",
+            channelCvNote: "descargar",
             form: {
                 title: "Mándame un mensaje",
                 name: "Nombre",
@@ -107,9 +122,9 @@ const translations = {
     },
     en: {
         hero: {
-            badge: "Data & AI Solutions Developer",
+            badge: "Fullstack Developer — Data & AI",
             title: "Daniel De los Ríos",
-            subtitle: "Multimedia Engineer building end-to-end data and AI applications — backend, frontend, and the model in between. From the problem to the app that solves it.",
+            subtitle: "I build end-to-end data and AI applications: backend, frontend, and the model in between. From the problem to the app that solves it.",
             stackLabel: "Core technologies",
             cta: "View projects",
             resume: "View CV"
@@ -154,7 +169,7 @@ const translations = {
         },
         about: {
             title: "About",
-            description: "I come from Multimedia Engineering, and that defines how I work: I don't stop at the model or the query. I design the architecture, write the backend, build the frontend, and make sure someone who doesn't know data can decide with what they see.\n\nToday I build end-to-end data and AI applications. At Datara the challenge wasn't the AI — it was the sandbox where the AI-generated code runs. At ANV·BAR it was taking a real catalogue to production with authentication and access policies. The technical and the visual aren't two hats: they're the same conversation."
+            description: "I'm a Fullstack developer. I work across the whole product: I design the architecture, and build the backend and the frontend. I come from Multimedia Engineering, where I studied programming, design, and communication. So it's not enough for me that it works — I also make sure it's understandable.\n\nToday I build end-to-end data and AI applications. At Datara the challenge wasn't the AI — it was the sandbox where the AI-generated code runs. At ANV·BAR it was taking a real catalogue to production with authentication and access policies. I don't separate the technical from the visual: they're part of the same job."
         },
         // See the Spanish branch: the skill data lives in src/data/skills.js.
         skills: {
@@ -177,6 +192,21 @@ const translations = {
             description: "Have a project in mind, or looking for someone who builds the application and not just the model? Get in touch.",
             cv: "Download CV",
             directTitle: "Write me directly",
+            availability: "Open to freelance projects",
+            responseTime: "I reply within 24 hours",
+            helpTitle: "What I can help with",
+            help: [
+                "End-to-end data and AI applications",
+                "Dashboards and predictive models",
+                "Fullstack web: React and Python",
+                "Automation with AI agents",
+            ],
+            copy: "Copy",
+            copied: "Copied",
+            channelsLabel: "Profiles",
+            channelGithubNote: "code and projects",
+            channelLinkedinNote: "background",
+            channelCvNote: "download",
             form: {
                 title: "Send me a message",
                 name: "Name",

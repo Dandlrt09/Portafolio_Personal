@@ -12,12 +12,11 @@ const tones = {
         icon: 'text-primary',
         rule: 'from-primary/30',
     },
-    accent: {
-        box: 'bg-accent/10 border-accent/20',
-        icon: 'text-accent',
-        rule: 'from-accent/30',
-    },
 };
+
+/* Sin tono `accent`: lo usaba la cabecera de "Analítica y BI" y pasó a `primary` para
+   acompañar al archivo. Además `accent` es el color de alerta/error del sistema, no un
+   tono de sección. Si vuelve a hacer falta, son tres líneas. */
 
 const SectionHeader = ({ icon: Icon, title, color = 'primary' }) => {
     const tone = tones[color] || tones.primary;
@@ -56,15 +55,15 @@ const ProjectGrid = () => {
                     <p className="mb-8 max-w-2xl text-text-muted">{t.projects.featuredIntro}</p>
 
                     <div className="flex flex-col gap-8">
-                        {featuredProjects.map((project, index) => (
-                            <FeaturedProjectCard key={project.id} project={project} index={index} />
+                        {featuredProjects.map((project) => (
+                            <FeaturedProjectCard key={project.id} project={project} />
                         ))}
                     </div>
                 </div>
 
                 {/* ── Sub-section 2: Analytics & BI ── */}
                 <div>
-                    <SectionHeader icon={BarChart2} title={t.projects.analyticsTitle} color="accent" />
+                    <SectionHeader icon={BarChart2} title={t.projects.analyticsTitle} color="primary" />
                     <p className="mb-8 max-w-2xl text-text-muted">{t.projects.analyticsIntro}</p>
 
                     {/* Dos columnas a proposito, no tres: son cuatro tarjetas y con

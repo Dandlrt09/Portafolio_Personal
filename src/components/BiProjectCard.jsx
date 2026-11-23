@@ -17,7 +17,7 @@ const BiProjectCard = ({ project, index }) => {
         <>
             <motion.div
                 {...reveal}
-                className="group relative bg-surface border border-white/5 rounded-xl overflow-hidden hover:border-accent/50 transition-colors flex flex-col h-full"
+                className="group relative bg-surface border border-white/5 rounded-xl overflow-hidden hover:border-primary/50 transition-colors flex flex-col h-full"
             >
                 {/* Project Image */}
                 {/* aspect-[16/10] en vez de h-48: en la grilla de 2 columnas la tarjeta mide
@@ -31,7 +31,7 @@ const BiProjectCard = ({ project, index }) => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60" />
                     {/* Tool badge */}
-                    <div className="absolute top-3 right-3 bg-accent/20 border border-accent/30 text-accent text-xs font-mono px-2 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm">
+                    <div className="absolute top-3 right-3 bg-primary/20 border border-primary/30 text-primary text-xs font-mono px-2 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm">
                         <BarChart2 size={12} />
                         {project.tool}
                     </div>
@@ -41,14 +41,14 @@ const BiProjectCard = ({ project, index }) => {
                     <div className="flex justify-between items-start mb-4">
                         <div className="flex flex-wrap gap-2">
                             {project.topics?.map(topic => (
-                                <span key={topic} className="text-xs font-mono text-accent bg-accent/10 px-2 py-1 rounded">
+                                <span key={topic} className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
                                     {topic}
                                 </span>
                             ))}
                         </div>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                         {project.title[language] || project.title?.es}
                     </h3>
 

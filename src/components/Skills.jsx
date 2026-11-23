@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { BarChart2, Code, Database, Layout, Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { revealProps } from '../lib/motion';
 import { SKILL_GROUPS, SKILL_PROJECTS } from '../data/skills';
@@ -9,6 +10,19 @@ const DESKTOP_QUERY = '(min-width: 1024px)';
 const isDesktop = () => typeof window !== 'undefined' && window.matchMedia(DESKTOP_QUERY).matches;
 
 const LEVEL_STEPS = [1, 2, 3, 4, 5];
+
+/**
+ * One icon per category, keyed by group id. `lucide-react` ships no brand
+ * icons, so the icon names the category and never a single technology; these
+ * five export names were verified against the installed `lucide-react`.
+ */
+const GROUP_ICONS = {
+    dev: Code,
+    data: Database,
+    ai: Sparkles,
+    bi: BarChart2,
+    design: Layout,
+};
 
 /**
  * The level is carried by shape — five segments — and never by a new colour:
@@ -321,66 +335,81 @@ const Skills = () => {
                     </p>
 
                     {/* Under `lg` this is a plain ordered list, which is the whole fallback. */}
-                    <div className="grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-                        {groups.map((group, groupIndex) => (
-                            <motion.div
-                                key={group.id}
-                                {...revealProps({ reduceMotion, duration: 0.4, delay: groupIndex * 0.06 })}
-                            >
-                                <div className="mb-3 flex items-baseline gap-2">
-                                    <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                                        {group.label}
-                                    </h3>
-                                    <span className="text-xs text-text-muted/65">{group.skills.length}</span>
-                                    <span className="h-px flex-1 bg-white/10" />
-                                </div>
-
-                                {group.skills.map((skill) => {
-                                    const key = `skill:${skill.id}`;
-                                    const projectIds = projectsBySkill.get(skill.id) ?? [];
-                                    const dimmed =
-                                        (onlyHigh && skill.level < 4) ||
-                                        (active && !active.skills.has(skill.id));
-                                    const lit = focus === key || active?.skills.has(skill.id);
-
-                                    return (
-                                        <button
-                                            key={skill.id}
-                                            ref={setRowRef(skill.id)}
-                                            type="button"
-                                            onPointerEnter={() => enter(key)}
-                                            onFocus={() => enter(key)}
-                                            onPointerLeave={() => leave(key)}
-                                            onBlur={() => leave(key)}
-                                            onClick={() => togglePin(key)}
-                                            aria-pressed={pinned === key}
-                                            aria-label={t.skills.ariaLevel(skill.name, skill.level)}
-                                            className={`flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-left transition-colors ${
-                                                focus === key ? 'bg-primary/15' : 'hover:bg-white/5'
-                                            } ${dimmed ? 'opacity-20' : ''}`}
+                    <div className="grid grid-cols-1 gap-x-10 gap-y-8 lg:grid-cols-2">
+                        {groups.map((group, groupIndex) => {
+                            const GroupIcon = GROUP_ICONS[group.id] ?? Sparkles;
+                            return (
+                                <motion.div
+                                    key={group.id}
+                                    {...revealProps({ reduceMotion, duration: 0.4, delay: groupIndex * 0.06 })}
+                                >
+                                    <div className="mb-3 flex items-center gap-2.5">
+                                        <span
+                                            className="flex h-[26px] w-[26px] flex-none items-center justify-center rounded-lg border border-white/10 bg-white/5 text-secondary"
+                                            aria-hidden="true"
                                         >
-                                            <span
-                                                className={`min-w-0 flex-1 truncate text-sm font-medium transition-colors ${
-                                                    lit ? 'text-text' : 'text-text-muted'
-                                                }`}
-                                            >
-                                                {skill.name}
-                                                {projectIds.length === 0 && (
-                                                    <span className="ml-2 text-text-muted/50">◦</span>
-                                                )}
-                                            </span>
-                                            <LevelBar level={skill.level} />
-                                            <span
-                                                className="w-3 flex-none text-right text-xs font-medium text-text-muted/60"
-                                                aria-hidden="true"
-                                            >
-                                                {skill.level}
-                                            </span>
-                                        </button>
-                                    );
-                                })}
-                            </motion.div>
-                        ))}
+                                            <GroupIcon size={15} />
+                                        </span>
+                                        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+                                            {group.label}
+                                        </h3>
+                                        <span className="text-xs text-text-muted/65">{group.skills.length}</span>
+                                        <span className="h-px flex-1 bg-white/10" />
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                                        {group.skills.map((skill) => {
+                                            const key = `skill:${skill.id}`;
+                                            const projectIds = projectsBySkill.get(skill.id) ?? [];
+                                            const dimmed =
+                                                (onlyHigh && skill.level < 4) ||
+                                                (active && !active.skills.has(skill.id));
+                                            const lit = focus === key || active?.skills.has(skill.id);
+
+                                            return (
+                                                <button
+                                                    key={skill.id}
+                                                    ref={setRowRef(skill.id)}
+                                                    type="button"
+                                                    onPointerEnter={() => enter(key)}
+                                                    onFocus={() => enter(key)}
+                                                    onPointerLeave={() => leave(key)}
+                                                    onBlur={() => leave(key)}
+                                                    onClick={() => togglePin(key)}
+                                                    aria-pressed={pinned === key}
+                                                    aria-label={t.skills.ariaLevel(skill.name, skill.level)}
+                                                    className={`flex flex-col gap-1.5 rounded-lg border p-2.5 text-left transition-colors ${
+                                                        focus === key
+                                                            ? 'border-primary bg-primary/15'
+                                                            : 'border-white/10 bg-surface hover:border-white/20 hover:bg-surface/65'
+                                                    } ${dimmed ? 'opacity-20' : ''}`}
+                                                >
+                                                    <span
+                                                        className={`truncate text-sm font-semibold transition-colors ${
+                                                            lit ? 'text-text' : 'text-text-muted'
+                                                        }`}
+                                                    >
+                                                        {skill.name}
+                                                        {projectIds.length === 0 && (
+                                                            <span className="ml-2 text-text-muted/50">◦</span>
+                                                        )}
+                                                    </span>
+                                                    <span className="flex items-center justify-between gap-2">
+                                                        <LevelBar level={skill.level} />
+                                                        <span
+                                                            className="text-xs font-medium text-text-muted/60"
+                                                            aria-hidden="true"
+                                                        >
+                                                            {skill.level}
+                                                        </span>
+                                                    </span>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
                     </div>
 
                     {/* Connection layer: empty at rest, drawn only for the focused skill. */}

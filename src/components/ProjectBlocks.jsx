@@ -31,6 +31,9 @@ export const ProjectRole = ({ role, timeline, className = '' }) => {
  * Two 1-5 self-ratings on the same page would be two scales with the same range and
  * different meanings. This one is always labelled, and it always carries the reason behind
  * the number: a bare score cannot be verified and reads as self-praise.
+ *
+ * Un solo formato: estrellas. El medidor de segmentos que probamos en las fichas destacadas
+ * se descartó, y con él el `variant` — si vuelve a hacer falta, se agrega de nuevo.
  */
 export const ComplexityRating = ({ complexity, className = '' }) => {
     const { t, language } = useLanguage();
