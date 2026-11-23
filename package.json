@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "verify:contact": "node tools/verify-contact.mjs",
+    "verify:projects": "node tools/verify-projects.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

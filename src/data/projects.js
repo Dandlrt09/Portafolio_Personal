@@ -26,6 +26,13 @@ import hrRotacion from '../assets/projects/hr_rotacion.png';
  *                self-ratings on one page would be two scales with the same range and
  *                different meanings. It always carries a `reason`, because a bare number
  *                cannot be verified and reads as self-praise.
+ * - `metrics`    three headline figures for the featured fichas, rendered as a strip under
+ *                the title. The shape differs from `analyticsProjects.metrics` on purpose:
+ *                there they are narrative bullets inside a compact card, here they are a big
+ *                number plus its unit and one supporting line. Every figure is derived from
+ *                the already approved `decision` / `problem` copy — none is invented for the
+ *                ficha, and `0 archivos` describes Datara's data boundary, not an absolute
+ *                claim that no data reaches the model.
  *
  * Honesty rules held here, do not break them:
  *   - ANV·BAR is the only real client in the whole portfolio. No other ficha may imply a
@@ -57,6 +64,18 @@ export const featuredProjects = [
         timeline: {
             es: 'Desde septiembre · en desarrollo activo',
             en: 'Since September · active development'
+        },
+        metrics: {
+            es: [
+                { value: '3', unit: 'capas', label: 'core, server y web, desacopladas y con proveedores de LLM intercambiables' },
+                { value: '1', unit: 'sandbox', label: 'entorno de ejecución aislado, escrito a medida, potente para pandas y Plotly' },
+                { value: '0', unit: 'archivos', label: 'del dataset subidos al modelo: solo recibe esquema, metadata, estadísticas y una muestra mínima' }
+            ],
+            en: [
+                { value: '3', unit: 'layers', label: 'core, server, and web — decoupled, with interchangeable LLM providers' },
+                { value: '1', unit: 'sandbox', label: 'a purpose-built isolated execution environment, powerful enough for pandas and Plotly' },
+                { value: '0', unit: 'files', label: 'of the dataset uploaded to the model: it only receives the schema, metadata, statistics, and a minimal sample' }
+            ]
         },
         problem: {
             es: 'Para analizar datos con IA hay que saber programar o usar herramientas en inglés, y casi todas te obligan a subir tus archivos a un servidor de terceros. Busco que Datara sea un programa local: que puedas trabajar con datos privados sin miedo a subirlos a una página de internet. Siempre es bueno desconfiar.',
@@ -98,6 +117,18 @@ export const featuredProjects = [
         timeline: {
             es: '4 semanas · entregado. Sin publicar: la marca todavía no cargó productos, por eso no se compró dominio.',
             en: '4 weeks · delivered. Not published yet: the brand has no products loaded, which is why no domain was bought.'
+        },
+        metrics: {
+            es: [
+                { value: '4', unit: 'semanas', label: 'de la primera reunión a la entrega, con un cliente real' },
+                { value: '4', unit: 'módulos', label: 'organizados por dominio de negocio — catalog, favorites, reviews, admin' },
+                { value: '0', unit: 'permisos', label: 'en el frontend: la seguridad vive en la base, con Supabase Auth y políticas RLS' }
+            ],
+            en: [
+                { value: '4', unit: 'weeks', label: 'from the first meeting to delivery, with a real client' },
+                { value: '4', unit: 'modules', label: 'organised by business domain — catalog, favorites, reviews, admin' },
+                { value: '0', unit: 'permissions', label: 'in the frontend: security lives in the database, with Supabase Auth and RLS policies' }
+            ]
         },
         problem: {
             es: 'Una marca de moda femenina hecha a mano necesitaba vender sin carrito ni pasarela de pago: catálogo en vivo, pedidos por WhatsApp y un panel propio para gestionar productos y testimonios sin depender de un desarrollador para cada cambio.',
@@ -143,6 +174,18 @@ export const featuredProjects = [
         timeline: {
             es: '2 días',
             en: '2 days'
+        },
+        metrics: {
+            es: [
+                { value: '5', unit: 'tipos', label: 'de documento — factura, propuesta, informe, carta y resumen — sobre un mismo motor' },
+                { value: '2', unit: 'días', label: 'del brief de Workana a un proyecto terminado, por iniciativa propia' },
+                { value: '0', unit: 'diferencias', label: 'un test exige que la CLI y la web produzcan PDFs byte-idénticos' }
+            ],
+            en: [
+                { value: '5', unit: 'types', label: 'of document — invoice, proposal, report, letter, and summary — over one engine' },
+                { value: '2', unit: 'days', label: 'from the Workana brief to a finished project, on my own initiative' },
+                { value: '0', unit: 'differences', label: 'a test demands that the CLI and the web produce byte-identical PDFs' }
+            ]
         },
         problem: {
             es: 'Generar documentos con IA suele terminar en layouts inconsistentes: el modelo también decide el formato y cada corrida sale distinta. Un mismo pedido debería producir siempre el mismo documento.',
