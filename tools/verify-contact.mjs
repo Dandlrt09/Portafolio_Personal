@@ -190,6 +190,63 @@ if (!existsSync(libPath)) {
     );
 }
 
+// --- Columna de contacto (dirección A) ------------------------------------
+// La columna izquierda dejó de ser tres líneas sueltas contra el alto del formulario.
+// Estas son las piezas que la llenan, en los dos idiomas. Los textos son la copia
+// aprobada por el dueño: si cambia, este bloque cambia con ella.
+const COLUMN = {
+    es: {
+        availability: 'Disponible para proyectos freelance',
+        response: 'Respondo en menos de 24 h',
+        helpTitle: 'En qué te puedo ayudar',
+        bullets: [
+            'Aplicaciones de datos e IA de punta a punta',
+            'Cuadros de mando y modelos predictivos',
+            'Web fullstack: React y Python',
+            'Automatización con agentes de IA',
+        ],
+    },
+    en: {
+        availability: 'Open to freelance projects',
+        response: 'I reply within 24 hours',
+        helpTitle: 'What I can help with',
+        bullets: [
+            'End-to-end data and AI applications',
+            'Dashboards and predictive models',
+            'Fullstack web: React and Python',
+            'Automation with AI agents',
+        ],
+    },
+};
+
+for (const [lang, html] of [['es', es], ['en', en]]) {
+    const copy = COLUMN[lang];
+    check(
+        `COL1 (${lang}): declara disponibilidad y tiempo de respuesta`,
+        html.includes(copy.availability) && html.includes(copy.response),
+        'falta la disponibilidad o el tiempo de respuesta'
+    );
+    check(
+        `COL1 (${lang}): los 4 bullets de "${copy.helpTitle}"`,
+        html.includes(copy.helpTitle) && copy.bullets.every((bullet) => html.includes(bullet)),
+        'falta algún bullet'
+    );
+    // La ubicación vive en `site.js` porque es el mismo dato en los dos idiomas: el
+    // chequeo la busca igual en los dos árboles, que es justo lo que puede romperse.
+    check(
+        `COL1 (${lang}): la ubicación sale de site.js`,
+        html.includes(site.CONTACT_LOCATION),
+        `buscado=${site.CONTACT_LOCATION}`
+    );
+    // Los canales van con nombre y no solo con el ícono: un círculo sin etiqueta obliga
+    // a adivinar cuál es cuál.
+    check(
+        `COL1 (${lang}): los 3 canales van con nombre`,
+        ['GitHub', 'LinkedIn', 'CV'].every((name) => html.includes(`>${name}</b>`)),
+        'algún canal quedó como ícono anónimo'
+    );
+}
+
 // --- Reporte --------------------------------------------------------------
 const failed = results.filter((r) => !r.ok);
 for (const r of results) {

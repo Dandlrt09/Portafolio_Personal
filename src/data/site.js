@@ -16,6 +16,14 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/danieldlrt09';
 export const CONTACT_EMAIL = 'danieldlrt.jobs@gmail.com';
 
 /**
+ * Ubicación y zona horaria. Igual que el correo: es el mismo dato en los dos idiomas, así
+ * que vive acá y no duplicado en los dos árboles de traducción.
+ *
+ * Colombia es UTC-5 todo el año — no tiene horario de verano, así que el offset no cambia.
+ */
+export const CONTACT_LOCATION = 'Barranquilla, Colombia · GMT-5';
+
+/**
  * Relay del formulario de contacto. El sitio se publica en GitHub Pages, que solo
  * sirve archivos: no hay backend que reciba el POST y mande el mail. Web3Forms ocupa
  * ese lugar.
