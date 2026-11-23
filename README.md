@@ -2,7 +2,7 @@
 
 Portafolio profesional de Data Science & Business Intelligence. Construido con React + Vite, muestra proyectos de análisis de datos, machine learning y dashboards interactivos.
 
-🔗 **Demo en vivo:** [portafolio-personal-sage.vercel.app](https://portafolio-personal-sage.vercel.app/)
+🔗 **Demo en vivo:** [portafolio-personal-sage.vercel.app](https://portafolio-personal-sage.vercel.app/) — despliega desde `main`.
 
 ---
 
@@ -60,6 +60,21 @@ npm run preview
 
 ## Despliegue
 
-El proyecto se deploya automáticamente a **Vercel** con cada push a `main`. Cada pull request genera además un deploy preview con su propia URL.
+Vercel construye **dos cosas distintas**, y confundirlas es fácil:
 
-La publicación anterior en **GitHub Pages** quedó retirada junto con su workflow, y su URL ya no sirve el portafolio. **Vercel es el único destino.**
+| Tipo | Se dispara con | URL |
+|------|----------------|-----|
+| **Producción** | un push a `main` | [portafolio-personal-sage.vercel.app](https://portafolio-personal-sage.vercel.app/) |
+| **Preview** | un push a **cualquier otra rama** | una URL única por commit |
+
+El dominio de producción sirve **solo lo que está en `main`**. Mientras una rama no se mergee,
+ese dominio sigue mostrando la versión vieja — no es un build que falló, es que nunca apuntó a
+la rama. Para ver los cambios de una rama hay que abrir su URL de preview.
+
+**No hace falta abrir un pull request para que Vercel construya el preview**: el push a la rama
+alcanza, y el preview se ve en la pestaña *Deployments* del proyecto en Vercel. El pull request
+sirve para que el link quede a la vista junto a la conversación, y para que el merge actualice
+producción.
+
+La publicación anterior en **GitHub Pages** quedó retirada junto con su workflow, y su URL ya
+no sirve el portafolio. **Vercel es el único destino.**
